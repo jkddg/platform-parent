@@ -1,9 +1,9 @@
-package com.platform.front.service.contanst;
+package com.platform.common.contanst;
 
 
-import com.platform.front.service.lang.EnumDisplayNameSupport;
-import com.platform.front.service.lang.EnumValueSupport;
-import com.platform.front.service.lang.Enums;
+import com.platform.common.lang.EnumDisplayNameSupport;
+import com.platform.common.lang.EnumValueSupport;
+import com.platform.common.lang.Enums;
 
 /**
  * Created by Huangyonghao on 2019/6/17 16:25.

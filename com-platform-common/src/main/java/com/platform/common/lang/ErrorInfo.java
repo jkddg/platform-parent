@@ -1,4 +1,4 @@
-package com.platform.front.service.lang;
+package com.platform.common.lang;
 
 /**
  * Created by Huangyonghao on 2019/6/17 16:37.
