@@ -1,7 +1,7 @@
 package com.platform.front.service.mapper;
 
 import com.platform.front.service.modal.GoodsInfo;
-import com.platform.front.service.modal.TaobaoGoodsInfo;
+import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 public class TaobaoGoodsMapper {
 
 
-    public static GoodsInfo convertToGoodsInfo(TaobaoGoodsInfo info) {
+    public static GoodsInfo convertToGoodsInfo(TbkDgMaterialOptionalResponse.MapData info) {
         if(info==null){
             return null;
         }
@@ -22,7 +22,7 @@ public class TaobaoGoodsMapper {
         return goodsInfo;
     }
 
-    public static List<GoodsInfo> convertToGoodsInfos(List<TaobaoGoodsInfo> list){
+    public static List<GoodsInfo> convertToGoodsInfos(List<TbkDgMaterialOptionalResponse.MapData> list){
         List<GoodsInfo> result=new ArrayList<>();
         if(list==null || list.size()==0){
             return result ;

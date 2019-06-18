@@ -4,7 +4,8 @@ package com.platform.common.lang;
  * Created by Huangyonghao on 2019/6/17 16:35.
  */
 
-import com.google.common.base.Strings;
+
+import org.apache.logging.log4j.util.Strings;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -107,7 +108,7 @@ public class Exceptions {
     public static String getMessage(Throwable e) {
         Objects.requireNonNull(e, "arg e");
         String msg = e.getMessage();
-        if (Strings.isNullOrEmpty(msg)) {
+        if (Strings.isEmpty(msg)) {
             msg = e.getClass().getName();
         }
         return msg;

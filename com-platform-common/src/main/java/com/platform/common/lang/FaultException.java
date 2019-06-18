@@ -4,7 +4,7 @@ package com.platform.common.lang;
  * Created by Huangyonghao on 2019/6/17 16:36.
  */
 
-import org.apache.commons.lang.text.StrBuilder;
+import org.apache.commons.text.TextStringBuilder;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -89,9 +89,8 @@ public class FaultException extends RuntimeException {
      * @return
      */
     public String toStringDetail() {
-        StrBuilder sb = new StrBuilder();
-        sb
-                .appendln(getStackTraceString())
+        TextStringBuilder sb = new TextStringBuilder();
+        sb.appendln(getStackTraceString())
                 .append(getDataString())
                 .appendNewLine();
         return sb.toString();
@@ -151,7 +150,7 @@ public class FaultException extends RuntimeException {
      */
     public String getDataString() {
         if (data != null && data.size() > 0) {
-            StrBuilder sb = new StrBuilder();
+            TextStringBuilder sb = new TextStringBuilder();
             data.forEach((k, v) -> sb.append(k).append(": ").append(v).appendNewLine());
             return sb.toString();
         }

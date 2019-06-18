@@ -8,4 +8,5 @@ package com.platform.common.lang;
  */
 public interface EnumValueSupport {
     int value();
+
 }

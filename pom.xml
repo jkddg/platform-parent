@@ -17,5 +17,6 @@
         <module>com-platform-front-web</module>
         <module>com-platform-task</module>
         <module>com-platform-front-service-contract</module>
+        <module>com-platform-common</module>
     </modules>
 </project>

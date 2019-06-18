@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 提供枚举实用功能。
  */
 public class Enums {
+
     private final static Map<Class<?>, Map<Integer, Object>> caches = new ConcurrentHashMap<>();
 
     /**

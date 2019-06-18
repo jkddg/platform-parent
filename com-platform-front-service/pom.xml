@@ -58,6 +58,16 @@
             <artifactId>elasticsearch</artifactId>
             <version>${es.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.taobao</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
