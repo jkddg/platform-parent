@@ -1,4 +1,4 @@
-package com.platform.front.web.controller;
+package com.platform.front.web.controller.api;
 
 import org.springframework.stereotype.Controller;
 

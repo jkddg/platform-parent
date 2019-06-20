@@ -1,5 +1,6 @@
 package com.platform.front.service.api;
 
+import com.platform.front.service.config.TaobaoConfig;
 import com.taobao.api.ApiException;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.TbkDgMaterialOptionalRequest;
@@ -7,6 +8,7 @@ import com.taobao.api.request.TbkItemInfoGetRequest;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.taobao.api.response.TbkItemInfoGetResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -18,7 +20,10 @@ import java.util.List;
 @Slf4j
 @Component
 public class TaobaoGoodsAPI extends AbstractTaobao {
-    long adzoneId;
+
+    @Autowired
+    TaobaoConfig taobaoConfig;
+
     /**
      * 淘宝商品列表抓取
      *
@@ -28,6 +33,7 @@ public class TaobaoGoodsAPI extends AbstractTaobao {
     public TbkDgMaterialOptionalResponse tbkMaterialOptional(boolean hasCoupon, String categorys, String keyWord, long pageSize, long pageIndex) {
 //        TaobaoClient client = new DefaultTaobaoClient("http://gw.api.taobao.com/router/rest", "25823044", "09486e171c16cbf652e800393ad0bded");
         TaobaoClient client = getTaobaoClient();
+        long adzoneId = taobaoConfig.getTkbAdzoneId();
         TbkDgMaterialOptionalRequest req = new TbkDgMaterialOptionalRequest();
 //        req.setAdzoneId(appPropertiesConfig.getTaobaoConfig().getTkbAdzoneId());
 //        req.setAdzoneId(103406600438L);
@@ -118,5 +124,46 @@ public class TaobaoGoodsAPI extends AbstractTaobao {
             log.error(rsp.getBody());
         }
         return rsp;
+    }
+
+    /**
+     * 淘宝客链接解析
+     */
+    public void TbkItemClickExtract(){
+//        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+//        TbkItemClickExtractRequest req = new TbkItemClickExtractRequest();
+//        req.setClickUrl("https://s.click.taobao.com/***");
+//        TbkItemClickExtractResponse rsp = client.execute(req);
+//        System.out.println(rsp.getBody());
+    }
+    /**
+     * 商品链接转换
+     */
+    public void TbkItemConvert(){
+//        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+//        TbkItemConvertRequest req = new TbkItemConvertRequest();
+//        req.setFields("num_iid,click_url");
+//        req.setNumIids("123,456");
+//        req.setAdzoneId(123L);
+//        req.setPlatform(123L);
+//        req.setUnid("demo");
+//        req.setDx("1");
+//        TbkItemConvertResponse rsp = client.execute(req);
+//        System.out.println(rsp.getBody());
+    }
+
+    /**
+     * 生成淘口令
+     */
+    public void TbkTpwdCreate(){
+//        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+//        TbkTpwdCreateRequest req = new TbkTpwdCreateRequest();
+//        req.setUserId("123");
+//        req.setText("长度大于5个字符");
+//        req.setUrl("https://uland.taobao.com/");
+//        req.setLogo("https://uland.taobao.com/");
+//        req.setExt("{}");
+//        TbkTpwdCreateResponse rsp = client.execute(req);
+//        System.out.println(rsp.getBody());
     }
 }
