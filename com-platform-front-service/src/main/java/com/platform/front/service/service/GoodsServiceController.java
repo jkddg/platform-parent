@@ -1,5 +1,6 @@
 package com.platform.front.service.service;
 
+
 import com.platform.common.modal.PageData;
 import com.platform.front.service.biz.TaobaoGoodsBiz;
 import com.platform.front.service.client.param.FindGoodsListParam;
@@ -20,7 +21,7 @@ public class GoodsServiceController {
     @Autowired
     TaobaoGoodsBiz taobaoGoodsBiz;
 
-    @PostMapping("/taobao/goods/list")
+    @PostMapping("/list")
     public PageData<GoodsInfo> findTaobaoGoodsList(@RequestBody FindGoodsListParam param){
         return taobaoGoodsBiz.findGoodsList(param);
     }

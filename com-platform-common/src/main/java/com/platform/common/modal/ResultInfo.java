@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ResultInfo {
-    private boolean success;
+    private boolean success = false;
     private String msg;
 }

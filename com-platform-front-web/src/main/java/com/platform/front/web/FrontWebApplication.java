@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableHystrix
 @EnableEurekaClient
-@EnableFeignClients
-@SpringBootApplication
+@EnableFeignClients(basePackages = "com.platform")
+@SpringBootApplication(scanBasePackages = "com.platform")
 public class FrontWebApplication {
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package com.platform.front.service;
 
-import com.platform.front.service.iface.TaobaoGoodsService;
+import com.platform.front.service.iface.GoodsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class FrontServiceApplicationTests {
 
     @Autowired
-    TaobaoGoodsService taobaoGoodsService;
+    GoodsService taobaoGoodsService;
 
     @Test
     public void contextLoads() {

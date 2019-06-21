@@ -14,4 +14,5 @@ public class FindGoodsListParam extends PageInfo {
 
     private PlatformEnum platformEnum;
     private String keyWord;
+    private int sort;
 }
