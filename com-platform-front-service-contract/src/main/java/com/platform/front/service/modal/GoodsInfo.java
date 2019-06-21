@@ -3,12 +3,19 @@ package com.platform.front.service.modal;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * Created by Huangyonghao on 2019/6/18 13:15.
  */
 @Getter
 @Setter
-public class GoodsInfo {
+public class GoodsInfo  implements Serializable {
+
+    private String platform;
+
+    private String plat;
+
     /**
      * 商品信息-叶子类目id
      */

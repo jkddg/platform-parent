@@ -3,6 +3,7 @@ package com.platform.common.modal;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class PageData<T> extends ResultInfo {
+public class PageData<T> extends ResultInfo implements Serializable {
     private List<T> data;
     private long totalCount = 0;
 }

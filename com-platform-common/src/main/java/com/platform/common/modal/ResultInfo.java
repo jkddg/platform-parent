@@ -3,12 +3,14 @@ package com.platform.common.modal;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * Created by Huangyonghao on 2019/6/18 16:07.
  */
 @Getter
 @Setter
-public class ResultInfo {
+public class ResultInfo  implements Serializable {
     private boolean success = false;
     private String msg;
 }

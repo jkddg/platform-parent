@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
     <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/popper.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/masonry.pkgd.min.js"></script>
     <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
+
     <script type="text/javascript" src="/js/list.js"></script>
 
 </head>
@@ -38,21 +40,22 @@
 
         </div>
         <div align="center">
-            <button type="submit" class="btn btn-primary" role="button" id="searchBtn">搜索</button>
+            <button type="button" class="btn btn-primary" role="button" id="searchBtn">搜索</button>
         </div>
     </form>
 </div>
 <div class="container">
-    <div class="col-md-4 col-sm-6 item">
-        <div class="thumbnail">
-            <img src="http://lorempixel.com/200/200/abstract" alt="">
-            <div class="caption">
-                <h3>Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-            </div>
-        </div>
-    </div><!--/.item -->
+<!--    <div class="col-md-4 col-sm-6 item">-->
+<!--        <div class="thumbnail">-->
+<!--            <img src="http://lorempixel.com/200/200/abstract" alt="">-->
+<!--            <div class="caption">-->
+<!--                <h3>Thumbnail label</h3>-->
+<!--                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>-->
+<!--                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <!--/.item -->
 
 <!--    标签选项卡的代码：-->
 
@@ -81,42 +84,6 @@
             <div role="tabpanel" class="tab-pane active" id="panel-1">
                 <div class="row masonry-container" id="tbList">
 
-                    <div class="col-md-4 col-sm-6 item">
-                        <!-- Thumbnail goes here -->
-                        <div class="thumbnail">
-                            <img src="http://lorempixel.com/200/200/abstract" alt="">
-                            <div class="caption">
-                                <h3>Thumbnail label</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 item">
-                        <!-- Thumbnail goes here -->
-                        <div class="thumbnail">
-                            <img src="http://lorempixel.com/200/200/abstract" alt="">
-                            <div class="caption">
-                                <h3>Thumbnail label</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 item">
-                        <!-- Thumbnail goes here -->
-                        <div class="thumbnail">
-                            <img src="http://lorempixel.com/200/200/abstract" alt="">
-                            <div class="caption">
-                                <h3>Thumbnail label</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    ...
                 </div><!--End masonry-container -->
             </div><!--End panel-1 -->
             <div role="tabpanel" class="tab-pane" id="panel-2">

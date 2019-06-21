@@ -28,6 +28,11 @@ $(document).ready(function () {
 function getData(page) {
 
     var keyWord = $("#keyWord").val();
+
+    if (keyWord == "") {
+        alert("请填写搜索关键词");
+    }
+
     var sort = $("input[name=sort]:checked").val();
 
     var platform = "";
@@ -51,15 +56,17 @@ function getData(page) {
             if (!result.success) {
                 alert(result.msg);
             }
+            $("#tbList").empty();
             for (var i = 0; i < result.data.length; i++) {
                 var data = result.data[i];
-                var item = "<div class=\"col-md-4 col-sm-6 item\">";
-                item = item + "<div class=\"thumbnail\">";
-                item = item + "<img src=\"" + data.pictUrl + "\" alt=\"\">";
+                var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\">";
+                item = item + "<div class=\"thumbnail\" style='z-index: 1;'>";
+                item = item + "<img src=\"" + data.pictUrl + "\" alt=\"" + data.title + "\" style='width: 100%;height: 100%;'>";
+                // item = item + "<p style='position: absolute;z-index: 2;left: 20px;top: 0px;'>" + data.platform + "</p>";
                 item = item + "<div class=\"caption\">";
-                item = item + "<h3>" + data.shortTitle + "</h3>";
-                item = item + "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>";
-                // item = item + "<p><a href=\"#\" class=\"btn btn-primary\" role=\"button\">Button</a> <a href=\"#\" class=\"btn btn-default\" role=\"button\">Button</a></p>";
+                item = item + "<a href='" + data.couponShareUrl + "' target='_blank'><h5>[" + data.platform + "]" + data.title + "</h5></a>";
+                // item = item + "<p>"+ data. +"</p>";
+                item = item + "<p align='center'><a href=\"#\" id='" + data.itemId + "' class=\"btn btn-default\" role=\"button\" onclick='showItemPopover(\"" + data.platform + "\"," + data.itemId + ")'>口令分享</a></p>";
                 item = item + "</div></div></div>";
                 $("#tbList").append(item);
             }
@@ -69,6 +76,16 @@ function getData(page) {
     });
 }
 
+
+function showItemPopover(platform, itemId) {
+    $('#' + itemId).popover({
+        "placement": "auto",
+        "title": "请复制",
+        "content": "口令内容"
+    });
+    // $('#' + itemId).popover('show');
+
+}
 
 
 

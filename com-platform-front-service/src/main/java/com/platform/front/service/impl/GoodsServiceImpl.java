@@ -22,6 +22,7 @@ public class GoodsServiceImpl implements GoodsService {
         PageData<GoodsInfo> result=new PageData<>();
         result.setTotalCount(0);
         result = taobaoGoodsBiz.findGoodsList(param);
+//        result = taobaoGoodsBiz.findCouponList(param);
         return result;
     }
 }

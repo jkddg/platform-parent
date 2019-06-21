@@ -3,10 +3,14 @@ package com.platform.front.service.api;
 import com.platform.front.service.config.TaobaoConfig;
 import com.taobao.api.ApiException;
 import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.TbkDgItemCouponGetRequest;
 import com.taobao.api.request.TbkDgMaterialOptionalRequest;
 import com.taobao.api.request.TbkItemInfoGetRequest;
+import com.taobao.api.request.TbkTpwdCreateRequest;
+import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.taobao.api.response.TbkItemInfoGetResponse;
+import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,8 +34,7 @@ public class TaobaoGoodsAPI extends AbstractTaobao {
      * @param pageSize
      * @param pageIndex
      */
-    public TbkDgMaterialOptionalResponse tbkMaterialOptional(boolean hasCoupon, String categorys, String keyWord, long pageSize, long pageIndex) {
-//        TaobaoClient client = new DefaultTaobaoClient("http://gw.api.taobao.com/router/rest", "25823044", "09486e171c16cbf652e800393ad0bded");
+    public TbkDgMaterialOptionalResponse tbkMaterialOptional(boolean hasCoupon, String categorys, String keyWord, long pageSize, long pageIndex, String sort, long materialId) {
         TaobaoClient client = getTaobaoClient();
         long adzoneId = taobaoConfig.getTkbAdzoneId();
         TbkDgMaterialOptionalRequest req = new TbkDgMaterialOptionalRequest();
@@ -48,9 +51,10 @@ public class TaobaoGoodsAPI extends AbstractTaobao {
         if (!StringUtils.isEmpty(keyWord)) {
             req.setQ(keyWord);
         }
-//        req.setCat("21,50016348");
-//        req.setCat("16,18");
-//        req.setCat("35,50014812,50022517,50008165,122650005,");
+        req.setSort(sort);
+        if (materialId > 0) {
+            req.setMaterialId(materialId);
+        }
 //        req.setStartDsr(10L);
 //        req.setEndTkRate(1234L);
 //        req.setStartTkRate(1234L);
@@ -58,11 +62,11 @@ public class TaobaoGoodsAPI extends AbstractTaobao {
 //        req.setStartPrice(10L);
 //        req.setIsOverseas(false);
 //        req.setIsTmall(false);
-//        req.setSort("tk_rate_des");
+
 //        req.setItemloc("杭州");
 
 //        req.setQ("女装");
-//        req.setMaterialId(2836L);
+
 //        req.setHasCoupon(false);
 //        req.setIp("13.2.33.4");
 //        req.setNeedFreeShipment(true);
@@ -129,17 +133,18 @@ public class TaobaoGoodsAPI extends AbstractTaobao {
     /**
      * 淘宝客链接解析
      */
-    public void TbkItemClickExtract(){
+    public void TbkItemClickExtract() {
 //        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
 //        TbkItemClickExtractRequest req = new TbkItemClickExtractRequest();
 //        req.setClickUrl("https://s.click.taobao.com/***");
 //        TbkItemClickExtractResponse rsp = client.execute(req);
 //        System.out.println(rsp.getBody());
     }
+
     /**
      * 商品链接转换
      */
-    public void TbkItemConvert(){
+    public void TbkItemConvert() {
 //        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
 //        TbkItemConvertRequest req = new TbkItemConvertRequest();
 //        req.setFields("num_iid,click_url");
@@ -155,15 +160,41 @@ public class TaobaoGoodsAPI extends AbstractTaobao {
     /**
      * 生成淘口令
      */
-    public void TbkTpwdCreate(){
-//        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-//        TbkTpwdCreateRequest req = new TbkTpwdCreateRequest();
+    public TbkTpwdCreateResponse TbkTpwdCreate(String text,String url) {
+        TaobaoClient client = getTaobaoClient();
+        TbkTpwdCreateRequest req = new TbkTpwdCreateRequest();
 //        req.setUserId("123");
-//        req.setText("长度大于5个字符");
-//        req.setUrl("https://uland.taobao.com/");
+        req.setText(text);
+        req.setUrl(url);
 //        req.setLogo("https://uland.taobao.com/");
 //        req.setExt("{}");
-//        TbkTpwdCreateResponse rsp = client.execute(req);
-//        System.out.println(rsp.getBody());
+        TbkTpwdCreateResponse rsp = null;
+        try {
+            rsp = client.execute(req);
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
+        return rsp;
+    }
+
+    /**
+     * 好券清单
+     */
+    public TbkDgItemCouponGetResponse couponGet(String keyWord, long pageSize, long pageIndex) {
+        long adzoneId = taobaoConfig.getTkbAdzoneId();
+        TaobaoClient client = getTaobaoClient();
+        TbkDgItemCouponGetRequest req = new TbkDgItemCouponGetRequest();
+        req.setAdzoneId(adzoneId);
+        req.setPlatform(2L);
+        req.setPageSize(pageSize);
+        req.setQ(keyWord);
+        req.setPageNo(pageIndex);
+        TbkDgItemCouponGetResponse rsp = null;
+        try {
+            rsp = client.execute(req);
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
+        return rsp;
     }
 }

@@ -3,12 +3,14 @@ package com.platform.common.modal;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * Created by Huangyonghao on 2019/6/18 15:57.
  */
 @Getter
 @Setter
-public class PageInfo {
+public class PageInfo  implements Serializable {
     private long pageSize = 25;
     private long pageIndex = 1;
 

@@ -4,6 +4,7 @@ package com.platform.front.service.service;
 import com.platform.common.modal.PageData;
 import com.platform.front.service.biz.TaobaoGoodsBiz;
 import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.iface.GoodsService;
 import com.platform.front.service.modal.GoodsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsServiceController {
 
     @Autowired
-    TaobaoGoodsBiz taobaoGoodsBiz;
+    GoodsService goodsService;
 
     @PostMapping("/list")
     public PageData<GoodsInfo> findTaobaoGoodsList(@RequestBody FindGoodsListParam param){
-        return taobaoGoodsBiz.findGoodsList(param);
+        return goodsService.findGoodsList(param);
     }
 }
