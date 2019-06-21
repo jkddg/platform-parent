@@ -36,10 +36,11 @@ public class TaobaoGoodsBiz {
         TbkDgMaterialOptionalResponse response = taobaoGoodsAPI.tbkMaterialOptional(true, null, param.getKeyWord(), param.getPageSize(), param.getPageIndex());
         if (!response.isSuccess()) {
             result.setSuccess(false);
-            result.setMsg(response.getMsg());
+            result.setMsg(response.getMsg() + response.getSubMessage());
             log.info("请求淘宝API失败，返回信息：" + response.getBody());
             return result;
         }
+        result.setSuccess(response.isSuccess());
         result.setTotalCount(response.getTotalResults());
         result.setData(TaobaoGoodsMapper.convertToGoodsInfos(response.getResultList()));
         return result;

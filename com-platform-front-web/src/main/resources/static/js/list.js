@@ -47,16 +47,24 @@ function getData(page) {
         },
         type: "POST",
         dataType: "json",
-        success: function (resultAu) {
-            eval("var mydata=" + resultAu);
-
-            var strCin = "<option value=\"\">请选择</option>";
-            for (var int = 0; int < mydata.length; int++) {
-                strCin += "<option value=\"" + mydata[int].dictType + ":" + mydata[int].dictName + ":" + mydata[int].dictCode + "\">" + mydata[int].dictName + "</option>";
+        success: function (result) {
+            if (!result.success) {
+                alert(result.msg);
             }
-            $("#choseVouSellOrderCategory").html(strCin);
+            for (var i = 0; i < result.data.length; i++) {
+                var data = result.data[i];
+                var item = "<div class=\"col-md-4 col-sm-6 item\">";
+                item = item + "<div class=\"thumbnail\">";
+                item = item + "<img src=\"" + data.pictUrl + "\" alt=\"\">";
+                item = item + "<div class=\"caption\">";
+                item = item + "<h3>" + data.shortTitle + "</h3>";
+                item = item + "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>";
+                // item = item + "<p><a href=\"#\" class=\"btn btn-primary\" role=\"button\">Button</a> <a href=\"#\" class=\"btn btn-default\" role=\"button\">Button</a></p>";
+                item = item + "</div></div></div>";
+                $("#tbList").append(item);
+            }
         }, error: function () {
-            $alert('查询销售单分类失败！');
+            alert('查询失败！');
         }
     });
 }
