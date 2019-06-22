@@ -3,10 +3,12 @@ package com.platform.front.service.biz;
 import com.platform.common.modal.PageData;
 import com.platform.front.service.api.TaobaoGoodsAPI;
 import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.client.param.TpwdParam;
 import com.platform.front.service.mapper.TaobaoGoodsMapper;
 import com.platform.front.service.modal.GoodsInfo;
 import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
+import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,9 +36,23 @@ public class TaobaoGoodsBiz {
             result.setMsg("请求参数为空");
             return result;
         }
-        String sort="total_sales";
+        String sort = "tk_rate_des";
+        switch (param.getSort()) {
+            case 1:
+                sort = "tk_rate_des";
+                break;
+            case 2:
+                sort = "total_sales_des";
+                break;
+            case 3:
+                sort = "price_asc";
+                break;
+            case 4:
+                sort = "price_des";
+                break;
+        }
 
-        TbkDgMaterialOptionalResponse response = taobaoGoodsAPI.tbkMaterialOptional(true, null, param.getKeyWord(), param.getPageSize(), param.getPageIndex(),sort,0L);
+        TbkDgMaterialOptionalResponse response = taobaoGoodsAPI.tbkMaterialOptional(true, null, param.getKeyWord(), param.getPageSize(), param.getPageIndex(), sort, 0L);
         if (!response.isSuccess()) {
             result.setSuccess(false);
             result.setMsg(response.getMsg() + response.getSubMsg());
@@ -44,13 +60,13 @@ public class TaobaoGoodsBiz {
             return result;
         }
         result.setSuccess(response.isSuccess());
-        if(response.getTotalResults()!=null){
+        if (response.getTotalResults() != null) {
             result.setTotalCount(response.getTotalResults());
-        }else {
-            if(response.getResultList()!=null && response.getResultList().size()>0){
-                result.setTotalCount(param.getPageSize()* param.getPageIndex() + 1);
-            }else {
-                result.setTotalCount(param.getPageSize()* param.getPageIndex() - 1);
+        } else {
+            if (response.getResultList() != null && response.getResultList().size() > 0) {
+                result.setTotalCount(param.getPageSize() * param.getPageIndex() + 1);
+            } else {
+                result.setTotalCount(param.getPageSize() * param.getPageIndex() - 1);
             }
         }
 
@@ -60,6 +76,7 @@ public class TaobaoGoodsBiz {
 
     /**
      * 获取好券清单
+     *
      * @param param
      * @return
      */
@@ -70,7 +87,7 @@ public class TaobaoGoodsBiz {
             result.setMsg("请求参数为空");
             return result;
         }
-        TbkDgItemCouponGetResponse response = taobaoGoodsAPI.couponGet( param.getKeyWord(), param.getPageSize(), param.getPageIndex());
+        TbkDgItemCouponGetResponse response = taobaoGoodsAPI.couponGet(param.getKeyWord(), param.getPageSize(), param.getPageIndex());
         if (!response.isSuccess()) {
             result.setSuccess(false);
             result.setMsg(response.getMsg() + response.getSubMsg());
@@ -83,5 +100,24 @@ public class TaobaoGoodsBiz {
         return result;
     }
 
+
+    /**
+     * 获取淘口令
+     *
+     * @param tpwdParam
+     * @return
+     */
+    public String getTpwd(TpwdParam tpwdParam) {
+        String url = tpwdParam.getUrl();
+        if (!url.startsWith("http")) {
+            url = "https:" + url;
+        }
+        TbkTpwdCreateResponse response = taobaoGoodsAPI.TbkTpwdCreate(tpwdParam.getText(), url);
+        if (response.isSuccess() && response.getData() != null) {
+            return tpwdParam.getText() + System.lineSeparator() + response.getData().getModel();
+        } else {
+            return "淘口令API请求失败" + response.getSubMsg();
+        }
+    }
 
 }

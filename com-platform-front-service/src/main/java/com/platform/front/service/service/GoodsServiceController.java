@@ -4,6 +4,7 @@ package com.platform.front.service.service;
 import com.platform.common.modal.PageData;
 import com.platform.front.service.biz.TaobaoGoodsBiz;
 import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.client.param.TpwdParam;
 import com.platform.front.service.iface.GoodsService;
 import com.platform.front.service.modal.GoodsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,9 @@ public class GoodsServiceController {
     @PostMapping("/list")
     public PageData<GoodsInfo> findTaobaoGoodsList(@RequestBody FindGoodsListParam param){
         return goodsService.findGoodsList(param);
+    }
+    @PostMapping("/getTpwd")
+    public String getTpwd(@RequestBody TpwdParam tpwdParam) {
+        return goodsService.getTpwd(tpwdParam);
     }
 }

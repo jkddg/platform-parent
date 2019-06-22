@@ -2,6 +2,7 @@ package com.platform.front.service.hystrix;
 
 import com.platform.common.modal.PageData;
 import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.client.param.TpwdParam;
 import com.platform.front.service.iface.GoodsService;
 import com.platform.front.service.modal.GoodsInfo;
 
@@ -15,5 +16,10 @@ public class GoodsServiceHystrix implements GoodsService {
         result.setSuccess(false);
         result.setMsg("超时熔断");
         return result;
+   }
+
+   @Override
+   public String getTpwd(TpwdParam tpwdParam){
+        return "请求超时";
    }
 }

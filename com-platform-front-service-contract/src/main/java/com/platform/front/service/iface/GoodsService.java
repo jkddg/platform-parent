@@ -2,6 +2,7 @@ package com.platform.front.service.iface;
 
 import com.platform.common.modal.PageData;
 import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.client.param.TpwdParam;
 import com.platform.front.service.hystrix.GoodsServiceHystrix;
 import com.platform.front.service.modal.GoodsInfo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,5 +16,9 @@ public interface GoodsService {
 
     @PostMapping("/goods/list")
     PageData<GoodsInfo> findGoodsList(FindGoodsListParam param);
+
+
+    @PostMapping("/goods/getTpwd")
+    String getTpwd(TpwdParam tpwdParam);
 }
 
