@@ -1,10 +1,12 @@
 package com.platform.front.service.mapper;
 
+import com.platform.common.contanst.PlatformEnum;
 import com.platform.front.service.modal.GoodsInfo;
 import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import org.springframework.beans.BeanUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,13 @@ public class TaobaoGoodsMapper {
         }
         GoodsInfo goodsInfo = new GoodsInfo();
         BeanUtils.copyProperties(info, goodsInfo);
-        goodsInfo.setPlatform(info.getUserType() == 0 ? "淘宝" : "天猫");
+        goodsInfo.setZkFinalPrice(Double.valueOf(info.getZkFinalPrice()));
+        goodsInfo.setReservePrice(Double.valueOf(info.getReservePrice()));
+        goodsInfo.setCouponAmount(Double.valueOf(info.getCouponAmount()));
+        goodsInfo.setCouponStartFee(Double.valueOf(info.getCouponStartFee()));
+        goodsInfo.setCouponStartTime(LocalDateTime.parse(info.getCouponStartTime()));
+        goodsInfo.setPlatform(info.getUserType() == 0 ? PlatformEnum.TAOBAO.displayName() : PlatformEnum.TMALL.displayName());
+        goodsInfo.setPlat(info.getUserType() == 0 ? PlatformEnum.TAOBAO.value() : PlatformEnum.TMALL.value());
         return goodsInfo;
     }
 
@@ -49,6 +57,7 @@ public class TaobaoGoodsMapper {
         goodsInfo.setShortTitle(info.getTitle());
         return goodsInfo;
     }
+
     public static List<GoodsInfo> convertConponInfos(List<TbkDgItemCouponGetResponse.TbkCoupon> list) {
         List<GoodsInfo> result = new ArrayList<>();
         if (list == null || list.size() == 0) {

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * Created by Huangyonghao on 2019/6/18 13:15.
@@ -14,7 +15,7 @@ public class GoodsInfo implements Serializable {
 
     private String platform;
 
-    private String plat;
+    private int plat;
 
     /**
      * 商品信息-叶子类目id
@@ -40,12 +41,12 @@ public class GoodsInfo implements Serializable {
      * 优惠券信息-优惠券面额。如：满299元减20元
      */
 
-    private String couponAmount;
+    private Double couponAmount;
     /**
      * 优惠券信息-优惠券结束时间
      */
 
-    private String couponEndTime;
+    private LocalDateTime couponEndTime;
     /**
      * 优惠券信息-优惠券id
      */
@@ -70,12 +71,12 @@ public class GoodsInfo implements Serializable {
      * 优惠券信息-优惠券起用门槛，满X元可用。如：满299元减20元
      */
 
-    private String couponStartFee;
+    private Double couponStartFee;
     /**
      * 优惠券信息-优惠券开始时间
      */
 
-    private String couponStartTime;
+    private LocalDateTime couponStartTime;
     /**
      * 优惠券信息-优惠券总量
      */
@@ -130,7 +131,7 @@ public class GoodsInfo implements Serializable {
      * 商品信息-商品一口价格
      */
 
-    private String reservePrice;
+    private Double reservePrice;
 
     /**
      * 店铺信息-卖家id
@@ -170,29 +171,21 @@ public class GoodsInfo implements Serializable {
      */
 
     private Long userType;
-    /**
-     * 预售专用-预售数量
-     */
 
-    private Long uvSumPreSale;
     /**
      * 商品信息-30天销量
      */
 
     private Long volume;
-    /**
-     * 商品信息-商品白底图
-     */
 
-    private String whiteImage;
 
     /**
      * 商品信息-商品折扣价格
      */
 
-    private String zkFinalPrice;
+    private Double zkFinalPrice;
 
     public String getFinalPrice() {
-        return String.format("%.2f", (Double.parseDouble(zkFinalPrice) - Double.parseDouble(couponAmount)));
+        return String.format("%.2f", (zkFinalPrice - couponAmount));
     }
 }

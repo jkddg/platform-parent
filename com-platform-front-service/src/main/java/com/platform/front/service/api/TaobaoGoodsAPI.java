@@ -2,6 +2,7 @@ package com.platform.front.service.api;
 
 import com.platform.front.service.config.TaobaoConfig;
 import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.TbkDgItemCouponGetRequest;
 import com.taobao.api.request.TbkDgMaterialOptionalRequest;
@@ -23,10 +24,18 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class TaobaoGoodsAPI extends AbstractTaobao {
+public class TaobaoGoodsAPI  {
 
     @Autowired
     TaobaoConfig taobaoConfig;
+
+
+    protected TaobaoClient getTaobaoClient(){
+
+        TaobaoClient client = new DefaultTaobaoClient(taobaoConfig.getTbkUrl(), taobaoConfig.getTbkAppkey(), taobaoConfig.getTbkSecret());
+        return client;
+
+    }
 
     /**
      * 淘宝商品列表抓取

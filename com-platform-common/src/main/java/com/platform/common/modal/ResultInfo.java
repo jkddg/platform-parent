@@ -10,7 +10,8 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-public class ResultInfo  implements Serializable {
+public class ResultInfo<T>  implements Serializable {
     private boolean success = false;
     private String msg;
+    private T data;
 }
