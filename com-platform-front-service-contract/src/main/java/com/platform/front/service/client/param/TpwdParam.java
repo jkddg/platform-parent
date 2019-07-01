@@ -1,4 +1,4 @@
-package com.platform.admin.service.client.param;
+package com.platform.front.service.client.param;
 
 import lombok.Getter;
 import lombok.Setter;

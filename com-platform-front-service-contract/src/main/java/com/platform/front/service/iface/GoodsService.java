@@ -1,9 +1,9 @@
-package com.platform.admin.service.iface;
+package com.platform.front.service.iface;
 
-import com.platform.admin.service.client.param.TpwdParam;
-import com.platform.admin.service.hystrix.GoodsServiceHystrix;
+import com.platform.front.service.client.param.TpwdParam;
+import com.platform.front.service.hystrix.GoodsServiceHystrix;
 import com.platform.common.modal.PageData;
-import com.platform.admin.service.client.param.FindGoodsListParam;
+import com.platform.front.service.client.param.FindGoodsListParam;
 import com.platform.common.modal.GoodsInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

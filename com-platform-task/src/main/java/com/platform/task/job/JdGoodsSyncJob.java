@@ -15,6 +15,6 @@ public class JdGoodsSyncJob {
 
     @Scheduled(cron = "0 15 * * * ?")
     public void doTask(){
-
+        jdGoodsBiz.syncGoods();
     }
 }

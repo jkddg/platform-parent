@@ -9,9 +9,14 @@ import java.io.Serializable;
 @Setter
 public class JdGoodsSyncParam implements Serializable {
     private int eliteId;
-    private int pageSize;
+    private int pageSize = 25;
     private int pageIndex;
     private long totalCount;
+
+    public long getPageCount() {
+        return (totalCount + pageSize - 1) / pageSize;
+    }
+
     private String sortName;
     private String sort;
 }

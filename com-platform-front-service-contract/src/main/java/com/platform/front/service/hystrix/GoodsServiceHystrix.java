@@ -1,9 +1,9 @@
-package com.platform.admin.service.hystrix;
+package com.platform.front.service.hystrix;
 
-import com.platform.admin.service.client.param.TpwdParam;
+import com.platform.front.service.client.param.TpwdParam;
 import com.platform.common.modal.PageData;
-import com.platform.admin.service.client.param.FindGoodsListParam;
-import com.platform.admin.service.iface.GoodsService;
+import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.iface.GoodsService;
 import com.platform.common.modal.GoodsInfo;
 
 /**
