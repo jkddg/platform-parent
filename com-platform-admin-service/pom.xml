@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.platform</groupId>
-    <artifactId>com-platform-front-service</artifactId>
+    <artifactId>com-platform-admin-service</artifactId>
     <version>1.0.0</version>
-    <name>com-platform-front-service</name>
+    <name>com-platform-admin-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -45,10 +45,19 @@
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
-            <artifactId>com-platform-front-service-contract</artifactId>
+            <artifactId>com-platform-admin-service-contract</artifactId>
             <version>1.0.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>${es.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${es.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.taobao</groupId>
             <artifactId>api</artifactId>
@@ -64,7 +73,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.8</version>
         </dependency>
-
     </dependencies>
 
     <dependencyManagement>
@@ -85,7 +93,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.platform.admin.service.FrontServiceApplication</mainClass>
+                    <mainClass>com.platform.admin.service.AdminServiceApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>

@@ -2,14 +2,13 @@ package com.platform.front.web.controller.site;
 
 import com.platform.common.contanst.PlatformEnum;
 import com.platform.common.modal.PageData;
-import com.platform.front.service.client.param.TpwdParam;
-import com.platform.front.service.iface.GoodsService;
-import com.platform.front.service.client.param.FindGoodsListParam;
-import com.platform.front.service.modal.GoodsInfo;
+import com.platform.admin.service.client.param.TpwdParam;
+import com.platform.admin.service.iface.GoodsService;
+import com.platform.admin.service.client.param.FindGoodsListParam;
+import com.platform.common.modal.GoodsInfo;
 import com.platform.front.web.controller.param.DataListParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;

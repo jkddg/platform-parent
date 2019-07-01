@@ -1,6 +1,6 @@
 package com.platform.task.biz;
 
-import com.platform.front.service.iface.JdGoodsService;
+import com.platform.admin.service.iface.JdGoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
