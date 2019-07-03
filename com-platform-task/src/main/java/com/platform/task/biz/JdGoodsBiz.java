@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -42,10 +43,15 @@ public class JdGoodsBiz {
             ResultInfo<JdGoodsSyncParam> response = jdGoodsService.syncGoods(jdGoodsSyncParam);
             if (response.isSuccess()) {
                 jdGoodsSyncParam = response.getData();
-                countDownLatch=new CountDownLatch((int) jdGoodsSyncParam.getPageCount()-1);
-                for (int i=2;i<=jdGoodsSyncParam.getPageCount();i++){
+                countDownLatch = new CountDownLatch((int) jdGoodsSyncParam.getPageCount() - 1);
+                for (int i = 2; i <= jdGoodsSyncParam.getPageCount(); i++) {
                     jdGoodsSyncParam.setPageIndex(i);
-                    appendWork(countDownLatch,jdGoodsSyncParam);
+                    appendWork(countDownLatch, jdGoodsSyncParam);
+                }
+                try {
+                    countDownLatch.await(300L,TimeUnit.SECONDS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
