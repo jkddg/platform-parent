@@ -1,7 +1,7 @@
-package com.platform.admin.service.biz;
+package com.platform.front.service.biz;
 
 import com.platform.common.modal.PageData;
-import com.platform.admin.service.client.param.FindGoodsListParam;
+import com.platform.front.service.client.param.FindGoodsListParam;
 import com.platform.common.modal.GoodsInfo;
 import org.springframework.stereotype.Component;
 

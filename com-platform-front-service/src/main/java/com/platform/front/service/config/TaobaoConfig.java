@@ -1,4 +1,4 @@
-package com.platform.admin.service.config;
+package com.platform.front.service.config;
 
 import lombok.Getter;
 import lombok.Setter;

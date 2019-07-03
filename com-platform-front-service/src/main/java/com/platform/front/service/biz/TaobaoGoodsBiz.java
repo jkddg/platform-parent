@@ -1,10 +1,10 @@
-package com.platform.admin.service.biz;
+package com.platform.front.service.biz;
 
 import com.platform.common.modal.PageData;
-import com.platform.admin.service.api.TaobaoGoodsAPI;
-import com.platform.admin.service.client.param.FindGoodsListParam;
-import com.platform.admin.service.client.param.TpwdParam;
-import com.platform.admin.service.mapper.TaobaoGoodsMapper;
+import com.platform.front.service.api.TaobaoGoodsAPI;
+import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.client.param.TpwdParam;
+import com.platform.front.service.mapper.TaobaoGoodsMapper;
 import com.platform.common.modal.GoodsInfo;
 import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;

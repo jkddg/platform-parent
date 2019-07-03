@@ -1,6 +1,6 @@
-package com.platform.admin.service.api;
+package com.platform.front.service.api;
 
-import com.platform.admin.service.config.TaobaoConfig;
+import com.platform.front.service.config.TaobaoConfig;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;

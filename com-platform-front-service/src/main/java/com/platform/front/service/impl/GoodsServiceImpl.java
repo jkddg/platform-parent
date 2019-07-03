@@ -1,10 +1,10 @@
-package com.platform.admin.service.impl;
+package com.platform.front.service.impl;
 
-import com.platform.admin.service.biz.TaobaoGoodsBiz;
-import com.platform.admin.service.client.param.TpwdParam;
+import com.platform.front.service.biz.TaobaoGoodsBiz;
+import com.platform.front.service.client.param.TpwdParam;
 import com.platform.common.modal.PageData;
-import com.platform.admin.service.client.param.FindGoodsListParam;
-import com.platform.admin.service.iface.GoodsService;
+import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.service.iface.GoodsService;
 import com.platform.common.modal.GoodsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

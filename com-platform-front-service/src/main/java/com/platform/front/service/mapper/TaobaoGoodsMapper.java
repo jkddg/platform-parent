@@ -1,4 +1,4 @@
-package com.platform.admin.service.mapper;
+package com.platform.front.service.mapper;
 
 import com.platform.common.contanst.PlatformEnum;
 import com.platform.common.modal.GoodsInfo;
@@ -6,7 +6,9 @@ import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import org.springframework.beans.BeanUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class TaobaoGoodsMapper {
         goodsInfo.setReservePrice(Double.valueOf(info.getReservePrice()));
         goodsInfo.setCouponAmount(Double.valueOf(info.getCouponAmount()));
         goodsInfo.setCouponStartFee(Double.valueOf(info.getCouponStartFee()));
-        goodsInfo.setCouponStartTime(LocalDateTime.parse(info.getCouponStartTime()));
+        goodsInfo.setCouponStartTime(LocalDate.parse(info.getCouponStartTime()).atTime(LocalTime.MIN));
         goodsInfo.setPlatform(info.getUserType() == 0 ? PlatformEnum.TAOBAO.displayName() : PlatformEnum.TMALL.displayName());
         goodsInfo.setPlat(info.getUserType() == 0 ? PlatformEnum.TAOBAO.value() : PlatformEnum.TMALL.value());
         return goodsInfo;

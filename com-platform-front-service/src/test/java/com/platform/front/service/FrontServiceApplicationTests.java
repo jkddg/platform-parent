@@ -1,6 +1,6 @@
 package com.platform.admin.service;
 
-import com.platform.admin.service.iface.GoodsService;
+import com.platform.front.service.iface.GoodsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
