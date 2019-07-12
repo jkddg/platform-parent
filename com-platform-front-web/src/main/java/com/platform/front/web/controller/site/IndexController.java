@@ -48,4 +48,6 @@ public class IndexController {
         String result = goodsService.getTpwd(tpwdParam);
         return result;
     }
+
+
 }

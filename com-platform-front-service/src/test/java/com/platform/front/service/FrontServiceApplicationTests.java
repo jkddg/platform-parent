@@ -1,4 +1,4 @@
-package com.platform.admin.service;
+package com.platform.front.service;
 
 import com.platform.front.service.iface.GoodsService;
 import org.junit.Test;
