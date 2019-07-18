@@ -1,33 +1,22 @@
-<!doctype html>
-<html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>Document</title>
-<style>
 .box {
-    width: 180px;
-    height: 100px;
     background: white;
     border-radius: 10px;
+    padding:10px;
     -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 90;
-  }
-  .box .box-con{
+}
+.box .box-con{
     width: 85px;
     height: 88px;
     overflow: hidden;
     position: absolute;
     top: -3px;
     right: -3px;
-  }
-  .box .box-text {
+}
+.box .box-text {
     color: white;
     text-align: center;
     -webkit-transform: rotate(45deg);
@@ -48,25 +37,15 @@
     -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-  }
-  .box .box-text:before, .box-text:after {
+}
+.box .box-text:before, .box-text:after {
     content: "";
     position: absolute;
     bottom: -3px;
-  }
-  .box .box-text:before {
+}
+.box .box-text:before {
     left: 0;
-  }
-  .box .box-text:after {
+}
+.box .box-text:after {
     right: 0;
-  }
-</style>
- </head>
- <body>
-      <div class="box">
-      <div class="box-con">
-        <div class="box-text">昨日</div>
-      </div>
-    </div>​
- </body>
-</html>
+}

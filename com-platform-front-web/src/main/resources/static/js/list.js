@@ -31,10 +31,10 @@ $(document).ready(function () {
     var num = 1;
     var totalheight = 0;
     var main = $("#tabpanel");                     //主体元素
-    $(window).scroll(function(){
+    $(window).scroll(function () {
         var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
         totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
-        if(($(document).height()-range) <= totalheight  && num != maxnum) {
+        if (($(document).height() - range) <= totalheight && num != maxnum) {
             getData(currentPage);
         }
     });
@@ -76,10 +76,12 @@ function getData(page) {
 
             for (var i = 0; i < result.data.length; i++) {
                 var data = result.data[i];
-                var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\">";
-                item = item + "<div class=\"thumbnail\" style='z-index: 1;'>";
+                var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\" style='padding-right:5px;padding-left:5px;'>";
+                item = item + "<div class=\"box\" >";
+                item = item + "<div class=\"thumbnail\" >";
                 item = item + "<img src=\"" + data.pictUrl + "\" alt=\"" + data.title + "\" style='width: 100%;height: 100%;'>";
-                item = item + "<p style='position: absolute;z-index: 2;left: 20px;top: 0px;color: red;font-size: x-large;'>" + data.couponAmount + "元券</p>";
+                item = item + "</div>";
+                // item = item + "<p style='position: absolute;z-index: 2;left: 20px;top: 0px;color: red;font-size: x-large;'>" + data.couponAmount + "元券</p>";
                 item = item + "<div class=\"caption\">";
                 item = item + "<a href='" + data.couponShareUrl + "' target='_blank'><p>[" + data.platform + "]" + data.title + "</p></a>";
                 // item = item + "<p>"+ data. +"</p>";
