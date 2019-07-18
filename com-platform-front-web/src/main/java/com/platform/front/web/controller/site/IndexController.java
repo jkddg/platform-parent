@@ -26,7 +26,7 @@ public class IndexController {
     public ModelAndView indexPage() {
         ModelAndView view = new ModelAndView();
         view.setViewName("view/index");
-        view.addObject("pid","1231123");
+        view.addObject("pid","mm_10869508_621300027_109172500468");
         return view;
     }
 
