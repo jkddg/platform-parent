@@ -78,7 +78,8 @@ function getData(page) {
                 var data = result.data[i];
                 var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\" style='padding-right:5px;padding-left:5px;'>";
                 item = item + "<div class=\"box\" >";
-                item = item + "<div class=\"thumbnail\" >";
+                item = item + "<div class=\"box-con\">";
+                item = item + "<div class=\"box-text\">" + data.couponAmount + "元券</div>";
                 item = item + "<img src=\"" + data.pictUrl + "\" alt=\"" + data.title + "\" style='width: 100%;height: 100%;'>";
                 item = item + "</div>";
                 // item = item + "<p style='position: absolute;z-index: 2;left: 20px;top: 0px;color: red;font-size: x-large;'>" + data.couponAmount + "元券</p>";

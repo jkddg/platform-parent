@@ -5,6 +5,7 @@ import com.platform.common.modal.GoodsInfo;
 import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,9 +41,11 @@ public class TaobaoGoodsMapper {
             return result;
         }
         for (int i = 0; i < list.size(); i++) {
-            GoodsInfo info = convertToGoodsInfo(list.get(i));
-            if (info != null) {
-                result.add(info);
+            if(!StringUtils.isEmpty(list.get(i).getCouponAmount())) {
+                GoodsInfo info = convertToGoodsInfo(list.get(i));
+                if (info != null) {
+                    result.add(info);
+                }
             }
         }
         return result;
