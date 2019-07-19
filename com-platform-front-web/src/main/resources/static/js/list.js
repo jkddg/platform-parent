@@ -76,7 +76,7 @@ function getData(page) {
 
             for (var i = 0; i < result.data.length; i++) {
                 var data = result.data[i];
-                var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\" style='padding-right:5px;padding-left:5px;'>";
+                var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\" style='padding-right:5px;padding-left:5px;margin-bottom:5px;'>";
                 item = item + "<div class=\"box\" >";
                 item = item + "<div class=\"box-con\">";
                 item = item + "<div class=\"box-text\">" + data.couponAmount + "元券</div>";
@@ -86,8 +86,9 @@ function getData(page) {
                 item = item + "<div class=\"caption\">";
                 item = item + "<a href='" + data.couponShareUrl + "' target='_blank'><p>[" + data.platform + "]" + data.title + "</p></a>";
                 // item = item + "<p>"+ data. +"</p>";
-                item = item + "<p style='float: left;'>价格:<span style='color: #b21f2d'>" + data.zkFinalPrice + "</span>,券后价:<span style='color: red'>" + data.finalPrice + "</span></p>" +
-                    "<p style='float: right;'><a href=\"###\" id='" + data.itemId + "' onclick='showItemPopover(\"" + data.platform + "\"," + data.itemId + ",\"" + data.shortTitle + "\",\"" + data.couponShareUrl + "\")'>口令分享</a></p>";
+                // 价格:<span style='color: #b21f2d'>" + data.zkFinalPrice + "</span>,
+                item = item + "<p style=\"margin-bottom:1rem;\">券后价:<span style='color: red'>" + data.finalPrice + "</span></p>" +
+                    "<p style=\"position: relative;\"><a class=\"btn btn-warning\" style=\"position:absolute;right:0px;top:-2rem;\" href=\"###\" id='" + data.itemId + "' onclick='showItemPopover(\"" + data.platform + "\"," + data.itemId + ",\"" + data.shortTitle + "\",\"" + data.couponShareUrl + "\")'>口令分享</a></p>";
                 item = item + "</div></div></div>";
                 $("#tbList").append(item);
             }
