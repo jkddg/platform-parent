@@ -1,4 +1,5 @@
 var currentPage = 1;
+var lastRequestTime = 0;
 $(document).ready(function () {
 
     var $container = $('.masonry-container');
@@ -35,7 +36,9 @@ $(document).ready(function () {
         var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
         totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
         if (($(document).height() - range) <= totalheight && num != maxnum) {
-            getData(currentPage);
+            if(canRequest()){
+                getData(currentPage);
+            }
         }
     });
 
@@ -127,6 +130,16 @@ function showItemPopover(platform, itemId, text, url) {
         }
     });
 
+}
+
+function canRequest() {
+
+    var currentTime = new Date().getTime();
+    if ((currentTime - lastRequestTime) > 1000) {
+        lastRequestTime = currentTime;
+        return true;
+    }
+    return false;
 }
 
 
