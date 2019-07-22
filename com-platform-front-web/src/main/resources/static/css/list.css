@@ -14,8 +14,7 @@
  .box-con {
     overflow: hidden;
     position: relative;
-    height: 9rem;
-    width: 9rem;
+
 }
 
 .box .box-text {
@@ -28,8 +27,9 @@
     position: absolute;
     padding: 2px 0;
     right: 0px;
-    top: 18px;
-    width: 65px;
+    top: 15px;
+    width: 50px;
+    font-size:.75rem;
     background-color: #00801C;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
     background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
