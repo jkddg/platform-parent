@@ -1,18 +1,23 @@
 .box {
     background: white;
     border-radius: 10px;
-    padding:10px;
+    padding: 10px;
     -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 90;
-}
-.box .box-con{
-    overflow: hidden;
-    position: relative;
+
 
 }
+
+ .box-con {
+    overflow: hidden;
+    position: relative;
+    height: 9rem;
+    width: 9rem;
+}
+
 .box .box-text {
     color: white;
     text-align: center;
@@ -35,14 +40,17 @@
     -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 }
+
 .box .box-text:before, .box-text:after {
     content: "";
     position: absolute;
     bottom: -3px;
 }
+
 .box .box-text:before {
     left: 0;
 }
+
 .box .box-text:after {
     right: 0;
 }

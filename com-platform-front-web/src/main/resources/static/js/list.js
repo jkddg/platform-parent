@@ -36,7 +36,7 @@ $(document).ready(function () {
         var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
         totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
         if (($(document).height() - range) <= totalheight && num != maxnum) {
-            if(canRequest()){
+            if (canRequest()) {
                 getData(currentPage);
             }
         }
@@ -79,20 +79,31 @@ function getData(page) {
 
             for (var i = 0; i < result.data.length; i++) {
                 var data = result.data[i];
+                // var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\" style='padding-right:5px;padding-left:5px;margin-bottom:5px;'>";
+                // item = item + "<div class=\"box\" >";
+                // item = item + "<div class=\"box-con\">";
+                // item = item + "<div class=\"box-text\">" + data.couponAmount + "元券</div>";
+                // item = item + "<img src=\"" + data.pictUrl + "\" alt=\"" + data.title + "\" style='width: 100%;height: 100%;'>";
+                // item = item + "</div>";
+                // item = item + "<div class=\"caption\">";
+                // item = item + "<a href='" + data.couponShareUrl + "' target='_blank'><p>[" + data.platform + "]" + data.title + "</p></a>";
+                // item = item + "<p style=\"margin-bottom:1rem;\">券后价:<span style='color: red'>" + data.finalPrice + "</span></p>" +
+                //     "<p style=\"position: relative;\"><a class=\"btn btn-warning\" style=\"position:absolute;right:0px;top:-2rem;\" href=\"###\" id='" + data.itemId + "' onclick='showItemPopover(\"" + data.platform + "\"," + data.itemId + ",\"" + data.shortTitle + "\",\"" + data.couponShareUrl + "\")'>口令分享</a></p>";
+                // item = item + "</div></div></div>";
+
                 var item = "<div class=\"col-md-3 col-sm-4 col-xs-12 item\" style='padding-right:5px;padding-left:5px;margin-bottom:5px;'>";
                 item = item + "<div class=\"box\" >";
                 item = item + "<div class=\"box-con\">";
                 item = item + "<div class=\"box-text\">" + data.couponAmount + "元券</div>";
                 item = item + "<img src=\"" + data.pictUrl + "\" alt=\"" + data.title + "\" style='width: 100%;height: 100%;'>";
                 item = item + "</div>";
-                // item = item + "<p style='position: absolute;z-index: 2;left: 20px;top: 0px;color: red;font-size: x-large;'>" + data.couponAmount + "元券</p>";
-                item = item + "<div class=\"caption\">";
-                item = item + "<a href='" + data.couponShareUrl + "' target='_blank'><p>[" + data.platform + "]" + data.title + "</p></a>";
-                // item = item + "<p>"+ data. +"</p>";
-                // 价格:<span style='color: #b21f2d'>" + data.zkFinalPrice + "</span>,
-                item = item + "<p style=\"margin-bottom:1rem;\">券后价:<span style='color: red'>" + data.finalPrice + "</span></p>" +
-                    "<p style=\"position: relative;\"><a class=\"btn btn-warning\" style=\"position:absolute;right:0px;top:-2rem;\" href=\"###\" id='" + data.itemId + "' onclick='showItemPopover(\"" + data.platform + "\"," + data.itemId + ",\"" + data.shortTitle + "\",\"" + data.couponShareUrl + "\")'>口令分享</a></p>";
-                item = item + "</div></div></div>";
+
+                item = item + "</div>";
+                item=item + "<div style=\"position: absolute;z-index: 91;font-size: .75rem; overflow: hidden;width: 7rem; height: auto; right: 10px; top: 10px; \">[" + data.platform + "]" + data.title + "</div>";
+
+
+                item = item + "</div>";
+                item = item + "</div>";
                 $("#tbList").append(item);
             }
             currentPage++;
