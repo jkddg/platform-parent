@@ -159,7 +159,7 @@ public class TaobaoGoodsAPI  {
 //        req.setFields("num_iid,click_url");
 //        req.setNumIids("123,456");
 //        req.setAdzoneId(123L);
-//        req.setPlatform(123L);
+//        req.setPlatformName(123L);
 //        req.setUnid("demo");
 //        req.setDx("1");
 //        TbkItemConvertResponse rsp = client.execute(req);

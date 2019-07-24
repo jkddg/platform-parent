@@ -18,8 +18,8 @@ public class JdGoodsMapper {
         GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setShortTitle(jfGoodsResp.getSkuName());
         goodsInfo.setCouponShareUrl(jfGoodsResp.getMaterialUrl());
-        goodsInfo.setPlatform(PlatformEnum.JD.displayName());
-        goodsInfo.setPlat(PlatformEnum.JD.value());
+        goodsInfo.setPlatformName(PlatformEnum.JD.displayName());
+        goodsInfo.setPlatformId(PlatformEnum.JD.value());
         if (jfGoodsResp.getCategoryInfo() != null) {
             goodsInfo.setLevelOneCategoryId(jfGoodsResp.getCategoryInfo().getCid1());
             goodsInfo.setLevelOneCategoryName(jfGoodsResp.getCategoryInfo().getCid1Name());

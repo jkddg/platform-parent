@@ -8,7 +8,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +29,8 @@ public class TaobaoGoodsMapper {
         goodsInfo.setCouponAmount(Double.valueOf(info.getCouponAmount()));
         goodsInfo.setCouponStartFee(Double.valueOf(info.getCouponStartFee()));
         goodsInfo.setCouponStartTime(LocalDate.parse(info.getCouponStartTime()).atTime(LocalTime.MIN));
-        goodsInfo.setPlatform(info.getUserType() == 0 ? PlatformEnum.TAOBAO.displayName() : PlatformEnum.TMALL.displayName());
-        goodsInfo.setPlat(info.getUserType() == 0 ? PlatformEnum.TAOBAO.value() : PlatformEnum.TMALL.value());
+        goodsInfo.setPlatformName(info.getUserType() == 0 ? PlatformEnum.TAOBAO.displayName() : PlatformEnum.TMALL.displayName());
+        goodsInfo.setPlatformId(info.getUserType() == 0 ? PlatformEnum.TAOBAO.value() : PlatformEnum.TMALL.value());
         return goodsInfo;
     }
 
@@ -57,7 +56,7 @@ public class TaobaoGoodsMapper {
         }
         GoodsInfo goodsInfo = new GoodsInfo();
         BeanUtils.copyProperties(info, goodsInfo);
-        goodsInfo.setPlatform(info.getUserType() == 0 ? "淘宝" : "天猫");
+        goodsInfo.setPlatformName(info.getUserType() == 0 ? "淘宝" : "天猫");
         goodsInfo.setCouponShareUrl(info.getCouponClickUrl());
         goodsInfo.setShortTitle(info.getTitle());
         return goodsInfo;
