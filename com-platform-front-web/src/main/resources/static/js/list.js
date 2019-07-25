@@ -53,7 +53,7 @@ function getData(page) {
     }
     var sort = $("input[name=sort]:checked").val();
     var platform = "";
-    $("input[name='platform']:checked").each(function (i) {
+    $("input[name='platformName']:checked").each(function (i) {
         if (platform.length > 0) {
             platform = platform + ",";
         }

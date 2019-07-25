@@ -13,9 +13,30 @@ import java.time.LocalDateTime;
 @Setter
 public class GoodsInfo implements Serializable {
 
-    private String platform;
+    /**
+     * 商品信息-宝贝id
+     */
 
-    private int plat;
+    private Long itemId;
+    /**
+     * 平台类型id
+     */
+    private int platformId;
+    /**
+     * 平台名称
+     */
+    private String platformName;
+
+    /**
+     * 商品信息-一级类目ID
+     */
+
+    private Long levelOneCategoryId;
+    /**
+     * 商品信息-一级类目名称
+     */
+
+    private String levelOneCategoryName;
 
     /**
      * 商品信息-叶子类目id
@@ -38,10 +59,19 @@ public class GoodsInfo implements Serializable {
 
     private String commissionType;
     /**
-     * 优惠券信息-优惠券面额。如：满299元减20元
+     * 优惠券信息-优惠券起用门槛，满X元可用。如：满299元减20元
      */
 
+    private Double couponStartFee;
+    /**
+     * 优惠券信息-优惠券面额。如：满299元减20元
+     */
     private Double couponAmount;
+    /**
+     * 优惠券信息-优惠券开始时间
+     */
+
+    private LocalDateTime couponStartTime;
     /**
      * 优惠券信息-优惠券结束时间
      */
@@ -58,6 +88,11 @@ public class GoodsInfo implements Serializable {
 
     private String couponInfo;
     /**
+     * 优惠券信息-优惠券总量
+     */
+
+    private Long couponTotalCount;
+    /**
      * 优惠券信息-优惠券剩余量
      */
 
@@ -67,87 +102,6 @@ public class GoodsInfo implements Serializable {
      */
 
     private String couponShareUrl;
-    /**
-     * 优惠券信息-优惠券起用门槛，满X元可用。如：满299元减20元
-     */
-
-    private Double couponStartFee;
-    /**
-     * 优惠券信息-优惠券开始时间
-     */
-
-    private LocalDateTime couponStartTime;
-    /**
-     * 优惠券信息-优惠券总量
-     */
-
-    private Long couponTotalCount;
-
-
-    /**
-     * 商品信息-宝贝描述(推荐理由)
-     */
-
-    private String itemDescription;
-    /**
-     * 商品信息-宝贝id
-     */
-
-    private Long itemId;
-    /**
-     * 链接-宝贝地址
-     */
-
-    private String itemUrl;
-
-    /**
-     * 商品信息-一级类目ID
-     */
-
-    private Long levelOneCategoryId;
-    /**
-     * 商品信息-一级类目名称
-     */
-
-    private String levelOneCategoryName;
-    /**
-     * 店铺信息-卖家昵称
-     */
-
-    private String nick;
-
-
-    /**
-     * 商品信息-商品主图
-     */
-
-    private String pictUrl;
-    /**
-     * 商品信息-宝贝所在地
-     */
-
-    private String provcity;
-    /**
-     * 商品信息-商品一口价格
-     */
-
-    private Double reservePrice;
-
-    /**
-     * 店铺信息-卖家id
-     */
-
-    private Long sellerId;
-    /**
-     * 店铺信息-店铺dsr评分
-     */
-
-    private Long shopDsr;
-    /**
-     * 店铺信息-店铺名称
-     */
-
-    private String shopTitle;
     /**
      * 商品信息-商品短标题
      */
@@ -166,11 +120,58 @@ public class GoodsInfo implements Serializable {
      */
 
     private String url;
+
     /**
-     * 店铺信息-卖家类型。0表示集市，1表示天猫
+     * 商品信息-宝贝描述(推荐理由)
      */
 
-    private Long userType;
+    private String itemDescription;
+
+    /**
+     * 链接-宝贝地址
+     */
+
+    private String itemUrl;
+
+    /**
+     * 商品信息-商品主图
+     */
+    private String pictUrl;
+    /**
+     * 商品信息-宝贝所在地
+     */
+
+    private String provcity;
+    /**
+     * 商品信息-商品一口价格
+     */
+
+    private Double reservePrice;
+    /**
+     * 商品信息-商品折扣价格
+     */
+
+    private Double zkFinalPrice;
+    /**
+     * 店铺信息-卖家id
+     */
+
+    private Long sellerId;
+    /**
+     * 店铺信息-卖家昵称
+     */
+
+    private String nick;
+    /**
+     * 店铺信息-店铺dsr评分
+     */
+
+    private Long shopDsr;
+    /**
+     * 店铺信息-店铺名称
+     */
+
+    private String shopTitle;
 
     /**
      * 商品信息-30天销量
@@ -179,11 +180,7 @@ public class GoodsInfo implements Serializable {
     private Long volume;
 
 
-    /**
-     * 商品信息-商品折扣价格
-     */
 
-    private Double zkFinalPrice;
 
     public String getFinalPrice() {
         return String.format("%.2f", (zkFinalPrice - couponAmount));
