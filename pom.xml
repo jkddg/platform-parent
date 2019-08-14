@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.platform</groupId>
+    <artifactId>com-platform-parent</artifactId>
+    <version>1.0.0</version>
+    <name>com-platform-parent</name>
+    <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <modules>
+        <module>com-platform-eureka</module>
+        <module>com-platform-front-service</module>
+        <module>com-platform-front-web</module>
+        <module>com-platform-task</module>
+        <module>com-platform-front-service-contract</module>
+        <module>com-platform-common</module>
+        <module>com-platform-admin-service-contract</module>
+        <module>com-platform-admin-service</module>
+        <module>com-platform-spider</module>
+    </modules>
+</project>

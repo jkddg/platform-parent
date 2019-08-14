@@ -1,0 +1,125 @@
+PUT goods_info
+{
+	"settings": {
+		"number_of_shards": 5,
+		"number_of_replicas": 0
+	},
+	"mappings": {
+		"properties": {
+			"itemId": {
+				"type": "long"
+			},
+			"platformId": {
+				"type": "integer"
+			},
+			"platformName": {
+				"type": "keyword"
+			},
+			"levelOneCategoryName": {
+				"type": "keyword"
+			},
+			"levelOneCategoryId": {
+				"type": "long"
+			},
+			"categoryName": {
+				"type": "keyword"
+			},
+			"categoryId": {
+				"type": "long"
+			},
+			"commissionRate": {
+				"type": "keyword"
+			},
+			"commissionType": {
+				"type": "keyword"
+			},
+			"couponStartTime": {
+				"type": "date"
+			},
+			"couponEndTime": {
+				"type": "date"
+			},
+			"couponStartFee": {
+				"type": "double"
+			},
+			"couponAmount": {
+				"type": "double"
+			},
+			"couponId": {
+				"type": "keyword"
+			},
+			"couponInfo": {
+				"type": "keyword"
+			},
+			"couponTotalCount": {
+				"type": "long"
+			},
+			"couponRemainCount": {
+				"type": "long"
+			},
+			"couponShareUrl": {
+				"type": "keyword"
+			},
+
+			"shortTitle": {
+				"type": "text",
+				"analyzer": "ik_max_word",
+				"search_analyzer": "ik_smart"
+			},
+			"title": {
+				"type": "text",
+				"analyzer": "ik_max_word",
+				"search_analyzer": "ik_smart"
+			},
+			"url": {
+				"type": "keyword"
+			},
+			"itemDescription": {
+				"type": "text",
+				"analyzer": "ik_max_word",
+				"search_analyzer": "ik_smart"
+			},
+			"itemUrl": {
+				"type": "keyword"
+			},
+			"pictUrl": {
+				"type": "keyword"
+			},
+			"provcity": {
+				"type": "keyword"
+			},
+			"reservePrice": {
+				"type": "double"
+			},
+			"zkFinalPrice": {
+				"type": "double"
+			},
+			"finalPrice": {
+                "type": "double"
+            },
+			"sellerId": {
+				"type": "long"
+			},
+			"nick": {
+				"type": "keyword"
+			},
+			"shopTitle": {
+				"type": "text",
+				"analyzer": "ik_max_word",
+				"search_analyzer": "ik_smart"
+			},
+			"shopDsr": {
+				"type": "long"
+			},
+			"volume": {
+				"type": "long"
+			},
+			"updateTime": {
+             	"type": "date"
+             }
+		}
+	},
+	"aliases": {
+		"goodsinfo": {}
+	}
+}

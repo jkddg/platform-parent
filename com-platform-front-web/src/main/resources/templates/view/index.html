@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,viewport-fit=cover">
+
+    <title>优惠券</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/list.css"/>
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
+
+    <script type="text/javascript" src="/js/list.js"></script>
+
+</head>
+<body>
+<div class="container">
+<!--    <div class="col-md-4 col-sm-6 item">-->
+<!--        <div class="thumbnail">-->
+<!--            <img src="http://lorempixel.com/200/200/abstract" alt="">-->
+<!--            <div class="caption">-->
+<!--                <h3>Thumbnail label</h3>-->
+<!--                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>-->
+<!--                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <!--/.item -->
+
+<!--    标签选项卡的代码：-->
+
+<!--    //code from http://caibaojian.com/bootstrap-mosonry.html-->
+    <div role="tabpanel" id="tabpanel">
+        <!-- Nav tabs -->
+        <ul  class="nav nav-tabs" role="tablist" >
+            <li class="nav-item">
+                <a class="nav-link active" href="#panel-1" aria-controls="panel-1" role="tab" data-toggle="tab">优惠券搜索</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#panel-2" aria-controls="panel-2" role="tab" data-toggle="tab">淘宝大额券</a>
+            </li>
+
+        </ul>
+
+        <!-- Tab panels -->
+        <div class="tab-content">
+
+            <div role="tabpanel" class="tab-pane active" id="panel-1">
+                <form role="form" name="searchForm">
+                    <div class="form-group">
+                        <label for="keyWord">关键词:</label>
+                        <input type="text" class="form-control" id="keyWord" placeholder="请输入搜索关键词">
+                    </div>
+
+                    <div class="custom-checkbox">
+                        <label>平台:</label>
+                        <input type="checkbox" name="platform" value="tb" checked>淘宝天猫&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" name="platform" value="jd" checked>京东&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" name="platform" value="pdd" checked>拼多多
+
+                    </div>
+                    <div class="custom-radio">
+                        <label>排序:</label>
+                        <input type="radio" name="sort" value="1"  checked>默认&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="sort" value="2">销量&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="sort" value="3" >价格低到高&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="sort" value="4" >价格高到低&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    </div>
+                    <div align="center">
+                        <button type="button" class="btn btn-primary" role="button" id="searchBtn">搜索</button><br/><br/>
+                    </div>
+                </form>
+                <div class="row masonry-container" id="tbList">
+                </div><!--End masonry-container -->
+            </div><!--End panel-1 -->
+            <div role="tabpanel" class="tab-pane" id="panel-2">
+                <div class="list-group">
+                    <a th:href="@{https://mos.m.taobao.com/union/supercoupon(pid=${pid})}" class="list-group-item list-group-item-action" target="_blank">
+                        大额优惠券榜
+                    </a>
+                    <a th:href="@{https://mos.m.taobao.com/taokeapp/20181111ysppcjbkg(pid=${pid})}" class="list-group-item list-group-item-action" target="_blank">品牌尖货</a>
+
+                </div>
+            </div><!--End panel-2 -->
+        </div><!--End tab-content -->
+    </div><!--End tabpanel -->
+</div>
+</body>
+</html>
