@@ -235,11 +235,11 @@ public class TbGoodsBiz {
                     threadPoolUtil.getThreadPool().execute(new Runnable() {
                         @Override
                         public void run() {
-                            log.info("请求：poolWorkQueue=" + threadPoolUtil.getThreadPool().getQueue().size() + ",categorys=" + tbGoodsSyncParam.getCategorys() + ",keyWord=" + tbGoodsSyncParam.getKeyWord() + ",总页数=" + tbGoodsSyncParam.getPageCount() + ",当前页=" + tbGoodsSyncParam.getPageIndex());
+                            log.info("淘宝请求：poolWorkQueue=" + threadPoolUtil.getThreadPool().getQueue().size() + ",categorys=" + tbGoodsSyncParam.getCategorys() + ",keyWord=" + tbGoodsSyncParam.getKeyWord() + ",总页数=" + tbGoodsSyncParam.getPageCount() + ",当前页=" + tbGoodsSyncParam.getPageIndex());
                             ResultInfo<TbGoodsSyncParam> response = tbGoodsService.syncGoods(tbGoodsSyncParam);
                             if (response.isSuccess()) {
                                 countDownLatch.countDown();
-                                log.info("结果：countDown=" + countDownLatch.getCount() + ",返回数量" + response.getData() + ",总页数=" + response.getData().getPageCount() + ",当前页=" + response.getData().getPageIndex());
+                                log.info("淘宝结果：countDown=" + countDownLatch.getCount() + ",返回数量" + response.getData() + ",总页数=" + response.getData().getPageCount() + ",当前页=" + response.getData().getPageIndex());
                             } else {
                                 //遇到失败，失败页重新入队
                                 appendWork(countDownLatch, response.getData());

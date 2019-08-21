@@ -101,11 +101,11 @@ public class JdGoodsBiz {
                     threadPoolUtil.getThreadPool().execute(new Runnable() {
                         @Override
                         public void run() {
-                            log.info("请求：poolWorkQueue=" + threadPoolUtil.getThreadPool().getQueue().size() + ",eliteId=" + jdGoodsSyncParam.getEliteId() + ",总页数=" + jdGoodsSyncParam.getPageCount() + ",当前页=" + jdGoodsSyncParam.getPageIndex());
+                            log.info("京东请求：poolWorkQueue=" + threadPoolUtil.getThreadPool().getQueue().size() + ",eliteId=" + jdGoodsSyncParam.getEliteId() + ",总页数=" + jdGoodsSyncParam.getPageCount() + ",当前页=" + jdGoodsSyncParam.getPageIndex());
                             ResultInfo<JdGoodsSyncParam> response = jdGoodsService.syncGoods(jdGoodsSyncParam);
                             if (response.isSuccess()) {
                                 countDownLatch.countDown();
-                                log.info("结果：countDown=" + countDownLatch.getCount() + ",返回数量" + response.getData() + ",总页数=" + response.getData().getPageCount() + ",当前页=" + response.getData().getPageIndex());
+                                log.info("京东结果：countDown=" + countDownLatch.getCount() + ",返回数量" + response.getData() + ",总页数=" + response.getData().getPageCount() + ",当前页=" + response.getData().getPageIndex());
                             } else {
                                 //遇到失败，失败页重新入队
                                 appendWork(countDownLatch, response.getData());

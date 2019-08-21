@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-@FeignClient(value = "com-platform-admin-service",fallback = JdGoodsServiceHystrix.class)
+@FeignClient(value = "com-platform-admin-service", fallback = JdGoodsServiceHystrix.class)
 public interface JdGoodsService {
 
     @PostMapping("/jd/goods/goodsSync")
