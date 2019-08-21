@@ -43,7 +43,7 @@ public class JdGoodsSyncBiz {
                     }
                 }
             }
-            EsWriteUtil.addList(list, EsConstanst.JD_GOODS_INDEX_NAME, EsConstanst.JD_GOODS_ID_COLUMN_NAME);
+            EsWriteUtil.addList(list, EsConstanst.ES_GOODS_INDEX_NAME, EsConstanst.ES_GOODS_ID_COLUMN_NAME);
             resultInfo.setSuccess(true);
 
         } else {

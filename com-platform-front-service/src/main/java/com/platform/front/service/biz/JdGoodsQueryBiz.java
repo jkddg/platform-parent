@@ -44,7 +44,7 @@ public class JdGoodsQueryBiz {
         params.put("title", param.getKeyWord());
         params.put("shortTitle", param.getKeyWord());
         List<SortEntity> sortEntity = new ArrayList<>();
-        EsResult<GoodsInfo> esResult = EsSearchUtil.search(EsConstanst.JD_GOODS_INDEX_NAME, params, null, null, sortEntity, param.getPageIndex(), param.getPageSize(), GoodsInfo.class);
+        EsResult<GoodsInfo> esResult = EsSearchUtil.search(EsConstanst.ES_GOODS_INDEX_NAME, params, null, null, sortEntity, param.getPageIndex(), param.getPageSize(), GoodsInfo.class);
         result.setSuccess(true);
         result.setTotalCount(esResult.getTotal());
         result.setData(esResult.getData());

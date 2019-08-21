@@ -28,8 +28,8 @@ public class SecurityUtil {
 
     public static void main(String[] args) {
         try {
-
-        }catch (Exception ex){
+            System.out.println(String.valueOf(DES_KEY));
+        } catch (Exception ex) {
 
         }
     }
