@@ -104,7 +104,7 @@ function getSquareItem(data) {
     item = item + "<img src=\"" + data.pictUrl + "\" alt=\"" + data.title + "\" style='width: 100%;height: 100%;'>";
     item = item + "</div>";
     item = item + "<div class=\"caption\">";
-    item = item + "<a href='" + data.couponShareUrl + "' target='_blank'><p>[" + data.platform + "]" + data.title + "</p></a>";
+    item = item + "<a href='" + data.couponShareUrl + "' target='_blank'><p>[" + data.platformName + "]" + data.title + "</p></a>";
     item = item + "<p style=\"margin-bottom:1rem;\">券后价:<span style='color: red'>" + data.finalPrice + "</span></p>" +
         "<p style=\"position: relative;\"><a class=\"btn btn-warning\" style=\"position:absolute;right:0px;top:-2rem;\" href=\"###\" id='" + data.itemId + "' onclick='showItemPopover(\"" + data.platform + "\"," + data.itemId + ",\"" + data.shortTitle + "\",\"" + data.couponShareUrl + "\")'>口令分享</a></p>";
     item = item + "</div></div></div>";
@@ -119,7 +119,7 @@ function getLineItem(data) {
     item = item + "<img src=\"" + data.pictUrl + "\" alt=\"" + data.title + "\" style='width: 100%;height: 100%;'>";
     item = item + "</div>";
     item = item + "</div>";
-    item = item + "<div style=\"position: absolute;z-index: 91; overflow: hidden;width: 12rem; height: 7rem; right: 10px; top: 10px; \">[" + data.platform + "]<a href='" + data.couponShareUrl + "' target='_blank'>" + data.title + "</a></div>";
+    item = item + "<div style=\"position: absolute;z-index: 91; overflow: hidden;width: 12rem; height: 7rem; right: 10px; top: 10px; \">[" + data.platformName + "]<a href='" + data.couponShareUrl + "' target='_blank'>" + data.title + "</a></div>";
     item = item + "<div style='position: relative;z-index: 91;'><p style=\"position:absolute;left:10px;top:-2rem;\">券后价:<span style='color: red'>" + data.finalPrice + "</span></p><a class=\"btn btn-warning\" style=\"position:absolute;right:10px;top:-2.5rem;padding:2px;\" href=\"###\" id='" + data.itemId + "' onclick='showItemPopover(\"" + data.platform + "\"," + data.itemId + ",\"" + data.shortTitle + "\",\"" + data.couponShareUrl + "\")'>口令分享</a></div>";
     item = item + "</div>";
     item = item + "</div>";

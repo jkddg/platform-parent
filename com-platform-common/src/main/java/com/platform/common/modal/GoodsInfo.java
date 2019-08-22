@@ -179,10 +179,19 @@ public class GoodsInfo implements Serializable {
 
     private Long volume;
 
-
+    /**
+     * 抓取数据的更新时间
+     */
+    private LocalDateTime updateTime;
 
 
     public String getFinalPrice() {
+        if (zkFinalPrice == null) {
+            zkFinalPrice = 0D;
+        }
+        if (couponAmount == null) {
+            couponAmount = 0D;
+        }
         return String.format("%.2f", (zkFinalPrice - couponAmount));
     }
 }

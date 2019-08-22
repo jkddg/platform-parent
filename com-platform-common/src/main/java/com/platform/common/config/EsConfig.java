@@ -15,4 +15,5 @@ public class EsConfig {
     public void setIps(String ips1) {
         ips = ips1;
     }
+
 }

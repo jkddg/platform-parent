@@ -34,10 +34,10 @@ PUT goods_info
 				"type": "keyword"
 			},
 			"couponStartTime": {
-				"type": "keyword"
+				"type": "date"
 			},
 			"couponEndTime": {
-				"type": "keyword"
+				"type": "date"
 			},
 			"couponStartFee": {
 				"type": "double"
@@ -94,6 +94,9 @@ PUT goods_info
 			"zkFinalPrice": {
 				"type": "double"
 			},
+			"finalPrice": {
+                "type": "double"
+            },
 			"sellerId": {
 				"type": "long"
 			},
@@ -110,10 +113,13 @@ PUT goods_info
 			},
 			"volume": {
 				"type": "long"
-			}
+			},
+			"updateTime": {
+             	"type": "date"
+             }
 		}
 	},
 	"aliases": {
-		"goodsInfo": {}
+		"goodsinfo": {}
 	}
 }

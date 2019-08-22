@@ -28,7 +28,7 @@ import static com.platform.common.util.es.EsSearchUtil.queryStr;
 public class EsWriteUtil {
 
     private static final RequestOptions defaultOptions = RequestOptions.DEFAULT;
-    private static final String ES_GOODS_INDEX = "taobaogoods";
+    private static final String ES_GOODS_INDEX = "goodsinfo";
 
     /**
      * 添加
@@ -79,7 +79,10 @@ public class EsWriteUtil {
         request.setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
         try {
 
-            client.bulk(request, defaultOptions);
+            BulkResponse response = client.bulk(request, defaultOptions);
+            if(response.hasFailures()){
+                throw new RuntimeException(response.buildFailureMessage());
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

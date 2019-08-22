@@ -1,10 +1,10 @@
-package com.platform.admin.service.api;
+package com.platform.front.service.api;
 
 import com.jd.open.api.sdk.DefaultJdClient;
 import com.jd.open.api.sdk.JdClient;
 import com.jd.open.api.sdk.JdException;
-import com.platform.admin.service.config.JdConfig;
 import com.platform.common.util.SecurityUtil;
+import com.platform.front.service.config.JdConfig;
 import jd.union.open.goods.jingfen.query.request.JFGoodsReq;
 import jd.union.open.goods.jingfen.query.request.UnionOpenGoodsJingfenQueryRequest;
 import jd.union.open.goods.jingfen.query.response.UnionOpenGoodsJingfenQueryResponse;

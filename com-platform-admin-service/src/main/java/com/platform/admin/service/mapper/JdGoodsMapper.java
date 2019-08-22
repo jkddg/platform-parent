@@ -65,6 +65,7 @@ public class JdGoodsMapper {
         if (jfGoodsResp.getPriceInfo() != null) {
             goodsInfo.setZkFinalPrice(jfGoodsResp.getPriceInfo().getPrice());
         }
+        goodsInfo.setUpdateTime(LocalDateTime.now());
         return goodsInfo;
     }
 }

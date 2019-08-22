@@ -1,7 +1,7 @@
-package com.platform.front.service.api;
+package com.platform.admin.service.api;
 
+import com.platform.admin.service.config.TaobaoConfig;
 import com.platform.common.util.SecurityUtil;
-import com.platform.front.service.config.TaobaoConfig;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class TaobaoGoodsAPI  {
+public class TaobaoGoodsAPI {
 
     @Autowired
     TaobaoConfig taobaoConfig;
@@ -69,7 +69,9 @@ public class TaobaoGoodsAPI  {
         if (!StringUtils.isEmpty(keyWord)) {
             req.setQ(keyWord);
         }
-        req.setSort(sort);
+        if(!StringUtils.isEmpty(sort)) {
+            req.setSort(sort);
+        }
         if (materialId > 0) {
             req.setMaterialId(materialId);
         }

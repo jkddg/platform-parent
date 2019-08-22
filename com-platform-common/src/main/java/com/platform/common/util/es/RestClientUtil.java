@@ -20,9 +20,9 @@ import java.util.Map;
  */
 public class RestClientUtil {
 
-    private static final String CLUSTER_NAME = StringUtils.isEmpty(EsConfig.clusterName)?"ngh-cluster":EsConfig.clusterName;
+    private static final String CLUSTER_NAME = StringUtils.isEmpty(EsConfig.clusterName)?"yunES":EsConfig.clusterName;
 
-    private static final String IPS = StringUtils.isEmpty(EsConfig.ips)?"117.122.208.140:9200":EsConfig.ips;
+    private static final String IPS = StringUtils.isEmpty(EsConfig.ips)?"140.143.225.53:9200":EsConfig.ips;
 
     private static Map<String, RestHighLevelClient> highClient = new HashMap<>();
 

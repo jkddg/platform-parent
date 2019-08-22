@@ -11,10 +11,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class PageInfo  implements Serializable {
-    private long pageSize = 25;
-    private long pageIndex = 1;
+    private int pageSize = 25;
+    private int pageIndex = 1;
 
-    public long getPageCount(long totalCount) {
+    public int getPageCount(int totalCount) {
         return (totalCount  +  pageSize  - 1) / pageSize;
     }
 }
