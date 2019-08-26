@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Huangyonghao on 2019/6/18 14:45.
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @Setter
 public class FindGoodsListParam extends PageInfo implements Serializable {
 
-    private PlatformEnum platformEnum;
+    private List<PlatformEnum> platformEnum;
     private String keyWord;
     private int sort;
 }
