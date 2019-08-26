@@ -31,6 +31,7 @@ public class TbGoodsSyncBiz {
         ResultInfo<TbGoodsSyncParam> resultInfo = new ResultInfo<>();
         resultInfo.setData(tbGoodsSyncParam);
         TbkDgMaterialOptionalResponse response = taobaoGoodsAPI.tbkMaterialOptional(tbGoodsSyncParam.isHasCoupon(), tbGoodsSyncParam.getCategorys(), tbGoodsSyncParam.getKeyWord(), tbGoodsSyncParam.getPageSize(), tbGoodsSyncParam.getPageIndex(), tbGoodsSyncParam.getSort(), tbGoodsSyncParam.getMaterialId());
+        resultInfo.setSuccess(response.isSuccess());
         if (response.isSuccess()) {
             tbGoodsSyncParam.setTotalCount(response.getTotalResults());
             List<Map<String, Object>> list = new ArrayList<>();

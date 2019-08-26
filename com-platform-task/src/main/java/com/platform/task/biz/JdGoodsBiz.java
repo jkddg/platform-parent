@@ -17,17 +17,20 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class JdGoodsBiz {
-
+    private boolean lockObj = false;
     @Autowired
     JdGoodsService jdGoodsService;
 
 
     @Autowired
     ThreadPoolUtil threadPoolUtil;
-
+    private long maxPageCount = 500;
 
     public void syncGoods() {
-
+        if (lockObj) {
+            return;
+        }
+        lockObj = true;
 //                1-好券商品,
 //                2-京粉APP-jingdong.超级大卖场,
 //                3-小程序-jingdong.好券商品,
@@ -68,6 +71,7 @@ public class JdGoodsBiz {
             }
         };
         for (Integer eliteId : eliteIds) {
+            long pageCount = maxPageCount;
             CountDownLatch countDownLatch;
             JdGoodsSyncParam jdGoodsSyncParam = new JdGoodsSyncParam();
             jdGoodsSyncParam.setEliteId(eliteId);
@@ -76,8 +80,11 @@ public class JdGoodsBiz {
             ResultInfo<JdGoodsSyncParam> response = jdGoodsService.syncGoods(jdGoodsSyncParam);
             if (response.isSuccess()) {
                 jdGoodsSyncParam = response.getData();
-                countDownLatch = new CountDownLatch((int) jdGoodsSyncParam.getPageCount() - 1);
-                for (int i = 2; i <= jdGoodsSyncParam.getPageCount(); i++) {
+                if (jdGoodsSyncParam.getPageCount() < maxPageCount) {
+                    pageCount = jdGoodsSyncParam.getPageCount();
+                }
+                countDownLatch = new CountDownLatch((int) pageCount - 1);
+                for (int i = 2; i <= pageCount; i++) {
                     JdGoodsSyncParam param = jdGoodsSyncParam.clone();
                     param.setPageIndex(i);
                     appendWork(countDownLatch, param);
@@ -89,7 +96,7 @@ public class JdGoodsBiz {
                 }
             }
         }
-
+        lockObj = false;
     }
 
     private void appendWork(CountDownLatch countDownLatch, JdGoodsSyncParam jdGoodsSyncParam) {

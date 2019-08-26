@@ -18,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class TbGoodsBiz {
 
+    private boolean lockObj = false;
+
     @Autowired
     TbGoodsService tbGoodsService;
 
@@ -25,40 +27,44 @@ public class TbGoodsBiz {
     @Autowired
     ThreadPoolUtil threadPoolUtil;
 
+    private long maxPageCount = 500;
 
     public void syncGoods() {
-
+        if (lockObj) {
+            return;
+        }
+        lockObj = true;
         List<String> keywords = new ArrayList<>();
         keywords.add("休闲食品");
-        keywords.add("T恤");
-        keywords.add("凉鞋");
-        keywords.add("纸品湿巾");
-        keywords.add("男士内裤");
+//        keywords.add("T恤");
+//        keywords.add("凉鞋");
+//        keywords.add("纸品湿巾");
+//        keywords.add("男士内裤");
         keywords.add("数码配件");
-        keywords.add("旅行箱");
-        keywords.add("床品套件");
+//        keywords.add("旅行箱");
+//        keywords.add("床品套件");
         keywords.add("健身器材");
         keywords.add("洗发护发");
         keywords.add("洁面");
-        keywords.add("大家电");
+//        keywords.add("大家电");
         keywords.add("坚果蜜饯");
-        keywords.add("POLO衫");
+//        keywords.add("POLO衫");
         keywords.add("运动鞋");
         keywords.add("图书文具");
         keywords.add("男袜");
         keywords.add("电脑配件");
-        keywords.add("双肩包");
+//        keywords.add("双肩包");
         keywords.add("水具酒具");
         keywords.add("玩转球类");
         keywords.add("沐浴用品");
         keywords.add("面霜");
         keywords.add("厨卫大电");
         keywords.add("糕点饼干");
-        keywords.add("衬衫");
+//        keywords.add("衬衫");
         keywords.add("帆布鞋");
         keywords.add("医药保健");
         keywords.add("睡衣睡裤");
-        keywords.add("手机相机");
+//        keywords.add("手机相机");
         keywords.add("钱包");
         keywords.add("厨卫净化");
         keywords.add("运动服饰");
@@ -70,7 +76,7 @@ public class TbGoodsBiz {
         keywords.add("板鞋");
         keywords.add("节庆用品");
         keywords.add("背心汗衫");
-        keywords.add("电脑整机");
+//        keywords.add("电脑整机");
         keywords.add("首饰");
         keywords.add("生活日用");
         keywords.add("瑜伽舞蹈");
@@ -201,17 +207,25 @@ public class TbGoodsBiz {
         keywords.add("长跑一族");
         keywords.add("呵护双手");
         keywords.add("美体养生");
+        keywords.add("汽车");
+        keywords.add("车载");
         for (String keyWord : keywords) {
+            long pageCount = maxPageCount;
             CountDownLatch countDownLatch;
             TbGoodsSyncParam tbGoodsSyncParam = new TbGoodsSyncParam();
             tbGoodsSyncParam.setKeyWord(keyWord);
             tbGoodsSyncParam.setPageIndex(1);
             tbGoodsSyncParam.setPageSize(40);
+            tbGoodsSyncParam.setHasCoupon(true);
+            tbGoodsSyncParam.setSort("total_sales");
             ResultInfo<TbGoodsSyncParam> response = tbGoodsService.syncGoods(tbGoodsSyncParam);
             if (response.isSuccess()) {
                 tbGoodsSyncParam = response.getData();
-                countDownLatch = new CountDownLatch((int) tbGoodsSyncParam.getPageCount() - 1);
-                for (int i = 2; i <= tbGoodsSyncParam.getPageCount(); i++) {
+                if (tbGoodsSyncParam.getPageCount() < maxPageCount) {
+                    pageCount = tbGoodsSyncParam.getPageCount();
+                }
+                countDownLatch = new CountDownLatch((int) pageCount - 1);
+                for (int i = 2; i <= pageCount; i++) {
                     TbGoodsSyncParam param = tbGoodsSyncParam.clone();
                     param.setPageIndex(i);
                     appendWork(countDownLatch, param);
@@ -223,7 +237,7 @@ public class TbGoodsBiz {
                 }
             }
         }
-
+        lockObj = false;
     }
 
     private void appendWork(CountDownLatch countDownLatch, TbGoodsSyncParam tbGoodsSyncParam) {

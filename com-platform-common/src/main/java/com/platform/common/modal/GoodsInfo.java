@@ -52,7 +52,11 @@ public class GoodsInfo implements Serializable {
      * 商品信息-佣金比率。1550表示15.5%
      */
 
-    private String commissionRate;
+    private Long commissionRate;
+    /**
+     * 券额比率。1550表示15.5%
+     */
+    private Long couponRate;
     /**
      * 商品信息-佣金类型。MKT表示营销计划，SP表示定向计划，COMMON表示通用计划
      */

@@ -36,6 +36,9 @@ public class TbGoodsMapper {
         if (!StringUtils.isEmpty(data.getCouponAmount())) {
             goodsInfo.setCouponAmount(Double.parseDouble(data.getCouponAmount()));
         }
+        if (goodsInfo.getCouponAmount() == null) {
+            goodsInfo.setCouponAmount(0D);
+        }
         if (!StringUtils.isEmpty(data.getCouponStartFee())) {
             goodsInfo.setCouponStartFee(Double.parseDouble(data.getCouponStartFee()));
         }
@@ -47,6 +50,15 @@ public class TbGoodsMapper {
         }
         if ("0.00".equals(goodsInfo.getFinalPrice())) {
             return null;
+        }
+        if (!StringUtils.isEmpty(data.getCommissionRate())) {
+            goodsInfo.setCommissionRate(Double.valueOf(data.getCommissionRate()).longValue());
+        }
+        if (goodsInfo.getZkFinalPrice() == null) {
+            return null;
+        }
+        if (goodsInfo.getCouponAmount() > 0 && goodsInfo.getZkFinalPrice() > 0) {
+            goodsInfo.setCouponRate(Double.valueOf(goodsInfo.getCouponAmount() * 100 / goodsInfo.getZkFinalPrice()).longValue());
         }
         return goodsInfo;
     }

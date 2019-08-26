@@ -28,8 +28,11 @@ PUT goods_info
 				"type": "long"
 			},
 			"commissionRate": {
-				"type": "keyword"
+				"type": "long"
 			},
+			"couponRate": {
+            	"type": "long"
+            },
 			"commissionType": {
 				"type": "keyword"
 			},

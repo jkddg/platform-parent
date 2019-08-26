@@ -27,7 +27,7 @@ public class JdGoodsMapper {
             goodsInfo.setCategoryName(jfGoodsResp.getCategoryInfo().getCid2Name());
         }
         if (jfGoodsResp.getCommissionInfo() != null) {
-            goodsInfo.setCommissionRate(String.valueOf(jfGoodsResp.getCommissionInfo().getCommissionShare()));
+            goodsInfo.setCommissionRate(Double.valueOf(jfGoodsResp.getCommissionInfo().getCommissionShare() * 100).longValue());
 //            goodsInfo.setCommissionType();
         }
 
@@ -43,6 +43,7 @@ public class JdGoodsMapper {
                     goodsInfo.setCouponStartTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(coupon.getGetStartTime()), ZoneId.systemDefault()));
                     goodsInfo.setCouponTotalCount(1L);
                     goodsInfo.setCouponShareUrl(coupon.getLink());
+
                 }
             }
         }
@@ -66,6 +67,15 @@ public class JdGoodsMapper {
             goodsInfo.setZkFinalPrice(jfGoodsResp.getPriceInfo().getPrice());
         }
         goodsInfo.setUpdateTime(LocalDateTime.now());
+        if (goodsInfo.getCouponAmount() == null) {
+            goodsInfo.setCouponAmount(0D);
+        }
+        if (goodsInfo.getZkFinalPrice() == null) {
+            return null;
+        }
+        if (goodsInfo.getCouponAmount() > 0 && goodsInfo.getZkFinalPrice() > 0) {
+            goodsInfo.setCouponRate(Double.valueOf(goodsInfo.getCouponAmount() * 100 / goodsInfo.getZkFinalPrice()).longValue());
+        }
         return goodsInfo;
     }
 }
