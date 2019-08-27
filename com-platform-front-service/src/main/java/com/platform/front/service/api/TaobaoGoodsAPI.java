@@ -5,20 +5,14 @@ import com.platform.front.service.config.TaobaoConfig;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.TbkDgItemCouponGetRequest;
 import com.taobao.api.request.TbkDgMaterialOptionalRequest;
-import com.taobao.api.request.TbkItemInfoGetRequest;
 import com.taobao.api.request.TbkTpwdCreateRequest;
-import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
-import com.taobao.api.response.TbkItemInfoGetResponse;
 import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 /**
  * Created by Huangyonghao on 2019/6/18 14:49.
@@ -117,36 +111,36 @@ public class TaobaoGoodsAPI  {
      *
      * @param itemId
      */
-    public TbkItemInfoGetResponse tbkItemInfoGet(List<Long> itemId) {
-        if (itemId == null || itemId.size() == 0) {
-            return null;
-        }
-        TaobaoClient client = getTaobaoClient();
-        TbkItemInfoGetRequest req = new TbkItemInfoGetRequest();
-//       String str= String.join(",",itemId);
-        StringBuilder sb = new StringBuilder();
-        for (Long l : itemId) {
-            if (sb.length() > 0) {
-                sb.append(",");
-            }
-            sb.append(l);
-        }
-        req.setNumIids(sb.toString());
-        req.setPlatform(2L);
-//        req.setIp("11.22.33.43");
-        TbkItemInfoGetResponse rsp = null;
-        try {
-            rsp = client.execute(req);
-        } catch (ApiException e) {
-            log.error(rsp.getBody());
-            e.printStackTrace();
-        }
-        System.out.println(rsp.getBody());
-        if (!rsp.isSuccess()) {
-            log.error(rsp.getBody());
-        }
-        return rsp;
-    }
+//    public TbkItemInfoGetResponse tbkItemInfoGet(List<Long> itemId) {
+//        if (itemId == null || itemId.size() == 0) {
+//            return null;
+//        }
+//        TaobaoClient client = getTaobaoClient();
+//        TbkItemInfoGetRequest req = new TbkItemInfoGetRequest();
+////       String str= String.join(",",itemId);
+//        StringBuilder sb = new StringBuilder();
+//        for (Long l : itemId) {
+//            if (sb.length() > 0) {
+//                sb.append(",");
+//            }
+//            sb.append(l);
+//        }
+//        req.setNumIids(sb.toString());
+//        req.setPlatform(2L);
+////        req.setIp("11.22.33.43");
+//        TbkItemInfoGetResponse rsp = null;
+//        try {
+//            rsp = client.execute(req);
+//        } catch (ApiException e) {
+//            log.error(rsp.getBody());
+//            e.printStackTrace();
+//        }
+//        System.out.println(rsp.getBody());
+//        if (!rsp.isSuccess()) {
+//            log.error(rsp.getBody());
+//        }
+//        return rsp;
+//    }
 
     /**
      * 淘宝客链接解析
@@ -198,21 +192,21 @@ public class TaobaoGoodsAPI  {
     /**
      * 好券清单
      */
-    public TbkDgItemCouponGetResponse couponGet(String keyWord, long pageSize, long pageIndex) {
-        long adzoneId = taobaoConfig.getTkbAdzoneId();
-        TaobaoClient client = getTaobaoClient();
-        TbkDgItemCouponGetRequest req = new TbkDgItemCouponGetRequest();
-        req.setAdzoneId(adzoneId);
-        req.setPlatform(2L);
-        req.setPageSize(pageSize);
-        req.setQ(keyWord);
-        req.setPageNo(pageIndex);
-        TbkDgItemCouponGetResponse rsp = null;
-        try {
-            rsp = client.execute(req);
-        } catch (ApiException e) {
-            e.printStackTrace();
-        }
-        return rsp;
-    }
+//    public TbkDgItemCouponGetResponse couponGet(String keyWord, long pageSize, long pageIndex) {
+//        long adzoneId = taobaoConfig.getTkbAdzoneId();
+//        TaobaoClient client = getTaobaoClient();
+//        TbkDgItemCouponGetRequest req = new TbkDgItemCouponGetRequest();
+//        req.setAdzoneId(adzoneId);
+//        req.setPlatform(2L);
+//        req.setPageSize(pageSize);
+//        req.setQ(keyWord);
+//        req.setPageNo(pageIndex);
+//        TbkDgItemCouponGetResponse rsp = null;
+//        try {
+//            rsp = client.execute(req);
+//        } catch (ApiException e) {
+//            e.printStackTrace();
+//        }
+//        return rsp;
+//    }
 }

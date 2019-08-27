@@ -60,6 +60,12 @@ PUT goods_info
 			"couponRemainCount": {
 				"type": "long"
 			},
+			"commandPwd": {
+            	"type": "keyword"
+            },
+            "shortUrl": {
+                "type": "keyword"
+             },
 			"couponShareUrl": {
 				"type": "keyword"
 			},

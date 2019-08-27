@@ -7,8 +7,10 @@ import com.platform.admin.service.mapper.TbGoodsMapper;
 import com.platform.common.contanst.EsConstanst;
 import com.platform.common.modal.GoodsInfo;
 import com.platform.common.modal.ResultInfo;
+import com.platform.common.util.StringUtil;
 import com.platform.common.util.es.EsWriteUtil;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
+import com.taobao.api.response.TbkTpwdCreateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -45,6 +47,7 @@ public class TbGoodsSyncBiz {
                     continue;
                 }
                 GoodsInfo goodsInfo = TbGoodsMapper.convertGoods(data);
+                goodsInfo.setCommandPwd(this.getTPwd(goodsInfo.getShortTitle(), StringUtil.getHttpsUrl(goodsInfo.getCouponShareUrl())));
                 if (goodsInfo != null) {
                     Map<String, Object> map = new HashMap<>();
                     map = JSON.parseObject(JSON.toJSONString(goodsInfo));
@@ -59,6 +62,13 @@ public class TbGoodsSyncBiz {
         return resultInfo;
     }
 
+    private String getTPwd(String text, String url) {
+        TbkTpwdCreateResponse response = taobaoGoodsAPI.TbkTpwdCreate(text, url);
+        if (response.isSuccess()) {
+            return response.getData().getModel();
+        }
+        return null;
+    }
 
 
 }

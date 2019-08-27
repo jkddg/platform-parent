@@ -74,7 +74,7 @@ public class JdGoodsMapper {
             return null;
         }
         if (goodsInfo.getCouponAmount() > 0 && goodsInfo.getZkFinalPrice() > 0) {
-            goodsInfo.setCouponRate(Double.valueOf(goodsInfo.getCouponAmount() * 100 / goodsInfo.getZkFinalPrice()).longValue());
+            goodsInfo.setCouponRate(Double.valueOf(goodsInfo.getCouponAmount() * 100 / (goodsInfo.getCouponAmount() + goodsInfo.getZkFinalPrice())).longValue());
         }
         return goodsInfo;
     }

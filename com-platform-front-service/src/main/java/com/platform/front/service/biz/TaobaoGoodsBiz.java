@@ -6,7 +6,6 @@ import com.platform.front.service.client.param.FindGoodsListParam;
 import com.platform.front.service.client.param.TpwdParam;
 import com.platform.front.service.mapper.TaobaoGoodsMapper;
 import com.platform.common.modal.GoodsInfo;
-import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -80,25 +79,25 @@ public class TaobaoGoodsBiz {
      * @param param
      * @return
      */
-    public PageData<GoodsInfo> findCouponList(FindGoodsListParam param) {
-        PageData<GoodsInfo> result = new PageData<>();
-        if (param == null) {
-            result.setSuccess(false);
-            result.setMsg("请求参数为空");
-            return result;
-        }
-        TbkDgItemCouponGetResponse response = taobaoGoodsAPI.couponGet(param.getKeyWord(), param.getPageSize(), param.getPageIndex());
-        if (!response.isSuccess()) {
-            result.setSuccess(false);
-            result.setMsg(response.getMsg() + response.getSubMsg());
-            log.info("请求淘宝API失败，返回信息：" + response.getBody());
-            return result;
-        }
-        result.setSuccess(response.isSuccess());
-        result.setTotalCount(response.getTotalResults());
-        result.setData(TaobaoGoodsMapper.convertConponInfos(response.getResults()));
-        return result;
-    }
+//    public PageData<GoodsInfo> findCouponList(FindGoodsListParam param) {
+//        PageData<GoodsInfo> result = new PageData<>();
+//        if (param == null) {
+//            result.setSuccess(false);
+//            result.setMsg("请求参数为空");
+//            return result;
+//        }
+//        TbkDgItemCouponGetResponse response = taobaoGoodsAPI.couponGet(param.getKeyWord(), param.getPageSize(), param.getPageIndex());
+//        if (!response.isSuccess()) {
+//            result.setSuccess(false);
+//            result.setMsg(response.getMsg() + response.getSubMsg());
+//            log.info("请求淘宝API失败，返回信息：" + response.getBody());
+//            return result;
+//        }
+//        result.setSuccess(response.isSuccess());
+//        result.setTotalCount(response.getTotalResults());
+//        result.setData(TaobaoGoodsMapper.convertConponInfos(response.getResults()));
+//        return result;
+//    }
 
 
     /**

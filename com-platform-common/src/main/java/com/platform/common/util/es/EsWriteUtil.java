@@ -13,14 +13,15 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.elasticsearch.script.Script;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 import static com.platform.common.util.es.EsSearchUtil.queryStr;
 
@@ -80,7 +81,7 @@ public class EsWriteUtil {
         try {
 
             BulkResponse response = client.bulk(request, defaultOptions);
-            if(response.hasFailures()){
+            if (response.hasFailures()) {
                 throw new RuntimeException(response.buildFailureMessage());
             }
         } catch (Exception e) {
@@ -171,6 +172,21 @@ public class EsWriteUtil {
         }
     }
 
+    public static void deleteByQuery(String index,Map<String, Object> params, List<RangeQueryEntity> rangeQuery) {
+        RestHighLevelClient client = RestClientUtil.highClient();
+        DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(index);
+        BoolQueryBuilder booleanQueryBuilder = buildRangeQuery(params, rangeQuery);
+        deleteByQueryRequest.setQuery(booleanQueryBuilder);
+        try {
+            client.deleteByQuery(deleteByQueryRequest, defaultOptions);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+        }
+
+    }
+
     /**
      * updateByQuery
      *
@@ -182,6 +198,12 @@ public class EsWriteUtil {
     public static void updateByQuery(Map<String, Object> params, List<RangeQueryEntity> rangeQuery, String scriptStr, String index) {
 
 
+        BoolQueryBuilder booleanQueryBuilder = buildRangeQuery(params, rangeQuery);
+        updateByQuery(index, scriptStr, booleanQueryBuilder);
+
+    }
+
+    private static BoolQueryBuilder buildRangeQuery(Map<String, Object> params, List<RangeQueryEntity> rangeQuery) {
         BoolQueryBuilder booleanQueryBuilder = QueryBuilders.boolQuery();
         if (params != null && !params.isEmpty()) {
             String query = queryStr(params);
@@ -200,13 +222,12 @@ public class EsWriteUtil {
                 booleanQueryBuilder.must(rangeQueryBuilder);
             }
         }
-        updateByQuery(index, scriptStr, booleanQueryBuilder);
-
+        return booleanQueryBuilder;
     }
 
-    public static void updateByQuery(String indices,String scriptStr, String field, List<String> values) {
+    public static void updateByQuery(String indices, String scriptStr, String field, List<String> values) {
         if (values == null || values.size() == 0) {
-           return;
+            return;
         }
         BoolQueryBuilder booleanQueryBuilder = QueryBuilders.boolQuery();
         booleanQueryBuilder.should(new TermsQueryBuilder(field, values));

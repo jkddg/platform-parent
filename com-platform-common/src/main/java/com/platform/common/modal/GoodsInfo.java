@@ -101,6 +101,15 @@ public class GoodsInfo implements Serializable {
      */
 
     private Long couponRemainCount;
+
+    /**
+     * 短链接
+     */
+    private String shortUrl;
+    /**
+     * 淘口令
+     */
+    private String  commandPwd;
     /**
      * 链接-宝贝+券二合一页面链接
      */

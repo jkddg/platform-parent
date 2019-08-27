@@ -2,7 +2,6 @@ package com.platform.front.service.mapper;
 
 import com.platform.common.contanst.PlatformEnum;
 import com.platform.common.modal.GoodsInfo;
-import com.taobao.api.response.TbkDgItemCouponGetResponse;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
@@ -50,29 +49,29 @@ public class TaobaoGoodsMapper {
         return result;
     }
 
-    public static GoodsInfo convertCouponInfo(TbkDgItemCouponGetResponse.TbkCoupon info) {
-        if (info == null) {
-            return null;
-        }
-        GoodsInfo goodsInfo = new GoodsInfo();
-        BeanUtils.copyProperties(info, goodsInfo);
-        goodsInfo.setPlatformName(info.getUserType() == 0 ? "淘宝" : "天猫");
-        goodsInfo.setCouponShareUrl(info.getCouponClickUrl());
-        goodsInfo.setShortTitle(info.getTitle());
-        return goodsInfo;
-    }
-
-    public static List<GoodsInfo> convertConponInfos(List<TbkDgItemCouponGetResponse.TbkCoupon> list) {
-        List<GoodsInfo> result = new ArrayList<>();
-        if (list == null || list.size() == 0) {
-            return result;
-        }
-        for (int i = 0; i < list.size(); i++) {
-            GoodsInfo info = convertCouponInfo(list.get(i));
-            if (info != null) {
-                result.add(info);
-            }
-        }
-        return result;
-    }
+//    public static GoodsInfo convertCouponInfo(TbkDgItemCouponGetResponse.TbkCoupon info) {
+//        if (info == null) {
+//            return null;
+//        }
+//        GoodsInfo goodsInfo = new GoodsInfo();
+//        BeanUtils.copyProperties(info, goodsInfo);
+//        goodsInfo.setPlatformName(info.getUserType() == 0 ? "淘宝" : "天猫");
+//        goodsInfo.setCouponShareUrl(info.getCouponClickUrl());
+//        goodsInfo.setShortTitle(info.getTitle());
+//        return goodsInfo;
+//    }
+//
+//    public static List<GoodsInfo> convertConponInfos(List<TbkDgItemCouponGetResponse.TbkCoupon> list) {
+//        List<GoodsInfo> result = new ArrayList<>();
+//        if (list == null || list.size() == 0) {
+//            return result;
+//        }
+//        for (int i = 0; i < list.size(); i++) {
+//            GoodsInfo info = convertCouponInfo(list.get(i));
+//            if (info != null) {
+//                result.add(info);
+//            }
+//        }
+//        return result;
+//    }
 }

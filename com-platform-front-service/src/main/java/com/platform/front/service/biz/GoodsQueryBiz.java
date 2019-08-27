@@ -22,6 +22,9 @@ import java.util.Map;
 @Service
 public class GoodsQueryBiz {
     public PageData<GoodsInfo> findGoodsList(FindGoodsListParam param) {
+        if (param.getPageIndex() < 1) {
+            param.setPageIndex(1);
+        }
         PageData<GoodsInfo> result = new PageData<>();
         if (param == null) {
             result.setSuccess(false);
