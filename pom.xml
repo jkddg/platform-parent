@@ -20,6 +20,7 @@
         <module>com-platform-common</module>
         <module>com-platform-admin-service-contract</module>
         <module>com-platform-admin-service</module>
+        <module>com-platform-admin-web</module>
         <module>com-platform-spider</module>
     </modules>
 </project>
