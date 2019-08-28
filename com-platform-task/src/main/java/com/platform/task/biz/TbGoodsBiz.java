@@ -27,7 +27,7 @@ public class TbGoodsBiz {
     @Autowired
     ThreadPoolUtil threadPoolUtil;
 
-    private long maxPageCount = 500;
+    private long maxPageCount = 200;
 
     public void syncGoods() {
         if (lockObj) {
@@ -36,6 +36,8 @@ public class TbGoodsBiz {
         lockObj = true;
         List<String> keywords = new ArrayList<>();
         keywords.add("休闲食品");
+        keywords.add("小吃");
+        keywords.add("月饼");
 //        keywords.add("T恤");
 //        keywords.add("凉鞋");
 //        keywords.add("纸品湿巾");

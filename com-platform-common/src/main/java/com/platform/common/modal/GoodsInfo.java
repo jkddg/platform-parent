@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 public class GoodsInfo implements Serializable {
 
+    String id;
     /**
      * 商品信息-宝贝id
      */

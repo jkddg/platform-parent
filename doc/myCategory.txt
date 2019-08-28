@@ -1,0 +1,23 @@
+PUT my_category
+{
+	"settings": {
+		"number_of_shards": 1,
+		"number_of_replicas": 0
+	},
+	"mappings": {
+		"properties": {
+			"myCategoryId": {
+				"type": "long"
+			},
+			"myCategoryName": {
+                "type": "keyword"
+            },
+			"updateTime": {
+             	"type": "date"
+             }
+		}
+	},
+	"aliases": {
+		"mycategory": {}
+	}
+}

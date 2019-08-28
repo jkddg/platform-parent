@@ -36,6 +36,10 @@ public class JdGoodsSyncBiz {
                 jdGoodsSyncParam.setTotalCount(response.getTotalCount());
                 for (int i = 0; i < response.getData().length; i++) {
                     GoodsInfo goodsInfo = JdGoodsMapper.convertGoods(response.getData()[i]);
+
+                    if (!filterGoods(goodsInfo)) {
+                        continue;
+                    }
                     if (goodsInfo != null) {
                         Map<String, Object> map = new HashMap<>();
                         map = JSON.parseObject(JSON.toJSONString(goodsInfo));
@@ -54,5 +58,24 @@ public class JdGoodsSyncBiz {
 
         }
         return resultInfo;
+    }
+
+    /**
+     * 筛选符合条件规则的商品才留下
+     *
+     * @param goodsInfo
+     * @return
+     */
+    private boolean filterGoods(GoodsInfo goodsInfo) {
+        if (goodsInfo == null) {
+            return false;
+        }
+        /**
+         * 月销量大于1万，或券面额大于20
+         */
+        if (goodsInfo.getVolume() > 10000 || goodsInfo.getCouponAmount() >= 20) {
+            return true;
+        }
+        return false;
     }
 }

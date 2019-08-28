@@ -1,0 +1,41 @@
+PUT goods_category
+{
+	"settings": {
+		"number_of_shards": 1,
+		"number_of_replicas": 0
+	},
+	"mappings": {
+		"properties": {
+			"myCategoryId": {
+				"type": "long"
+			},
+			"myCategoryName": {
+                "type": "keyword"
+            },
+			"platformId": {
+				"type": "integer"
+			},
+			"platformName": {
+				"type": "keyword"
+			},
+			"levelOneCategoryName": {
+				"type": "keyword"
+			},
+			"levelOneCategoryId": {
+				"type": "long"
+			},
+			"categoryName": {
+				"type": "keyword"
+			},
+			"categoryId": {
+				"type": "long"
+			},
+			"updateTime": {
+             	"type": "date"
+             }
+		}
+	},
+	"aliases": {
+		"goodscategory": {}
+	}
+}

@@ -172,10 +172,10 @@ public class EsWriteUtil {
         }
     }
 
-    public static void deleteByQuery(String index,Map<String, Object> params, List<RangeQueryEntity> rangeQuery) {
+    public static void deleteByQuery(String index, Map<String, Object> params, List<RangeQueryEntity> rangeQuery, String filterQuery) {
         RestHighLevelClient client = RestClientUtil.highClient();
         DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(index);
-        BoolQueryBuilder booleanQueryBuilder = buildRangeQuery(params, rangeQuery);
+        BoolQueryBuilder booleanQueryBuilder = buildRangeQuery(params, rangeQuery, filterQuery);
         deleteByQueryRequest.setQuery(booleanQueryBuilder);
         try {
             client.deleteByQuery(deleteByQueryRequest, defaultOptions);
@@ -198,26 +198,42 @@ public class EsWriteUtil {
     public static void updateByQuery(Map<String, Object> params, List<RangeQueryEntity> rangeQuery, String scriptStr, String index) {
 
 
-        BoolQueryBuilder booleanQueryBuilder = buildRangeQuery(params, rangeQuery);
+        BoolQueryBuilder booleanQueryBuilder = buildRangeQuery(params, rangeQuery, null);
         updateByQuery(index, scriptStr, booleanQueryBuilder);
 
     }
 
-    private static BoolQueryBuilder buildRangeQuery(Map<String, Object> params, List<RangeQueryEntity> rangeQuery) {
+    private static BoolQueryBuilder buildRangeQuery(Map<String, Object> params, List<RangeQueryEntity> rangeQuery, String filterQuery) {
         BoolQueryBuilder booleanQueryBuilder = QueryBuilders.boolQuery();
         if (params != null && !params.isEmpty()) {
             String query = queryStr(params);
             QueryStringQueryBuilder queryStringQueryBuilder = QueryBuilders.queryStringQuery(query);
             booleanQueryBuilder.must(queryStringQueryBuilder);
         }
+        if (!StringUtils.isEmpty(filterQuery)) {
+            QueryStringQueryBuilder queryStringQueryBuilder = QueryBuilders.queryStringQuery(filterQuery);
+//            if (!StringUtils.isEmpty(anaylzer)) {
+//                queryStringQueryBuilder.analyzer(anaylzer);
+//            }
+            booleanQueryBuilder.must(queryStringQueryBuilder);
+        }
         if (rangeQuery != null && rangeQuery.size() > 0) {
             for (RangeQueryEntity rangeQueryEntity : rangeQuery) {
                 RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery(rangeQueryEntity.getFieldName());
-                if (rangeQueryEntity.getMinValue() != null) {
-                    rangeQueryBuilder.gte(rangeQueryEntity.getMinValue());
-                }
-                if (rangeQueryEntity.getMaxValue() != null) {
-                    rangeQueryBuilder.lte(rangeQueryEntity.getMaxValue());
+                if (rangeQueryEntity.getFieldName().indexOf("Time") > -1) {
+                    if (rangeQueryEntity.getMinValue() != null) {
+                        rangeQueryBuilder.from(rangeQueryEntity.getMinValue());
+                    }
+                    if (rangeQueryEntity.getMaxValue() != null) {
+                        rangeQueryBuilder.to(rangeQueryEntity.getMaxValue());
+                    }
+                } else {
+                    if (rangeQueryEntity.getMinValue() != null) {
+                        rangeQueryBuilder.gte(rangeQueryEntity.getMinValue());
+                    }
+                    if (rangeQueryEntity.getMaxValue() != null) {
+                        rangeQueryBuilder.lte(rangeQueryEntity.getMaxValue());
+                    }
                 }
                 booleanQueryBuilder.must(rangeQueryBuilder);
             }

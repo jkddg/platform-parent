@@ -73,8 +73,9 @@ public class JdGoodsMapper {
         if (goodsInfo.getZkFinalPrice() == null) {
             return null;
         }
+        goodsInfo.setId(goodsInfo.getPlatformId() + "_" + goodsInfo.getItemId());
         if (goodsInfo.getCouponAmount() > 0 && goodsInfo.getZkFinalPrice() > 0) {
-            goodsInfo.setCouponRate(Double.valueOf(goodsInfo.getCouponAmount() * 100 / (goodsInfo.getCouponAmount() + goodsInfo.getZkFinalPrice())).longValue());
+            goodsInfo.setCouponRate(Double.valueOf(goodsInfo.getCouponAmount() * 10000 / (goodsInfo.getCouponAmount() + goodsInfo.getZkFinalPrice())).longValue());
         }
         return goodsInfo;
     }

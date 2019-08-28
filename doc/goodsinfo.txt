@@ -1,11 +1,14 @@
 PUT goods_info
 {
 	"settings": {
-		"number_of_shards": 5,
+		"number_of_shards": 3,
 		"number_of_replicas": 0
 	},
 	"mappings": {
 		"properties": {
+		    "id": {
+        		"type": "keyword"
+        	},
 			"itemId": {
 				"type": "long"
 			},
