@@ -89,9 +89,17 @@ public class TbGoodsSyncBiz {
         if (goodsInfo == null) {
             return false;
         }
+
+        /**
+         * 过滤没有销量的商品
+         */
+        if (goodsInfo.getVolume() == 0) {
+            return false;
+        }
         /**
          * 券额比例大于20%，或月销量大于1万，或券面额大于20
          */
+
         if (goodsInfo.getCouponRate() >= 2000 || goodsInfo.getVolume() > 10000 || goodsInfo.getCouponAmount() >= 20) {
             return true;
         }

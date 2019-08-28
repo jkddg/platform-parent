@@ -71,7 +71,7 @@ public class JdGoodsBiz {
             }
         };
         for (Integer eliteId : eliteIds) {
-            long pageCount = maxPageCount;
+            long pageCount = 0;
             CountDownLatch countDownLatch;
             JdGoodsSyncParam jdGoodsSyncParam = new JdGoodsSyncParam();
             jdGoodsSyncParam.setEliteId(eliteId);
@@ -80,7 +80,9 @@ public class JdGoodsBiz {
             ResultInfo<JdGoodsSyncParam> response = jdGoodsService.syncGoods(jdGoodsSyncParam);
             if (response.isSuccess()) {
                 jdGoodsSyncParam = response.getData();
-                if (jdGoodsSyncParam.getPageCount() < maxPageCount) {
+                if (jdGoodsSyncParam.getPageCount() > maxPageCount) {
+                    pageCount = maxPageCount;
+                } else {
                     pageCount = jdGoodsSyncParam.getPageCount();
                 }
                 countDownLatch = new CountDownLatch((int) pageCount - 1);

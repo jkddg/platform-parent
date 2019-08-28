@@ -17,7 +17,7 @@ public class ClearExpireGoodsJob {
     @Autowired
     ClearExpireGoodsBiz clearExpireGoodsBiz;
 
-    @Scheduled(cron = "0 0 */3 * * ? ")
+    @Scheduled(cron = "0 30 * * * ? ")
     public void doTask(){
         clearExpireGoodsBiz.clearExpireGoods();
     }

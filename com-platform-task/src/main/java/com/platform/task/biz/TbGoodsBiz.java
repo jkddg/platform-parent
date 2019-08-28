@@ -212,7 +212,7 @@ public class TbGoodsBiz {
         keywords.add("汽车");
         keywords.add("车载");
         for (String keyWord : keywords) {
-            long pageCount = maxPageCount;
+            long pageCount = 0;
             CountDownLatch countDownLatch;
             TbGoodsSyncParam tbGoodsSyncParam = new TbGoodsSyncParam();
             tbGoodsSyncParam.setKeyWord(keyWord);
@@ -223,7 +223,9 @@ public class TbGoodsBiz {
             ResultInfo<TbGoodsSyncParam> response = tbGoodsService.syncGoods(tbGoodsSyncParam);
             if (response.isSuccess()) {
                 tbGoodsSyncParam = response.getData();
-                if (tbGoodsSyncParam.getPageCount() < maxPageCount) {
+                if (tbGoodsSyncParam.getPageCount() > maxPageCount) {
+                    pageCount = maxPageCount;
+                } else {
                     pageCount = tbGoodsSyncParam.getPageCount();
                 }
                 countDownLatch = new CountDownLatch((int) pageCount - 1);

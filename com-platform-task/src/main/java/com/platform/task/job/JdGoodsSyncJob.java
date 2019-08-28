@@ -13,7 +13,7 @@ public class JdGoodsSyncJob {
     @Autowired
     JdGoodsBiz jdGoodsBiz;
 
-    @Scheduled(cron = "0 30 */3 * * ? ")
+    @Scheduled(cron = "0 49 * * * ? ")
     public void doTask(){
         jdGoodsBiz.syncGoods();
     }
