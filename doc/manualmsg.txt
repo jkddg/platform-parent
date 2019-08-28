@@ -1,4 +1,4 @@
-PUT goods_category
+PUT manual_msg
 {
 	"settings": {
 		"number_of_shards": 1,
@@ -7,8 +7,8 @@ PUT goods_category
 	"mappings": {
 		"properties": {
 		    "id": {
-                "type": "keyword"
-            },
+              	"type": "keyword"
+             },
 			"myCategoryId": {
 				"type": "long"
 			},
@@ -21,24 +21,15 @@ PUT goods_category
 			"platformName": {
 				"type": "keyword"
 			},
-			"levelOneCategoryName": {
-				"type": "keyword"
-			},
-			"levelOneCategoryId": {
-				"type": "long"
-			},
-			"categoryName": {
-				"type": "keyword"
-			},
-			"categoryId": {
-				"type": "long"
-			},
+			"msg": {
+            	"type": "keyword"
+            },
 			"updateTime": {
              	"type": "date"
              }
 		}
 	},
 	"aliases": {
-		"goodscategory": {}
+		"manualmsg": {}
 	}
 }
