@@ -8,18 +8,18 @@
 <body>
 <div class="container">
     <div class="col-md-3 col-sm-4 col-xs-12 item" style='padding-right:5px;padding-left:5px;margin-bottom:5px;'>
-        <form role="form" name="loginForm">
-            <div class="form-group">
-                <label for="uname">账号:</label>
-                <input type="text" class="form-control" id="uname">
+        <form role="form" name="loginForm" action="/login"  method="post">
+            <div  align="center" class="form-group">
+                <label for="userName">账号:</label>
+                <input type="text" class="form-control" id="userName" name="userName">
             </div>
-            <div class="form-group">
-                <label for="pwd">密码:</label>
-                <input type="password" class="form-control" id="pwd">
+            <div  align="center" class="form-group">
+                <label for="passWd">密码:</label>
+                <input type="password" class="form-control" id="passWd" name="passWd">
             </div>
 
             <div align="center">
-                <button type="button" class="btn btn-primary" role="button" id="searchBtn">搜索</button>
+                <button type="submit" class="btn btn-primary" role="button" id="loginBtn">登录</button>
                 <br/><br/>
             </div>
         </form>
