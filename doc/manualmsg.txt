@@ -24,9 +24,22 @@ PUT manual_msg
 			"msg": {
             	"type": "keyword"
             },
-			"updateTime": {
+			"createTime": {
              	"type": "date"
+             },
+             "endTime": {
+                  "type": "date"
+             },
+             "lastSendTime": {
+                 "type": "date"
+             },
+             "maxSendCount": {
+                  "type": "integer"
              }
+             ,
+             "beenSendCount": {
+                 "type": "integer"
+              }
 		}
 	},
 	"aliases": {
