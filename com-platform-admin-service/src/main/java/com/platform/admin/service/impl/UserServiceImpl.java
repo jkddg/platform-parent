@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
         if (esResult != null && esResult.getData() != null && esResult.getData().size() > 0) {
             UserInfo userInfo = esResult.getData().get(0);
             resultInfo.setData(userInfo);
+            resultInfo.setSuccess(true);
         }
         return resultInfo;
     }

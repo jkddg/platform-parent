@@ -1,0 +1,58 @@
+:root{
+    font-size: 12px;
+}
+.box {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 90;
+
+
+}
+
+ .box-con {
+    overflow: hidden;
+    position: relative;
+
+}
+
+.box .box-text {
+    color: white;
+    text-align: center;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    position: absolute;
+    padding: 2px 0;
+    right: 0px;
+    top: 15px;
+    width: 50px;
+    background-color: #00801C;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
+    background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image: -moz-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image: -ms-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image: -o-linear-gradient(top, #BFDC7A, #8EBF45);
+    -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.box .box-text:before, .box-text:after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+}
+
+.box .box-text:before {
+    left: 0;
+}
+
+.box .box-text:after {
+    right: 0;
+}

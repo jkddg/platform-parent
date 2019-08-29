@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,viewport-fit=cover">
-    <title>人工消息</title>
+    <title>手动添加优惠信息</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/mobiscroll.custom-3.0.0-beta2.min.css">
+    <link rel="stylesheet" href="/css/list.css"/>
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/js/mobiscroll.custom-3.0.0-beta2.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+
+
+
 </head>
 <body>
 <div class="container">
     <div class="col-md-3 col-sm-4 col-xs-12 item" style='padding-right:5px;padding-left:5px;margin-bottom:5px;'>
-        <form role="form" name="msgForm" action="/pushMsg" method="post">
+        <form role="form" name="msgForm" action="" method="post">
             <div align="center" class="form-group" style="margin-top: 1rem;">
                 <span>优惠信息:</span>
                 <textarea id="msg" name="msg" style="width: 15rem;height: 12rem;"></textarea>
             </div>
             <div align="center" class="custom-checkbox" style="margin-top: 1rem;">
                 <label>自定义分类:</label>
-                <input type="checkbox" name="platform" value="tb" checked>淘宝&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="checkbox" name="platform" value="jd" checked>京东&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="checkbox" name="platform" value="pdd" checked>拼多多
+                <input type="checkbox" name="category" value="tb" checked />淘宝&nbsp;&nbsp;&nbsp;&nbsp;
+
             </div>
             <div align="center" class="custom-radio" style="margin-top: 1rem;">
                 <label>平台:</label>
@@ -43,7 +51,7 @@
                     <option value="30">30</option>
                 </select>
             </div>
-            <div align="center" style="margin-top: 1rem;">
+            <div align="center" style="margin-top: 3rem;">
                 <button type="submit" class="btn btn-primary" role="button" id="loginBtn">发送</button>
                 <br/><br/>
             </div>
