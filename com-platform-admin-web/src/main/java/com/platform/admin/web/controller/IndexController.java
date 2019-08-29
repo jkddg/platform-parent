@@ -99,6 +99,6 @@ public class IndexController {
     }
 
     public static void main(String[] args) {
-        System.out.println(DigestUtils.md5DigestAsHex(("jkddg123456" + "abc").getBytes()));
+        System.out.println(DigestUtils.md5DigestAsHex(("jkddg" + "abc").getBytes()));
     }
 }
