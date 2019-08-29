@@ -97,4 +97,8 @@ public class IndexController {
         }
         return null;
     }
+
+    public static void main(String[] args) {
+        System.out.println(DigestUtils.md5DigestAsHex(("jkddg" + "abc").getBytes()));
+    }
 }
