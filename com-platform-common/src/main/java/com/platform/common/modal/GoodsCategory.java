@@ -3,6 +3,7 @@ package com.platform.common.modal;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class GoodsCategory {
+public class GoodsCategory implements Serializable {
     private String id;
     private long myCategoryId;
     private String myCategoryName;

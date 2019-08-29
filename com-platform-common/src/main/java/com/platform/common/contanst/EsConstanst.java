@@ -7,4 +7,8 @@ public class EsConstanst {
 
     public static final String ES_GOODS_CATEGORY_INDEX_NAME = "goodscategory";
     public static final String ES_GOODS_CATEGORY_ID_COLUMN_NAME = "id";
+
+    public static final String ES_ADMIN_USER_INDEX_NAME = "adminuser";
+    public static final String ES_ADMIN_USER_ID_COLUMN_NAME = "userId";
+
 }
