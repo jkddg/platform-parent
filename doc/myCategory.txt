@@ -21,3 +21,12 @@ PUT my_category
 		"mycategory": {}
 	}
 }
+
+
+
+PUT /mycategory/_doc/1
+{
+  "myCategoryId": 1,
+  "myCategoryName": "零食小吃",
+  "updateTime": "2019-08-30T23:28:00"
+}

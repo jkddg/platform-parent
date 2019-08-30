@@ -120,7 +120,11 @@ public class EsSearchUtil {
             }
 
         }
-
+//        if (params == null && filterQuery == null && nestParams == null && nestFilterString == null && rangeQuery == null) {
+//            builder.query(QueryBuilders.matchAllQuery());
+//        } else {
+//            builder.query(booleanQueryBuilder);
+//        }
         builder.query(booleanQueryBuilder);
         if (sort != null && !sort.isEmpty()) {
             sort(builder, sort);

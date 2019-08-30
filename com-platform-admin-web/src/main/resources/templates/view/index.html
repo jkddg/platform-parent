@@ -12,47 +12,55 @@
     <script type="text/javascript" src="/js/index.js"></script>
 
 
-
 </head>
 <body>
 <div class="container">
     <div class="col-md-3 col-sm-4 col-xs-12 item" style='padding-right:5px;padding-left:5px;margin-bottom:5px;'>
         <form role="form" name="msgForm" action="" method="post">
-            <div align="center" class="form-group" style="margin-top: 1rem;">
-                <span>优惠信息:</span>
-                <textarea id="msg" name="msg" style="width: 15rem;height: 12rem;"></textarea>
+            <div class="form-group" style="margin-top:2rem;">
+                <span class="media-left">优惠信息:</span>
+                <div class="media-body">
+                    <textarea id="msg" name="msg" style="width: 16rem;height: 12rem;"></textarea>
+                </div>
             </div>
-            <div align="center" class="custom-checkbox" style="margin-top: 1rem;">
-                <label>自定义分类:</label>
-                <input type="checkbox" name="category" value="tb" checked />淘宝&nbsp;&nbsp;&nbsp;&nbsp;
-
+            <div class="form-group" style="margin-top:2rem;">
+                <span class="media-left">自定义分类:</span>
+                <div class="media-body" id="categoryDiv">
+                    &nbsp;&nbsp;
+                </div>
             </div>
-            <div align="center" class="custom-radio" style="margin-top: 1rem;">
-                <label>平台:</label>
-                <input type="radio" name="platform" value="1" checked>淘宝&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="platform" value="2">天猫&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="platform" value="3">京东&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="platform" value="4">拼多多&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="form-group" style="margin-top:0.5rem;">
+                <span class="media-left">平台:</span>
+                <div class="media-body">
+                    <input type="radio" name="platform" value="1" checked>淘宝&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="platform" value="2">天猫&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="platform" value="3">京东&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="platform" value="4">拼多多&nbsp;
+                </div>
             </div>
-            <div align="center" class="form-group" style="margin-top: 1rem;">
-                <label for="endTime">结束时间:</label>
-                <input type="text" class="form-control" id="endTime" name="endTime">
+            <div class="form-group" style="margin-top:0.5rem;">
+                <span class="media-left">结束日期:</span>
+                <div class="media-body">
+                    <input type="text" class="form-control" id="endTime" name="endTime"  style="width: 12rem;">
+                </div>
             </div>
-            <div align="center" class="form-group" style="margin-top: 1rem;">
-                <label for="maxSendCount">发送次数:</label>
-                <select id="maxSendCount" name="maxSendCount">
-                    <option value="1">1</option>
-                    <option value="3">3</option>
-                    <option value="5">5</option>
-                    <option value="8">8</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                </select>
+            <div class="form-group" style="margin-top:0.5rem;">
+                <span class="media-left">发送次数:</span>
+                <div class="media-body">
+                    <select id="maxSendCount" name="maxSendCount">
+                        <option value="1">1</option>
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                </div>
             </div>
             <div align="center" style="margin-top: 3rem;">
-                <button type="submit" class="btn btn-primary" role="button" id="loginBtn">发送</button>
+                <button type="button" class="btn btn-primary" role="button" id="pushMsgBtn">发送</button>
                 <br/><br/>
             </div>
         </form>
