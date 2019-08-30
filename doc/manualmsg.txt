@@ -42,6 +42,11 @@ PUT manual_msg
              "beenSendCount": {
                  "type": "integer"
               }
+              ,
+              "createUser": {
+                  "type": "keyword"
+                }
+
 		}
 	},
 	"aliases": {

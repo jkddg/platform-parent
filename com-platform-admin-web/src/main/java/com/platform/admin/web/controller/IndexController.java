@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -31,13 +32,18 @@ public class IndexController {
         Cookie cookiePwd = getCookie(cookies, "uPwd");
         String userName = cookieName != null ? cookieName.getValue() : null;
         String passWd = cookiePwd != null ? cookiePwd.getValue() : null;
-        String md5 = "";
-        try {
-            md5 = SecurityUtil.desDecrypt(passWd);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(passWd)){
+            view.setViewName("view/login");
+        }else{
+            String md5 = "";
+            try {
+                md5 = SecurityUtil.desDecrypt(passWd);
+            } catch (Exception e) {
+
+            }
+            chkUser(userName, md5, response, view);
         }
-        chkUser(userName, passWd, response, view);
+
         return view;
     }
 
@@ -50,6 +56,10 @@ public class IndexController {
     }
 
     private void chkUser(String userName, String passWd, HttpServletResponse response, ModelAndView view) {
+        if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(passWd)){
+            view.setViewName("view/login");
+            return;
+        }
         ResultInfo<UserInfo> userResult = userService.getUserByAccout(userName);
         if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(passWd)) {
             view.setViewName("view/login");
@@ -97,8 +107,14 @@ public class IndexController {
         }
         return null;
     }
+    @RequestMapping("/pushMsg")
+    @ResponseBody
+    public ResultInfo pushMsg(String msg, String platform, String category,String endTime,String maxSendCount) {
+        ResultInfo resultInfo=new ResultInfo();
 
-    public static void main(String[] args) {
-        System.out.println(DigestUtils.md5DigestAsHex(("jkddg" + "abc").getBytes()));
+
+
+        return resultInfo;
     }
+
 }

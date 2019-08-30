@@ -4,6 +4,7 @@ import com.platform.admin.service.iface.UserService;
 import com.platform.admin.service.modal.user.UserInfo;
 import com.platform.common.modal.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class UserController {
     UserService userService;
 
     @RequestMapping("/getUserByAccout")
-    public ResultInfo<UserInfo> getUserByAccout(String userName) {
+    public ResultInfo<UserInfo> getUserByAccout(@RequestBody String userName) {
         return userService.getUserByAccout(userName);
     }
 }
