@@ -13,7 +13,8 @@ public class TbGoodsSyncJob {
     @Autowired
     TbGoodsBiz tbGoodsBiz;
 
-    @Scheduled(cron = "0 0 */3 * * ? ")
+    @Scheduled(cron = "0 0 */6 * * ? ")
+//    @Scheduled(cron = "0 49 * * * ? ")
     public void doTask(){
         tbGoodsBiz.syncGoods();
     }

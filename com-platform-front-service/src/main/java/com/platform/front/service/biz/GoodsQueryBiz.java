@@ -7,6 +7,7 @@ import com.platform.common.util.es.EsResult;
 import com.platform.common.util.es.EsSearchUtil;
 import com.platform.common.util.es.SortEntity;
 import com.platform.front.service.client.param.FindGoodsListParam;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,25 +32,41 @@ public class GoodsQueryBiz {
             result.setMsg("请求参数为空");
             return result;
         }
-        String sort = "tk_rate_des";
+
+        /**
+         * 1、佣金比例
+         * 2、券额度比例
+         * 3、券面值
+         * 4、销量
+         * 5、价格
+         */
+        List<SortEntity> sortEntity = new ArrayList<>();
+        SortEntity sort;
         switch (param.getSort()) {
             case 1:
-                sort = "tk_rate_des";
+                sort = new SortEntity("commissionRate", SortOrder.DESC);
                 break;
             case 2:
-                sort = "total_sales_des";
+                sort = new SortEntity("couponRate", SortOrder.DESC);
                 break;
             case 3:
-                sort = "price_asc";
+                sort = new SortEntity("couponAmount", SortOrder.DESC);
                 break;
             case 4:
-                sort = "price_des";
+                sort = new SortEntity("volume", SortOrder.DESC);
+                break;
+            case 5:
+                sort = new SortEntity("finalPrice", SortOrder.DESC);
+                break;
+            default:
+                sort = new SortEntity("commissionRate", SortOrder.DESC);
                 break;
         }
+        sortEntity.add(sort);
         Map<String, Object> params = new HashMap<>();
         params.put("title", param.getKeyWord());
         params.put("shortTitle", param.getKeyWord());
-        List<SortEntity> sortEntity = new ArrayList<>();
+
 
         StringBuilder sb = new StringBuilder();
         if (param.getPlatformEnum() != null && param.getPlatformEnum().size() > 0) {

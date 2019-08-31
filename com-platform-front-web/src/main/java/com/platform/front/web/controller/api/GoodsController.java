@@ -32,7 +32,7 @@ public class GoodsController {
         List<PlatformEnum> platformEnums=new ArrayList<>();
         platformEnums.add(PlatformEnum.TAOBAO);
         platformEnums.add(PlatformEnum.TMALL);
-        platformEnums.add(PlatformEnum.JD);
+        //platformEnums.add(PlatformEnum.JD);
         findGoodsListParam.setPlatformEnum(platformEnums);
         findGoodsListParam.setKeyWord(dataListParam.getKeyWord());
         findGoodsListParam.setSort(dataListParam.getSort());
