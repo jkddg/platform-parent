@@ -29,7 +29,7 @@ public class GoodsController {
     @ResponseBody
     public PageData<GoodsInfo> getData(DataListParam dataListParam) {
         FindGoodsListParam findGoodsListParam = new FindGoodsListParam();
-        List<PlatformEnum> platformEnums=new ArrayList<>();
+        List<PlatformEnum> platformEnums = new ArrayList<>();
         platformEnums.add(PlatformEnum.TAOBAO);
         platformEnums.add(PlatformEnum.TMALL);
         //platformEnums.add(PlatformEnum.JD);

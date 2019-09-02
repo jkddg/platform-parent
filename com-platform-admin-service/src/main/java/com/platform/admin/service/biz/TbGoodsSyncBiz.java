@@ -93,7 +93,7 @@ public class TbGoodsSyncBiz {
         /**
          * 过滤没有销量的商品
          */
-        if (goodsInfo.getVolume() == 0) {
+        if (goodsInfo.getVolume() < 100) {
             return false;
         }
         /**
