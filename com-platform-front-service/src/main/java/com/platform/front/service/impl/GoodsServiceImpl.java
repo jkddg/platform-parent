@@ -31,6 +31,13 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public PageData<GoodsInfo> findGoodsLists(FindGoodsListParam param){
+        PageData<GoodsInfo> result=new PageData<>();
+        result.setTotalCount(0);
+        result = taobaoGoodsBiz.findGoodsList(param);
+        return result;
+    }
+    @Override
     public String getTpwd(TpwdParam tpwdParam){
         return taobaoGoodsBiz.getTpwd(tpwdParam);
     }

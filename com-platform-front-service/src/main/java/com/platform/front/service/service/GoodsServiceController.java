@@ -22,12 +22,17 @@ public class GoodsServiceController {
     @Autowired
     GoodsService goodsService;
 
-    @PostMapping("/list")
-    public PageData<GoodsInfo> findTaobaoGoodsList(@RequestBody FindGoodsListParam param){
+    @PostMapping("/lists")
+    public PageData<GoodsInfo> findGoodsLists(@RequestBody FindGoodsListParam param){
         return goodsService.findGoodsList(param);
     }
     @PostMapping("/getTpwd")
     public String getTpwd(@RequestBody TpwdParam tpwdParam) {
         return goodsService.getTpwd(tpwdParam);
+    }
+
+    @PostMapping("/list")
+    public PageData<GoodsInfo> findGoodsList(@RequestBody FindGoodsListParam param){
+        return goodsService.findGoodsList(param);
     }
 }

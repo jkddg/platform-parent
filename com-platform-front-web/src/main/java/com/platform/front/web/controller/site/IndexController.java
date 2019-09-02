@@ -55,7 +55,7 @@ public class IndexController {
         findGoodsListParam.setKeyWord(dataListParam.getKeyWord());
         findGoodsListParam.setSort(dataListParam.getSort());
         findGoodsListParam.setPageIndex(dataListParam.getPage());
-        PageData<GoodsInfo> result = goodsService.findGoodsList(findGoodsListParam);
+        PageData<GoodsInfo> result = goodsService.findGoodsLists(findGoodsListParam);
         return result;
     }
 

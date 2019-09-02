@@ -29,6 +29,9 @@ public class TbGoodsBiz {
 
     private long maxPageCount = 200;
 
+    private long errorCount = 0;
+    private static final long maxErrorCount = 100;
+
     public void syncGoods() {
         if (lockObj) {
             return;
@@ -212,6 +215,7 @@ public class TbGoodsBiz {
         keywords.add("汽车");
         keywords.add("车载");
         for (String keyWord : keywords) {
+            errorCount = 0;
             long pageCount = 0;
             CountDownLatch countDownLatch;
             TbGoodsSyncParam tbGoodsSyncParam = new TbGoodsSyncParam();
@@ -259,9 +263,14 @@ public class TbGoodsBiz {
                                 countDownLatch.countDown();
                                 log.info("淘宝结果：countDown=" + countDownLatch.getCount() + ",返回数量" + response.getData() + ",总页数=" + response.getData().getPageCount() + ",当前页=" + response.getData().getPageIndex());
                             } else {
+                                errorCount++;
+                                if (errorCount > maxErrorCount) {
+                                    return;
+                                }
                                 //遇到失败，失败页重新入队
                                 appendWork(countDownLatch, response.getData());
                                 log.error("请求淘宝接口返回失败[已重新入队列]，请求信息：" + JSON.toJSONString(response.getData()) + ",返回信息：" + response.getMsg());
+
                             }
 
                         }

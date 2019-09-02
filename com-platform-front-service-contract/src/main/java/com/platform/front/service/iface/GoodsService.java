@@ -17,6 +17,8 @@ public interface GoodsService {
     @PostMapping("/goods/list")
     PageData<GoodsInfo> findGoodsList(FindGoodsListParam param);
 
+    @PostMapping("/goods/lists")
+    PageData<GoodsInfo> findGoodsLists(FindGoodsListParam param);
 
     @PostMapping("/goods/getTpwd")
     String getTpwd(TpwdParam tpwdParam);

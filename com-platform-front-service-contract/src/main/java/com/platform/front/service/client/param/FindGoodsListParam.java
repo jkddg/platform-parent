@@ -17,5 +17,12 @@ public class FindGoodsListParam extends PageInfo implements Serializable {
 
     private List<PlatformEnum> platformEnum;
     private String keyWord;
+    /**
+     * 1、佣金比例
+     * 2、券额度比例
+     * 3、券面值
+     * 4、销量
+     * 5、价格
+     */
     private int sort;
 }

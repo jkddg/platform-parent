@@ -1,9 +1,15 @@
 package com.platform.admin.web.controller;
 
 
+import com.platform.admin.service.iface.GoodsService;
 import com.platform.admin.service.iface.UserService;
 import com.platform.admin.service.modal.user.UserInfo;
+import com.platform.common.contanst.PlatformEnum;
+import com.platform.common.modal.ManualMessage;
+import com.platform.common.modal.ManualMessageParam;
+import com.platform.common.modal.MyCategory;
 import com.platform.common.modal.ResultInfo;
+import com.platform.common.util.DateUtil;
 import com.platform.common.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +22,21 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class IndexController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    GoodsService goodsService;
+
     String solt = "abc";
 
     @RequestMapping({"", "/index"})
@@ -32,9 +47,9 @@ public class IndexController {
         Cookie cookiePwd = getCookie(cookies, "uPwd");
         String userName = cookieName != null ? cookieName.getValue() : null;
         String passWd = cookiePwd != null ? cookiePwd.getValue() : null;
-        if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(passWd)){
+        if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(passWd)) {
             view.setViewName("view/login");
-        }else{
+        } else {
             String md5 = "";
             try {
                 md5 = SecurityUtil.desDecrypt(passWd);
@@ -56,7 +71,7 @@ public class IndexController {
     }
 
     private void chkUser(String userName, String passWd, HttpServletResponse response, ModelAndView view) {
-        if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(passWd)){
+        if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(passWd)) {
             view.setViewName("view/login");
             return;
         }
@@ -97,6 +112,13 @@ public class IndexController {
         return false;
     }
 
+    private String getCurrentUserName(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        Cookie cookieName = getCookie(cookies, "userName");
+        String userName = cookieName != null ? cookieName.getValue() : null;
+        return userName;
+    }
+
     private Cookie getCookie(Cookie[] cookies, String name) {
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
@@ -107,14 +129,44 @@ public class IndexController {
         }
         return null;
     }
+
     @RequestMapping("/pushMsg")
     @ResponseBody
-    public ResultInfo pushMsg(String msg, String platform, String category,String endTime,String maxSendCount) {
-        ResultInfo resultInfo=new ResultInfo();
-
-
+    public ResultInfo pushMsg(String msg, int platform, String category, String endTime, int maxSendCount, HttpServletRequest request) {
+        ResultInfo resultInfo = new ResultInfo();
+        try {
+            ManualMessageParam message = new ManualMessageParam();
+            message.setBeenSendCount(0);
+            message.setCreateTime(LocalDateTime.now());
+            message.setCreateUser(getCurrentUserName(request));
+            LocalDateTime myEndTime = DateUtil.dateStr2EndLocalDateTime(endTime);
+            message.setEndTime(myEndTime);
+            message.setId(UUID.randomUUID().toString());
+            message.setMaxSendCount(maxSendCount);
+            message.setMsg(msg);
+            String[] c = category.split(",");
+            List<Long> categorys = new ArrayList<>();
+            for (String s : c) {
+                categorys.add(Long.parseLong(s));
+            }
+            message.setMyCategoryId(categorys);
+            message.setPlatformId(platform);
+            message.setPlatformName(PlatformEnum.valueOf(platform).displayName());
+            message.setLastSendTime(LocalDateTime.now());
+            resultInfo = goodsService.appendManualMessage(message);
+        } catch (Exception ex) {
+            resultInfo.setSuccess(false);
+            resultInfo.setMsg(ex.getMessage());
+        }
 
         return resultInfo;
+    }
+
+    @RequestMapping("/getMyCategorys")
+    @ResponseBody
+    public ResultInfo<List<MyCategory>> getMyCategorys() {
+        ResultInfo<List<MyCategory>> result = goodsService.getMyCategorys();
+        return result;
     }
 
 }
