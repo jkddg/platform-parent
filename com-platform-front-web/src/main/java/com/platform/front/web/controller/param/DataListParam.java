@@ -14,4 +14,5 @@ public class DataListParam {
     private String platform;
     private int sort;
     private int page;
+    private int pageSize = 25;
 }

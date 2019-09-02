@@ -37,6 +37,7 @@ public class GoodsController {
         findGoodsListParam.setKeyWord(dataListParam.getKeyWord());
         findGoodsListParam.setSort(dataListParam.getSort());
         findGoodsListParam.setPageIndex(dataListParam.getPage());
+        findGoodsListParam.setPageSize(dataListParam.getPageSize());
         PageData<GoodsInfo> result = goodsService.findGoodsList(findGoodsListParam);
         return result;
     }
