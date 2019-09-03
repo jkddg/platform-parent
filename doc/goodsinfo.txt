@@ -128,7 +128,10 @@ PUT goods_info
 			},
 			"updateTime": {
              	"type": "date"
-             }
+             },
+             "sourceFlag": {
+                 	"type": "integer"
+                }
 		}
 	},
 	"aliases": {

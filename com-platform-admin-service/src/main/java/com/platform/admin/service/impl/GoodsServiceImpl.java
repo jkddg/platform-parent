@@ -34,7 +34,7 @@ public class GoodsServiceImpl implements GoodsService {
         List<RangeQueryEntity> rangeQuery = new ArrayList<>();
         RangeQueryEntity rangeQueryEntity = new RangeQueryEntity();
         rangeQueryEntity.setFieldName("updateTime");
-        rangeQueryEntity.setMaxValue(LocalDateTime.now().minusDays(3));
+        rangeQueryEntity.setMaxValue(LocalDateTime.now().minusDays(1));
         rangeQuery.add(rangeQueryEntity);
         EsWriteUtil.deleteByQuery(EsConstanst.ES_GOODS_INDEX_NAME, null, rangeQuery, null);
 

@@ -15,6 +15,7 @@ public class ManualMessageParam implements Serializable {
     private String myCategoryName;
     private int platformId;
     private String platformName;
+    private String imgUrl;
     private String msg;
     private LocalDateTime createTime;
     private LocalDateTime endTime;

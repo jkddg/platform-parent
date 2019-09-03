@@ -58,6 +58,10 @@ public class DateUtil {
         return LocalDateTime.of(date, LocalTime.of(0, 0, 0));
     }
 
+    public static LocalDateTime getDateStartLocalDateTime() {
+        return LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0, 0));
+    }
+
     public static LocalDateTime dateStr2StartLocalDateTime(String dateStr) {
         LocalDate date = dateStr2LocalDate(dateStr);
         return LocalDateTime.of(date, LocalTime.of(0, 0, 0));
@@ -115,7 +119,7 @@ public class DateUtil {
         if (1 == weekNo) {
             startDay = date.withDayOfYear(1);
             weekDay = startDay.getDayOfWeek().getValue();
-            endDay = date.plusDays(7L - (long)weekDay);
+            endDay = date.plusDays(7L - (long) weekDay);
         } else if (53 == weekNo) {
             if (12 == date.plusDays(6L).getMonthValue()) {
                 startDay = date;
@@ -123,7 +127,7 @@ public class DateUtil {
             } else {
                 endDay = date.plusMonths(1L).withDayOfMonth(1).minusDays(1L);
                 weekDay = endDay.getDayOfWeek().getValue();
-                startDay = endDay.minusDays((long)weekDay).plusDays(1L);
+                startDay = endDay.minusDays((long) weekDay).plusDays(1L);
             }
         } else {
             startDay = date;
@@ -141,7 +145,7 @@ public class DateUtil {
         if (week == 1) {
             return LocalDate.of(year, Month.JANUARY, 1);
         } else {
-            Calendar cal = (GregorianCalendar)c.clone();
+            Calendar cal = (GregorianCalendar) c.clone();
             cal.add(5, (week - 1) * 7);
             Date d = getFirstDayOfWeek(cal.getTime());
             return dateStr2LocalDate((new SimpleDateFormat("yyyy-MM-dd")).format(d));
@@ -158,7 +162,7 @@ public class DateUtil {
 
     public static List<Integer> hoursBetween(LocalDateTime sDate, LocalDateTime eDate) {
         ArrayList list;
-        for(list = new ArrayList(); sDate.isBefore(eDate) || sDate.equals(eDate); sDate = sDate.plusHours(1L)) {
+        for (list = new ArrayList(); sDate.isBefore(eDate) || sDate.equals(eDate); sDate = sDate.plusHours(1L)) {
             String hour = sDate.getHour() < 10 ? "0" + sDate.getHour() : String.valueOf(sDate.getHour());
             String day = sDate.getDayOfMonth() < 10 ? "0" + sDate.getDayOfMonth() : String.valueOf(sDate.getDayOfMonth());
             String month = sDate.getMonthValue() < 10 ? "0" + sDate.getMonthValue() : String.valueOf(sDate.getMonthValue());
@@ -176,7 +180,7 @@ public class DateUtil {
 
     public static List<Integer> daysBetween(LocalDate sdate, LocalDate edate) {
         ArrayList list;
-        for(list = new ArrayList(); sdate.isBefore(edate) || sdate.equals(edate); sdate = sdate.plusDays(1L)) {
+        for (list = new ArrayList(); sdate.isBefore(edate) || sdate.equals(edate); sdate = sdate.plusDays(1L)) {
             String day = sdate.getDayOfMonth() < 10 ? "0" + sdate.getDayOfMonth() : String.valueOf(sdate.getDayOfMonth());
             String month = sdate.getMonthValue() < 10 ? "0" + sdate.getMonthValue() : String.valueOf(sdate.getMonthValue());
             list.add(Integer.parseInt(sdate.getYear() + month + day));
@@ -194,7 +198,7 @@ public class DateUtil {
         Integer startYearWeek = getYearWeek(sdate);
         Integer endYearWeek = getYearWeek(edate);
 
-        for(int i = startYearWeek; i <= endYearWeek; ++i) {
+        for (int i = startYearWeek; i <= endYearWeek; ++i) {
             list.add(i);
             int week = i - i / 100 * 100;
             if (week == 53) {
@@ -214,7 +218,7 @@ public class DateUtil {
         Integer startMonth = date2MonthNumber(sdate);
         Integer endMonth = date2MonthNumber(edate);
 
-        for(int i = startMonth; i <= endMonth; ++i) {
+        for (int i = startMonth; i <= endMonth; ++i) {
             list.add(i);
             int month = i - i / 100 * 100;
             if (month == 12) {
@@ -232,7 +236,7 @@ public class DateUtil {
     public static List<Integer> yearsBetween(Integer syear, Integer eyear) {
         List<Integer> list = new ArrayList();
 
-        for(int i = syear; i <= eyear; ++i) {
+        for (int i = syear; i <= eyear; ++i) {
             list.add(i);
         }
 

@@ -3,8 +3,10 @@ package com.platform.front.service.biz;
 import com.platform.common.contanst.EsConstanst;
 import com.platform.common.modal.GoodsInfo;
 import com.platform.common.modal.PageData;
+import com.platform.common.util.DateUtil;
 import com.platform.common.util.es.EsResult;
 import com.platform.common.util.es.EsSearchUtil;
+import com.platform.common.util.es.RangeQueryEntity;
 import com.platform.common.util.es.SortEntity;
 import com.platform.front.service.client.param.FindGoodsListParam;
 import org.elasticsearch.search.sort.SortOrder;
@@ -77,7 +79,12 @@ public class GoodsQueryBiz {
                 sb.append("platformId:").append(param.getPlatformEnum().get(i).value());
             }
         }
-        EsResult<GoodsInfo> esResult = EsSearchUtil.search(EsConstanst.ES_GOODS_INDEX_NAME, params, sb.toString(), null, sortEntity, param.getPageIndex(), param.getPageSize(), GoodsInfo.class);
+        List<RangeQueryEntity> rangeQuery = new ArrayList<>();
+        RangeQueryEntity rangeQueryEntity = new RangeQueryEntity();
+        rangeQueryEntity.setFieldName("updateTime");
+        rangeQueryEntity.setMinValue(DateUtil.getDateStartLocalDateTime());
+        rangeQuery.add(rangeQueryEntity);
+        EsResult<GoodsInfo> esResult = EsSearchUtil.search(EsConstanst.ES_GOODS_INDEX_NAME, params, sb.toString(), rangeQuery, sortEntity, param.getPageIndex(), param.getPageSize(), GoodsInfo.class);
         result.setSuccess(true);
         result.setTotalCount(esResult.getTotal());
         result.setData(esResult.getData());

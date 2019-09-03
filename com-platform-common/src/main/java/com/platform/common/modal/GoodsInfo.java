@@ -198,6 +198,10 @@ public class GoodsInfo implements Serializable {
      */
     private LocalDateTime updateTime;
 
+    /**
+     * 自定义标识，0:API自动抓取，1:爬虫定向抓取，2:手动指定
+     */
+    private int sourceFlag;
 
     public String getFinalPrice() {
         if (zkFinalPrice == null) {

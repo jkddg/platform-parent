@@ -21,6 +21,9 @@ PUT manual_msg
 			"platformName": {
 				"type": "keyword"
 			},
+			"imgUrl": {
+            	"type": "keyword"
+            },
 			"msg": {
             	"type": "text",
                 "analyzer": "ik_max_word",

@@ -57,6 +57,7 @@ public class TbGoodsSyncBiz {
                 }
                 String tpwd = this.getCommendPwd(goodsInfo);
                 goodsInfo.setCommandPwd(tpwd);
+                goodsInfo.setSourceFlag(0);
                 if (goodsInfo != null) {
                     Map<String, Object> map = new HashMap<>();
                     map = JSON.parseObject(JSON.toJSONString(goodsInfo));
