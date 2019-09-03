@@ -227,4 +227,16 @@ public class TaobaoGoodsAPI {
 //        TbkSpreadGetResponse rsp = client.execute(req);
 //        System.out.println(rsp.getBody());
 //    }
+
+    /**
+     * 淘宝链接解析为商品id
+     * @return
+     */
+//    public TbkItemClickExtractResponse itemClickExtract(){
+//        TaobaoClient client = getTaobaoClient();
+//        TbkItemClickExtractRequest req = new TbkItemClickExtractRequest();
+//        req.setClickUrl("https://s.click.taobao.com/***");
+//        TbkItemClickExtractResponse rsp = client.execute(req);
+//        System.out.println(rsp.getBody());
+//    }
 }
