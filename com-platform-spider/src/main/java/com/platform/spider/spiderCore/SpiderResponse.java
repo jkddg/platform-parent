@@ -1,4 +1,4 @@
-package com.platform.spider.spiderUtil;
+package com.platform.spider.spiderCore;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.CloseableHttpResponse;

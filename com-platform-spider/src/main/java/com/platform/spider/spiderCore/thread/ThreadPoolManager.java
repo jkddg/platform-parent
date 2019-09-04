@@ -1,4 +1,4 @@
-package com.platform.spider.spiderUtil.thread;
+package com.platform.spider.spiderCore.thread;
 
 import java.util.LinkedList;
 import java.util.Queue;

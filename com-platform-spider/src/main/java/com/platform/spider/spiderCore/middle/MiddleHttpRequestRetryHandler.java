@@ -1,4 +1,4 @@
-package com.platform.spider.spiderUtil.middle;
+package com.platform.spider.spiderCore.middle;
 
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;

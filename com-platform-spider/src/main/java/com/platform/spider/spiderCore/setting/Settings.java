@@ -1,9 +1,9 @@
-package com.platform.spider.spiderUtil.setting;
+package com.platform.spider.spiderCore.setting;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.platform.spider.spiderUtil.Common;
+import com.platform.spider.spiderCore.Common;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

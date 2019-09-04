@@ -1,9 +1,9 @@
-package com.platform.spider.spiderUtil;
+package com.platform.spider.spiderCore;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface SpiderIpl {
+public interface SpiderIface {
     String getName();
 
     default String getCustomSettings() {

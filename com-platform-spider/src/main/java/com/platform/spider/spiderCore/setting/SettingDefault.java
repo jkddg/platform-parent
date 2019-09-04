@@ -1,4 +1,4 @@
-package com.platform.spider.spiderUtil.setting;
+package com.platform.spider.spiderCore.setting;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.platform.spider.spiderUtil;
+package com.platform.spider.spiderCore;
 
 import java.util.Comparator;
 

@@ -1,9 +1,14 @@
-package com.platform.spider.spiderUtil;
+package com.platform.spider.spiderCore;
 
-import com.platform.spider.spiderUtil.middle.MiddleHttpProxyHandler;
-import com.platform.spider.spiderUtil.middle.MiddleHttpUserAgentHandler;
-import com.platform.spider.spiderUtil.setting.SettingDefault;
-import com.platform.spider.spiderUtil.setting.Settings;
+import com.alibaba.fastjson.JSONObject;
+import com.platform.spider.spiderCore.constant.RequestMethod;
+import com.platform.spider.spiderCore.middle.MiddleHttpProxyHandler;
+import com.platform.spider.spiderCore.middle.MiddleHttpRequestRetryHandler;
+import com.platform.spider.spiderCore.middle.MiddleUserAgent;
+import com.platform.spider.spiderCore.setting.SettingDefault;
+import com.platform.spider.spiderCore.setting.Settings;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -15,16 +20,36 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.protocol.HttpContext;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Slf4j
-public class SpiderRequest {
+@Getter
+@Setter
+public class Spider implements SpiderIface {
+    private PoolingHttpClientConnectionManager cm = null;
+    private CloseableHttpClient httpClient;
+    private HttpContext context;
+    private RequestConfig requestConfig;
+    private HttpClientBuilder clientBuilder;
+
+    private Settings settings;
+
+    private String name = "";
+    private String customSettings = "";
+
+    //统计
+    private StatisticsInfo statisticsInfo = null;
     private HttpRequestBase httpBase;
     private String url;
     private RequestMethod method;
@@ -34,27 +59,53 @@ public class SpiderRequest {
     private Map<String, String> meta;
     private String encoding;
     private String callback;
-
-    //-------------------------------
+    //url列表
+    public static ConcurrentLinkedQueue<Spider> spiderTasks = new ConcurrentLinkedQueue<>();
     private Map<String, String> defaultHeaders;
 
-    public SpiderRequest(String url,
-                         RequestMethod method,
-                   Map<String, String> headers,
-                   String body,
-                   Map<String, String> cookies,
-                   Map<String, String> meta,
-                   String encoding,
-                   String callback) {
-        this.url = url;
-        this.method = method;
-        this.headers = headers;
-        this.body = body;
-        this.cookies = cookies;
-        this.meta = meta;
-        this.encoding = encoding;
-        this.callback = callback;
+    public Spider() {
 
+
+        this.name = this.getName();
+        if (this.name == null || this.name.length() == 0) {
+            log.error("name must be not null or ''");
+            System.exit(1);
+        }
+        this.customSettings = this.getCustomSettings();
+
+        this.cm = new PoolingHttpClientConnectionManager();
+        this.cm.setMaxTotal(100);
+        this.cm.setDefaultMaxPerRoute(20);
+
+        try {
+            this.settings = new Settings(this.customSettings);
+        } catch (RuntimeException e) {
+            log.error(e.getMessage(), e);
+            System.exit(-1);
+        }
+
+        this.requestConfig = RequestConfig.custom()
+                .setSocketTimeout((int) settings.download_timeout * 1000)
+                .setConnectionRequestTimeout((int) settings.download_timeout * 1000)
+                .setConnectTimeout((int) settings.download_timeout * 1000)
+                .build();
+
+        this.clientBuilder = HttpClients.custom()
+                .setConnectionManager(cm)
+                .setDefaultRequestConfig(this.requestConfig)
+                .disableCookieManagement();
+
+        if (settings.retry_enabled) {
+            clientBuilder = clientBuilder.setRetryHandler(new MiddleHttpRequestRetryHandler(settings.retry_times, false));
+        } else {
+            clientBuilder = clientBuilder.setRetryHandler(new MiddleHttpRequestRetryHandler(SettingDefault.RETRY_TIMES, false));
+        }
+
+        this.httpClient = clientBuilder.build();
+
+    }
+
+    private void init() {
         this.defaultHeaders = new HashMap<>();
         this.defaultHeaders.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
         this.defaultHeaders.put("Accept-Encoding", "gzip, deflate, br");
@@ -62,14 +113,16 @@ public class SpiderRequest {
         this.defaultHeaders.put("Connection", "keep-alive");
         this.defaultHeaders.put("Upgrade-Insecure-Requests", "1");
         this.defaultHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
+        this.statisticsInfo = new StatisticsInfo();
+        this.statisticsInfo.setStartTime(System.currentTimeMillis());
+
     }
 
-    public void start(HttpClientBuilder clientBuilder,
-                      Spider spider,
-                      RequestConfig config,
-                      StatisticsInfo statisticsInfo) throws RuntimeException {
-        Settings settings = spider.getSettings();
+    public String getUrl() {
+        return url;
+    }
 
+    public void startRequests() {
         int count = -1;
         while (count < settings.retry_counts) {
             count += 1;
@@ -98,16 +151,16 @@ public class SpiderRequest {
                     }
                 }
 
-                this.httpBase.setConfig(config);
+                this.httpBase.setConfig(this.requestConfig);
 
                 // user-agent
-                String userAgent = this.getUserAgent(settings, this, spider);
+                String userAgent = this.getUserAgent();
                 if (userAgent != null) {
                     this.httpBase.setHeader("User-Agent", userAgent);
                 }
 
                 // proxy
-                String[] proxy = this.getProxy(settings, this, spider);
+                String[] proxy = this.getProxy();
                 if (proxy != null && proxy.length == 4) {
                     try {
                         String user = proxy[0];
@@ -150,7 +203,7 @@ public class SpiderRequest {
                         "" + response.getStatusLine().getStatusCode())) {
                     try {
                         if (this.callback != null) {
-                            Class<?> cl = Class.forName(spider.getClass().getName());
+                            Class<?> cl = Class.forName(this.getClass().getName());
                             Method[] methods = cl.getDeclaredMethods();
                             for (Method method : methods) {
                                 if (this.callback.equals(method.getName())) {
@@ -170,21 +223,102 @@ public class SpiderRequest {
         }
     }
 
-    public String getUrl() {
-        return url;
+
+    /**
+     * 添加url任务
+     *
+     * @param spider
+     * @return void
+     * @author mtime
+     * @date 2018/7/26 0026
+     */
+    public void yield(Spider spider) {
+        Spider.spiderTasks.add(spider);
+        log.info("add url = " + spider.getUrl());
     }
 
-    private String getUserAgent(Settings settings, SpiderRequest request, Spider spider) {
+    /**
+     * 处理数据
+     *
+     * @param object
+     * @param spider
+     * @return void
+     * @author mtime
+     * @date 2018/7/26 0026
+     */
+    public void yield(JSONObject object, Spider spider) {
+        try {
+            List<String> pipelines = this.settings.getPipelines();
+
+            for (String pipeline : pipelines) {
+
+                Class<?> cl = Class.forName(pipeline);
+                Method[] methods = cl.getDeclaredMethods();
+
+                //openItem
+                for (Method method : methods) {
+                    if (method.getName().equals("openItem")) {
+                        method.invoke(cl.newInstance(), spider);
+                    }
+                }
+
+                //processItem
+                for (Method method : methods) {
+                    if (method.getName().equals("processItem")) {
+                        object = (JSONObject) method.invoke(cl.newInstance(), object, spider);
+                    }
+                }
+
+                //closeItem
+                for (Method method : methods) {
+                    if (method.getName().equals("closeItem")) {
+                        method.invoke(cl.newInstance(), spider);
+                    }
+                }
+
+                if (object == null) {
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    private PipeLines pipeLines = null;
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public CloseableHttpClient getHttpClient() {
+        return httpClient;
+    }
+
+    public PipeLines getPipeLines() {
+        return pipeLines;
+    }
+
+    public void setPipeLines(PipeLines pipeLines) {
+        this.pipeLines = pipeLines;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    private String getUserAgent() {
         List<String> middlewares = settings.getMiddlewares();
         for (String name : middlewares) {
             try {
                 Class<?> cl = Class.forName(name);
-                if (MiddleHttpUserAgentHandler.class.isAssignableFrom(cl)) {
+                if (MiddleUserAgent.class.isAssignableFrom(cl)) {
                     Method[] methods = cl.getDeclaredMethods();
 
                     for (Method method : methods) {
                         if (method.getName().equals("processRequest")) {
-                            return (String) method.invoke(cl.newInstance(), request, spider);
+                            return (String) method.invoke(cl.newInstance(), this);
                         }
                     }
                     return SettingDefault.USER_AGENT;
@@ -196,7 +330,7 @@ public class SpiderRequest {
         return null;
     }
 
-    private String[] getProxy(Settings settings, SpiderRequest request, Spider spider) {
+    private String[] getProxy() {
         List<String> middlewares = settings.getMiddlewares();
         for (String name : middlewares) {
             try {
@@ -206,7 +340,7 @@ public class SpiderRequest {
 
                     for (Method method : methods) {
                         if (method.getName().equals("processRequest")) {
-                            return (String[]) method.invoke(cl.newInstance(), request, spider);
+                            return (String[]) method.invoke(cl.newInstance(), this);
                         }
                     }
                 }
