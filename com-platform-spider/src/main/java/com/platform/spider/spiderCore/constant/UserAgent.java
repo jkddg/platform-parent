@@ -2,7 +2,6 @@ package com.platform.spider.spiderCore.constant;
 
 
 import com.platform.spider.spiderCore.Spider;
-import com.platform.spider.spiderCore.middle.MiddleHttpUserAgentHandler;
 
 /**
  * @author mtime

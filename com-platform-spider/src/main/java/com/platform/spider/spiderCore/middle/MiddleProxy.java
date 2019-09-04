@@ -8,9 +8,9 @@ import com.platform.spider.spiderCore.Spider;
  * @version 1.0
  * @date 2018/7/25 0025
  */
-public class MiddleProxy extends MiddleHttpProxyHandler {
+public class MiddleProxy  {
 
-    @Override
+
     public String[] processRequest(Spider spider) {
         String[][] proxies = {
                 {"H84D338NX736437D", "E223D6240DC64E28", "http-dyn.abuyun.com", "9020"},

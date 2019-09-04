@@ -2,7 +2,6 @@ package com.platform.spider.spiderCore;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.spider.spiderCore.constant.RequestMethod;
-import com.platform.spider.spiderCore.middle.MiddleHttpProxyHandler;
 import com.platform.spider.spiderCore.middle.MiddleHttpRequestRetryHandler;
 import com.platform.spider.spiderCore.middle.MiddleUserAgent;
 import com.platform.spider.spiderCore.setting.SettingDefault;
