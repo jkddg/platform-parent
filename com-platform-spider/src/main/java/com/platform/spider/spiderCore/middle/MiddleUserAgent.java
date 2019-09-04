@@ -10,7 +10,7 @@ import com.platform.spider.spiderCore.Spider;
  */
 public class MiddleUserAgent  {
 
-    
+
     public String processRequest(Spider spider) {
         String[] user_agents = {
                 "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",

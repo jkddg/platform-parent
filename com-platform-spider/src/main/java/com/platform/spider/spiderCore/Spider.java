@@ -63,7 +63,7 @@ public class Spider implements SpiderIface {
     private Map<String, String> defaultHeaders;
 
     public Spider() {
-
+    this.init();
 
         this.name = this.getName();
         if (this.name == null || this.name.length() == 0) {
@@ -302,7 +302,7 @@ public class Spider implements SpiderIface {
         this.pipeLines = pipeLines;
     }
 
-    @Override
+
     public String getName() {
         return null;
     }
