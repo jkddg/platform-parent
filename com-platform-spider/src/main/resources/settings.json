@@ -1,23 +1,12 @@
 {
   "DOWNLOADER_MIDDLEWARES": {
-    "com.mtime.cinema.middle.MiddleUserAgent": 544,
-    "com.mtime.cinema.middle.MiddleProxy": 545
+    "com.platform.spider.spiderCore.constant.UserAgent": 544,
+    "com.platform.spider.spiderCore.constant.MiddleProxy": 545
   },
   "ITEM_PIPELINES": {
-    "com.mtime.cinema.pipelines.maoyan.MaoyanCityPipeline": 320,
-    "com.mtime.cinema.pipelines.maoyan.MaoyanCinemaPipeline": 330,
-    "com.mtime.cinema.pipelines.dianping.DianpingCityPipeline": 220,
-    "com.mtime.cinema.pipelines.dianping.DianpingCinemaPipeline": 221,
-    "com.mtime.cinema.pipelines.nuomi.NuomiCityPipeline": 222,
-    "com.mtime.cinema.pipelines.nuomi.NuomiCinemaPipeline": 223,
-    "com.mtime.cinema.pipelines.wangpiao.WangpiaoCityPipeline": 224,
-    "com.mtime.cinema.pipelines.wangpiao.WangpiaoCinemaPipeline": 225,
-    "com.mtime.cinema.pipelines.mtime.MtimeCityPipeLine": 331,
-    "com.mtime.cinema.pipelines.mtime.MtimeCinemaPipeLine": 332,
-    "com.mtime.cinema.pipelines.taopiaopiao.TaopiaopiaoCityPipeline": 226,
-    "com.mtime.cinema.pipelines.taopiaopiao.TaopiaopiaoCinemaPipeline": 227
+
   },
-  "RETRY_ENABLED": true,
+  "RETRY_ENABLED": false,
   "RETRY_TIMES": 3,
   "RETRY_COUNTS": 3,
   "CONCURRENT_REQUESTS": 1,

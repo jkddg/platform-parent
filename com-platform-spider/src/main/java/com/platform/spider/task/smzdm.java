@@ -12,5 +12,6 @@ public class smzdm {
     @Scheduled(cron = "0 49 * * * ? ")
     public void doTask(){
 
+
     }
 }

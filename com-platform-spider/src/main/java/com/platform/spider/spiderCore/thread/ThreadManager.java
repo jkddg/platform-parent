@@ -36,7 +36,7 @@ public class ThreadManager extends Thread {
         while (!this.isStop) {
             Spider spider = this.getSpiderTask();
             if (spider != null) {
-                log.info(String.format("spider start url = %s", spider.getSpiderRequest().getUrl()));
+                log.info(String.format("spider start url = %s", spider.getUrl()));
                 try {
                     spider.startRequests();
                 } catch (RuntimeException e) {
@@ -44,7 +44,7 @@ public class ThreadManager extends Thread {
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);
                 }
-                log.info(String.format("crawl end url = %s", spider.getSpiderRequest().getUrl()));
+                log.info(String.format("crawl end url = %s", spider.getUrl()));
             }
             try {
                 Thread.sleep((long) settings.download_delay);

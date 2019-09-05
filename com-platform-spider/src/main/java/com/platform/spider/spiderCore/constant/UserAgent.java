@@ -8,10 +8,9 @@ import com.platform.spider.spiderCore.Spider;
  * @version 1.0
  * @date 2018/7/25 0025
  */
-public class UserAgent extends MiddleHttpUserAgentHandler {
+public class UserAgent  {
 
-    @Override
-    public String processRequest(SpiderRequest request, Spider spider) {
+    public String processRequest(Spider spider) {
         String[] user_agents = {
                 "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36",

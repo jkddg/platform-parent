@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Slf4j
 public class Settings {
     public List<String> pipelines;
@@ -42,10 +43,7 @@ public class Settings {
 
         if (jsonObject.keySet().contains("ITEM_PIPELINES")) {
             JSONObject object = (JSONObject) jsonObject.get("ITEM_PIPELINES");
-            JSONObject custom = null;
-            if (customObject.keySet().contains("ITEM_PIPELINES")) {
-                custom = (JSONObject) customObject.get("ITEM_PIPELINES");
-            }
+
             List<Integer> temp = new ArrayList<>();
             Map<Integer, String> tempMap = new HashMap<>();
             for (String key : object.keySet()) {
@@ -66,10 +64,7 @@ public class Settings {
 
         if (jsonObject.keySet().contains("DOWNLOADER_MIDDLEWARES")) {
             JSONObject object = (JSONObject) jsonObject.get("DOWNLOADER_MIDDLEWARES");
-            JSONObject custom = null;
-            if (customObject.keySet().contains("DOWNLOADER_MIDDLEWARES")) {
-                custom = (JSONObject) customObject.get("DOWNLOADER_MIDDLEWARES");
-            }
+
             List<Integer> temp = new ArrayList<>();
             Map<Integer, String> tempMap = new HashMap<>();
             for (String key : object.keySet()) {
@@ -106,7 +101,7 @@ public class Settings {
 
     private String[] getDefault(JSONObject object1, JSONObject object2, String key, String[] defaultValue) {
         String[] result;
-        if (object2.keySet().contains(key)) {
+        if (object2!=null && object2.keySet().contains(key)) {
             JSONArray temp = object2.getJSONArray(key);
             String[] temps = new String[temp.size()];
             for (int i = 0; i < temps.length; i++) {
@@ -114,7 +109,7 @@ public class Settings {
             }
             return temps;
         }
-        if (object1.keySet().contains(key)) {
+        if (object1!=null && object1.keySet().contains(key)) {
             JSONArray temp = object1.getJSONArray(key);
             String[] temps = new String[temp.size()];
             for (int i = 0; i < temps.length; i++) {
@@ -129,10 +124,10 @@ public class Settings {
 
     private boolean getDefault(JSONObject object1, JSONObject object2, String key, boolean defaultValue) {
         boolean result = false;
-        if (object2.keySet().contains(key)) {
+        if (object2 != null && object2.keySet().contains(key)) {
             return object1.getBoolean(key);
         }
-        if (object1.keySet().contains(key)) {
+        if (object1 != null && object1.keySet().contains(key)) {
             return object1.getBoolean(key);
         } else {
             result = defaultValue;
@@ -142,13 +137,13 @@ public class Settings {
 
     private int getDefault(JSONObject object1, JSONObject object2, String key, int defaultValue) {
         int result;
-        if (object2.keySet().contains(key)) {
+        if (object2 != null && object2.keySet().contains(key)) {
             int temp = object1.getInteger(key);
             if (temp > 0) {
                 return temp;
             }
         }
-        if (object1.keySet().contains(key)) {
+        if (object1 != null && object1.keySet().contains(key)) {
             int temp = object1.getInteger(key);
             if (temp > 0) {
                 result = temp;
@@ -163,13 +158,13 @@ public class Settings {
 
     private double getDefault(JSONObject object1, JSONObject object2, String key, double defaultValue) {
         double result;
-        if (object2.keySet().contains(key)) {
+        if (object2 != null && object2.keySet().contains(key)) {
             double temp = object1.getDouble(key);
             if (temp > 0) {
                 return temp;
             }
         }
-        if (object1.keySet().contains(key)) {
+        if (object1 != null && object1.keySet().contains(key)) {
             double temp = object1.getDouble(key);
             if (temp > 0) {
                 result = temp;

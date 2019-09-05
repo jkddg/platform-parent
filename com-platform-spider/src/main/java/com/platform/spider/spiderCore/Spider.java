@@ -1,9 +1,10 @@
 package com.platform.spider.spiderCore;
 
 import com.alibaba.fastjson.JSONObject;
+import com.platform.spider.spiderCore.constant.MiddleProxy;
 import com.platform.spider.spiderCore.constant.RequestMethod;
+import com.platform.spider.spiderCore.constant.UserAgent;
 import com.platform.spider.spiderCore.middle.MiddleHttpRequestRetryHandler;
-import com.platform.spider.spiderCore.middle.MiddleUserAgent;
 import com.platform.spider.spiderCore.setting.SettingDefault;
 import com.platform.spider.spiderCore.setting.Settings;
 import lombok.Getter;
@@ -18,14 +19,25 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.springframework.util.StringUtils;
 
+import javax.net.ssl.SSLContext;
 import java.lang.reflect.Method;
+import java.security.cert.X509Certificate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -35,53 +47,62 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @Slf4j
 @Getter
 @Setter
-public class Spider implements SpiderIface {
-    private PoolingHttpClientConnectionManager cm = null;
-    private CloseableHttpClient httpClient;
-    private HttpContext context;
-    private RequestConfig requestConfig;
-    private HttpClientBuilder clientBuilder;
+public abstract class Spider implements SpiderIface {
+    protected PoolingHttpClientConnectionManager cm = null;
+    protected CloseableHttpClient httpClient;
+    protected HttpContext context;
+    protected RequestConfig requestConfig;
+    protected HttpClientBuilder clientBuilder;
 
-    private Settings settings;
+    protected Settings settings;
 
-    private String name = "";
-    private String customSettings = "";
+    protected String name = "";
+    protected String customSettings = "";
 
     //统计
-    private StatisticsInfo statisticsInfo = null;
-    private HttpRequestBase httpBase;
-    private String url;
-    private RequestMethod method;
-    private Map<String, String> headers;
-    private String body;
-    private Map<String, String> cookies;
-    private Map<String, String> meta;
-    private String encoding;
-    private String callback;
+    protected StatisticsInfo statisticsInfo = null;
+    protected HttpRequestBase httpBase;
+    protected String url;
+    protected RequestMethod method;
+    protected Map<String, String> headers;
+    protected String body;
+    protected Map<String, String> cookies;
+    protected Map<String, String> meta;
+    protected String encoding;
+    protected String callback;
     //url列表
     public static ConcurrentLinkedQueue<Spider> spiderTasks = new ConcurrentLinkedQueue<>();
     private Map<String, String> defaultHeaders;
 
-    public Spider() {
-    this.init();
 
-        this.name = this.getName();
+    public Spider(String name, RequestMethod requestMethod, String encoding) {
+        this.name = name;
         if (this.name == null || this.name.length() == 0) {
             log.error("name must be not null or ''");
-            System.exit(1);
+            throw new RuntimeException("name must be not null");
         }
+
+        this.method = requestMethod;
+
+        this.encoding = encoding;
+        this.init();
+    }
+
+    protected void init() {
+        this.defaultHeaders = new HashMap<>();
+        this.defaultHeaders.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+        this.defaultHeaders.put("Accept-Encoding", "gzip, deflate, br");
+        this.defaultHeaders.put("Accept-Language", "zh-CN,zh;q=0.9");
+        this.defaultHeaders.put("Connection", "keep-alive");
+        this.defaultHeaders.put("Upgrade-Insecure-Requests", "1");
+        this.defaultHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
+        this.statisticsInfo = new StatisticsInfo();
+        this.statisticsInfo.setStartTime(System.currentTimeMillis());
         this.customSettings = this.getCustomSettings();
 
-        this.cm = new PoolingHttpClientConnectionManager();
-        this.cm.setMaxTotal(100);
-        this.cm.setDefaultMaxPerRoute(20);
+        initCM();
 
-        try {
-            this.settings = new Settings(this.customSettings);
-        } catch (RuntimeException e) {
-            log.error(e.getMessage(), e);
-            System.exit(-1);
-        }
+        this.settings = new Settings(this.customSettings);
 
         this.requestConfig = RequestConfig.custom()
                 .setSocketTimeout((int) settings.download_timeout * 1000)
@@ -101,20 +122,36 @@ public class Spider implements SpiderIface {
         }
 
         this.httpClient = clientBuilder.build();
-
     }
 
-    private void init() {
-        this.defaultHeaders = new HashMap<>();
-        this.defaultHeaders.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-        this.defaultHeaders.put("Accept-Encoding", "gzip, deflate, br");
-        this.defaultHeaders.put("Accept-Language", "zh-CN,zh;q=0.9");
-        this.defaultHeaders.put("Connection", "keep-alive");
-        this.defaultHeaders.put("Upgrade-Insecure-Requests", "1");
-        this.defaultHeaders.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36");
-        this.statisticsInfo = new StatisticsInfo();
-        this.statisticsInfo.setStartTime(System.currentTimeMillis());
+    private void initCM() {
 
+        try {
+            ConnectionSocketFactory plainsf = PlainConnectionSocketFactory.getSocketFactory();
+            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+                @Override
+                public boolean isTrusted(X509Certificate[] paramArrayOfX509Certificate, String paramString) {
+                    return true;
+                }
+            }).build();
+
+
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
+//		SSLContext ctx = SSLContext.getInstance(SSLConnectionSocketFactory.TLS);
+//        ctx.init(null, new TrustManager[] { trustManager }, null);
+//        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(ctx, NoopHostnameVerifier.INSTANCE);
+
+
+//		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, new String[] { "TLSv1.2" },
+//				new String[] { "TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384", "TLS_RSA_WITH_AES_256_GCM_SHA384" },
+//				SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+            Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+                    .register("http", plainsf).register("https", sslsf).build();
+            this.cm = new PoolingHttpClientConnectionManager(registry);
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
     }
 
     public String getUrl() {
@@ -122,18 +159,18 @@ public class Spider implements SpiderIface {
     }
 
     public void startRequests() {
+
         int count = -1;
+        if (!settings.retry_enabled) {
+            settings.retry_counts = 0;
+        }
         while (count < settings.retry_counts) {
             count += 1;
             try {
-                if (this.url == null) {
+                if (StringUtils.isEmpty(this.url)) {
                     throw new RuntimeException("url must is not null!");
                 }
                 this.url = this.url.trim();
-                if (this.url.length() == 0) {
-                    throw new RuntimeException("url must is not null!");
-                }
-
                 if (this.method == RequestMethod.GET) {
                     this.httpBase = new HttpGet(this.url);
                 } else {
@@ -166,25 +203,18 @@ public class Spider implements SpiderIface {
                         String password = proxy[1];
                         String host = proxy[2];
                         int port = Integer.parseInt(proxy[3]);
-                        if (host != null && host.length() != 0) {
-                            if ((user != null && user.length() != 0)
-                                    && (password != null && password.length() != 0)) {
+                        if (!StringUtils.isEmpty(host) && port > 0) {
+                            if (!StringUtils.isEmpty(user) && !StringUtils.isEmpty(password)) {
                                 CredentialsProvider credsProvider = new BasicCredentialsProvider();
-                                credsProvider.setCredentials(
-                                        new AuthScope(host, port),
-                                        new UsernamePasswordCredentials(user, password));
+                                credsProvider.setCredentials(new AuthScope(host, port), new UsernamePasswordCredentials(user, password));
                                 clientBuilder.setDefaultCredentialsProvider(credsProvider);
 
                                 HttpHost temp = new HttpHost(host, port);
-                                RequestConfig conf = RequestConfig.custom()
-                                        .setProxy(temp)
-                                        .build();
+                                RequestConfig conf = RequestConfig.custom().setProxy(temp).build();
                                 this.httpBase.setConfig(conf);
                             } else {
                                 HttpHost temp = new HttpHost(host, port);
-                                RequestConfig conf = RequestConfig.custom()
-                                        .setProxy(temp)
-                                        .build();
+                                RequestConfig conf = RequestConfig.custom().setProxy(temp).build();
                                 this.httpBase.setConfig(conf);
                             }
                         }
@@ -194,23 +224,14 @@ public class Spider implements SpiderIface {
                     }
                 }
 
-                CloseableHttpResponse response = clientBuilder.build().execute(this.httpBase);
+                CloseableHttpResponse response = this.httpClient.execute(this.httpBase);
 
                 statisticsInfo.addStatus("" + response.getStatusLine().getStatusCode());
 
                 if (response.getStatusLine().getStatusCode() == 200 || Arrays.asList(settings.handle_httpstatus_list).contains(
                         "" + response.getStatusLine().getStatusCode())) {
                     try {
-                        if (this.callback != null) {
-                            Class<?> cl = Class.forName(this.getClass().getName());
-                            Method[] methods = cl.getDeclaredMethods();
-                            for (Method method : methods) {
-                                if (this.callback.equals(method.getName())) {
-                                    method.invoke(cl.newInstance(), new SpiderResponse(response, this.meta));
-                                    return;
-                                }
-                            }
-                        }
+                        responseCallback(new SpiderResponse(response, this.meta));
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
                     }
@@ -222,6 +243,9 @@ public class Spider implements SpiderIface {
         }
     }
 
+    public abstract void responseCallback(SpiderResponse response);
+
+    public abstract JSONObject processItem(JSONObject item);
 
     /**
      * 添加url任务
@@ -236,56 +260,6 @@ public class Spider implements SpiderIface {
         log.info("add url = " + spider.getUrl());
     }
 
-    /**
-     * 处理数据
-     *
-     * @param object
-     * @param spider
-     * @return void
-     * @author mtime
-     * @date 2018/7/26 0026
-     */
-    public void yield(JSONObject object, Spider spider) {
-        try {
-            List<String> pipelines = this.settings.getPipelines();
-
-            for (String pipeline : pipelines) {
-
-                Class<?> cl = Class.forName(pipeline);
-                Method[] methods = cl.getDeclaredMethods();
-
-                //openItem
-                for (Method method : methods) {
-                    if (method.getName().equals("openItem")) {
-                        method.invoke(cl.newInstance(), spider);
-                    }
-                }
-
-                //processItem
-                for (Method method : methods) {
-                    if (method.getName().equals("processItem")) {
-                        object = (JSONObject) method.invoke(cl.newInstance(), object, spider);
-                    }
-                }
-
-                //closeItem
-                for (Method method : methods) {
-                    if (method.getName().equals("closeItem")) {
-                        method.invoke(cl.newInstance(), spider);
-                    }
-                }
-
-                if (object == null) {
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
-    }
-
-    private PipeLines pipeLines = null;
-
     public Settings getSettings() {
         return settings;
     }
@@ -294,17 +268,9 @@ public class Spider implements SpiderIface {
         return httpClient;
     }
 
-    public PipeLines getPipeLines() {
-        return pipeLines;
-    }
-
-    public void setPipeLines(PipeLines pipeLines) {
-        this.pipeLines = pipeLines;
-    }
-
-
+    @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     private String getUserAgent() {
@@ -312,7 +278,7 @@ public class Spider implements SpiderIface {
         for (String name : middlewares) {
             try {
                 Class<?> cl = Class.forName(name);
-                if (MiddleUserAgent.class.isAssignableFrom(cl)) {
+                if (UserAgent.class.isAssignableFrom(cl)) {
                     Method[] methods = cl.getDeclaredMethods();
 
                     for (Method method : methods) {
@@ -334,7 +300,7 @@ public class Spider implements SpiderIface {
         for (String name : middlewares) {
             try {
                 Class<?> cl = Class.forName(name);
-                if (MiddleHttpProxyHandler.class.isAssignableFrom(cl)) {
+                if (MiddleProxy.class.isAssignableFrom(cl)) {
                     Method[] methods = cl.getDeclaredMethods();
 
                     for (Method method : methods) {
