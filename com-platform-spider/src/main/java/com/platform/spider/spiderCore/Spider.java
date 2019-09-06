@@ -75,7 +75,7 @@ public abstract class Spider implements SpiderIface {
     private Map<String, String> defaultHeaders;
 
 
-    public Spider(String name, RequestMethod requestMethod, String encoding) {
+    public Spider(String name, RequestMethod requestMethod, String encoding,Map<String, String> meta) {
         this.name = name;
         if (this.name == null || this.name.length() == 0) {
             log.error("name must be not null or ''");
@@ -127,6 +127,7 @@ public abstract class Spider implements SpiderIface {
     private void initCM() {
 
         try {
+            //设置允许所有ssl请求
             ConnectionSocketFactory plainsf = PlainConnectionSocketFactory.getSocketFactory();
             SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
                 @Override
@@ -134,18 +135,7 @@ public abstract class Spider implements SpiderIface {
                     return true;
                 }
             }).build();
-
-
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
-//		SSLContext ctx = SSLContext.getInstance(SSLConnectionSocketFactory.TLS);
-//        ctx.init(null, new TrustManager[] { trustManager }, null);
-//        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(ctx, NoopHostnameVerifier.INSTANCE);
-
-
-//		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, new String[] { "TLSv1.2" },
-//				new String[] { "TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384", "TLS_RSA_WITH_AES_256_GCM_SHA384" },
-//				SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
             Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
                     .register("http", plainsf).register("https", sslsf).build();
             this.cm = new PoolingHttpClientConnectionManager(registry);
