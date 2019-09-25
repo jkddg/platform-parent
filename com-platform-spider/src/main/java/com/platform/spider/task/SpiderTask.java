@@ -1,7 +1,7 @@
 package com.platform.spider.task;
 
 import com.platform.spider.spiderCore.thread.ThreadManager;
-import com.platform.spider.spiders.SpiderSmzdmTmall;
+import com.platform.spider.spiders.smzdm.SpiderSmzdmTmallList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +19,7 @@ public class SpiderTask {
 
     @Scheduled(cron = "0 31 * * * ? ")
     public void doTask() {
-        SpiderSmzdmTmall spiderSmzdmTmall = new SpiderSmzdmTmall();
+        SpiderSmzdmTmallList spiderSmzdmTmall = new SpiderSmzdmTmallList();
         threadManager.start();
     }
 }

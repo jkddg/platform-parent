@@ -1,6 +1,5 @@
 package com.platform.spider.spiderCore;
 
-import com.alibaba.fastjson.JSONObject;
 import com.platform.spider.spiderCore.constant.MiddleProxy;
 import com.platform.spider.spiderCore.constant.RequestMethod;
 import com.platform.spider.spiderCore.constant.UserAgent;
@@ -43,6 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Getter
@@ -235,7 +236,7 @@ public abstract class Spider implements SpiderIface {
 
     public abstract void responseCallback(SpiderResponse response);
 
-    public abstract JSONObject processItem(JSONObject item);
+
 
     /**
      * 添加url任务
@@ -304,5 +305,21 @@ public abstract class Spider implements SpiderIface {
             }
         }
         return null;
+    }
+    protected String trim(String message) {
+        if (message != null) {
+            return message.trim();
+        } else {
+            return "";
+        }
+    }
+
+    protected String group(String pattern, String message) {
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(message);
+        if (m.find()) {
+            return m.group(1);
+        }
+        return "";
     }
 }
