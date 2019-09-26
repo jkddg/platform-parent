@@ -52,17 +52,15 @@ public class SpiderSmzdmTmallList extends Spider {
         Elements elements = doc.select("ul#feed-main-list").select("li.feed-row-wide");
         if (elements != null && elements.size() > 0) {
             for (Element element : elements) {
-
-                String url = this.trim(element.selectFirst("div.z-feed-img").selectFirst("a").attr("href"));
-
-                SpiderSmzdmTmallItem itemSpider = new SpiderSmzdmTmallItem(url);
-
-                //saveCinema(meta, name, address, url, cinemaId);
+                String url = element.selectFirst("div.z-feed-img").selectFirst("a").attr("href");
+                 new SpiderSmzdmTmallItem(url,new PipeLineTmallItem1());
+                 break;
             }
-            if (elements.size() == pagesize) {
-                page++;
-                recursivePage(meta, page, pagesize);
-            }
+
+        }
+        if (elements.size() == pagesize) {
+            page++;
+            recursivePage(meta, page, pagesize);
         }
     }
 

@@ -14,18 +14,23 @@ public class SpiderResponse {
     private CloseableHttpResponse response;
     private Document doc;
     private String text;
+    private String referer;
     private Map<String, String> meta;
 
-    public SpiderResponse(CloseableHttpResponse response, Map<String, String> meta) {
+    public SpiderResponse(CloseableHttpResponse response, String referer, Map<String, String> meta) {
         this.response = response;
         this.meta = meta;
-
+        this.referer = referer;
         try {
             this.text = EntityUtils.toString(response.getEntity());
             this.doc = Jsoup.parse(this.text);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
+    }
+
+    public String getReferer() {
+        return this.referer;
     }
 
     public Document getDocument() {

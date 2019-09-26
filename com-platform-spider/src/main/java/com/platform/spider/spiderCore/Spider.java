@@ -74,7 +74,7 @@ public abstract class Spider implements SpiderIface {
     //url列表
     public static ConcurrentLinkedQueue<Spider> spiderTasks = new ConcurrentLinkedQueue<>();
     private Map<String, String> defaultHeaders;
-
+    protected ResponsePipeLine[] responsePipeLines;
 
     public Spider(String name, RequestMethod requestMethod, String encoding,Map<String, String> meta) {
         this.name = name;
@@ -222,7 +222,7 @@ public abstract class Spider implements SpiderIface {
                 if (response.getStatusLine().getStatusCode() == 200 || Arrays.asList(settings.handle_httpstatus_list).contains(
                         "" + response.getStatusLine().getStatusCode())) {
                     try {
-                        responseCallback(new SpiderResponse(response, this.meta));
+                        responseCallback(new SpiderResponse(response,this.getUrl(), this.meta));
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
                     }
@@ -306,13 +306,7 @@ public abstract class Spider implements SpiderIface {
         }
         return null;
     }
-    protected String trim(String message) {
-        if (message != null) {
-            return message.trim();
-        } else {
-            return "";
-        }
-    }
+
 
     protected String group(String pattern, String message) {
         Pattern r = Pattern.compile(pattern);

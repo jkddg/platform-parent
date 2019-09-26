@@ -1,14 +1,13 @@
 package com.platform.spider.spiders.smzdm;
 
 import com.platform.spider.constant.SpiderName;
+import com.platform.spider.spiderCore.ResponsePipeLine;
 import com.platform.spider.spiderCore.Spider;
 import com.platform.spider.spiderCore.SpiderResponse;
 import com.platform.spider.spiderCore.constant.AcceptType;
 import com.platform.spider.spiderCore.constant.RequestMethod;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,18 +18,31 @@ import java.util.Map;
 
 @Slf4j
 public class SpiderSmzdmTmallItem extends Spider {
-    public SpiderSmzdmTmallItem(String url) {
 
+    public SpiderSmzdmTmallItem(String url, ResponsePipeLine... responsePipeLines) {
         super(SpiderName.SMZDM_TMALL, RequestMethod.GET, "utf-8", null);
+        initSpider(url, null, responsePipeLines);
+    }
+
+    public SpiderSmzdmTmallItem(String url, String refer, ResponsePipeLine... responsePipeLines) {
+        super(SpiderName.SMZDM_TMALL, RequestMethod.GET, "utf-8", null);
+        initSpider(url, refer, responsePipeLines);
+
+    }
+
+    private void initSpider(String url, String refer, ResponsePipeLine... responsePipeLines) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", AcceptType.ALL);
         headers.put("Accept-Encoding", "gzip, deflate");
         headers.put("Accept-Language", "zh-CN,zh;q=0.9");
         headers.put("Host", "www.smzdm.com");
         headers.put("Proxy-Connection", "keep-alive");
+        if (!StringUtils.isEmpty(refer)) {
+            headers.put("Referer", refer);
+        }
         this.url = url;
         this.headers = headers;
-
+        this.responsePipeLines = responsePipeLines;
         this.yield(this);
         this.startRequests();
     }
@@ -38,12 +50,14 @@ public class SpiderSmzdmTmallItem extends Spider {
     @Override
     public void responseCallback(SpiderResponse response) {
 
-        Document doc = Jsoup.parse(response.getText());
-        Element element = doc.selectFirst("div.J_info").selectFirst("li.feed-row-wide").selectFirst("a.img-box");
-        if (element != null) {
-            String url = this.trim(element.attr("href"));
-            new SpiderSmzdmTmallItem(url);
+        if (this.responsePipeLines != null && this.responsePipeLines.length > 0) {
+            for (ResponsePipeLine pipeLine : this.responsePipeLines) {
+                pipeLine.processResponse(response);
+            }
         }
 
+
     }
+
+
 }
