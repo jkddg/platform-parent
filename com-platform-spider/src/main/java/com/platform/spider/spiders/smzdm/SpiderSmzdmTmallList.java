@@ -27,8 +27,8 @@ public class SpiderSmzdmTmallList extends Spider {
         String url = "https://www.smzdm.com/fenlei/shipinbaojian/h1c4s247f0t0p2";
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", AcceptType.ALL);
-        headers.put("Accept-Encoding", "gzip, deflate");
-        headers.put("Accept-Language", "zh-CN,zh;q=0.9");
+        headers.put("Accept-Encoding", "gzip, deflate, br");
+        headers.put("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
         headers.put("Host", "www.smzdm.com");
         headers.put("Proxy-Connection", "keep-alive");
 //        headers.put("Referer", "http://www.dianping.com/beijing");

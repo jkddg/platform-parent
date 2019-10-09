@@ -33,9 +33,9 @@ public class SpiderSmzdmTmallItem extends Spider {
     private void initSpider(String url, String refer, ResponsePipeLine... responsePipeLines) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", AcceptType.ALL);
-        headers.put("Accept-Encoding", "gzip, deflate");
-        headers.put("Accept-Language", "zh-CN,zh;q=0.9");
-        headers.put("Host", "www.smzdm.com");
+        headers.put("Accept-Encoding", "gzip, deflate, br");
+        headers.put("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+        //headers.put("Host", "www.smzdm.com");
         headers.put("Proxy-Connection", "keep-alive");
         if (!StringUtils.isEmpty(refer)) {
             headers.put("Referer", refer);

@@ -9,6 +9,7 @@ import com.platform.spider.spiderCore.setting.Settings;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -25,6 +26,7 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -76,7 +78,7 @@ public abstract class Spider implements SpiderIface {
     private Map<String, String> defaultHeaders;
     protected ResponsePipeLine[] responsePipeLines;
 
-    public Spider(String name, RequestMethod requestMethod, String encoding,Map<String, String> meta) {
+    public Spider(String name, RequestMethod requestMethod, String encoding, Map<String, String> meta) {
         this.name = name;
         if (this.name == null || this.name.length() == 0) {
             log.error("name must be not null or ''");
@@ -140,7 +142,7 @@ public abstract class Spider implements SpiderIface {
             Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
                     .register("http", plainsf).register("https", sslsf).build();
             this.cm = new PoolingHttpClientConnectionManager(registry);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -166,6 +168,10 @@ public abstract class Spider implements SpiderIface {
                     this.httpBase = new HttpGet(this.url);
                 } else {
                     this.httpBase = new HttpPost(this.url);
+                    if (!StringUtils.isEmpty(this.body)) {
+                        HttpEntity httpEntity = new StringEntity(this.body);
+                        ((HttpPost) this.httpBase).setEntity(httpEntity);
+                    }
                 }
 
                 if (this.headers != null) {
@@ -179,6 +185,7 @@ public abstract class Spider implements SpiderIface {
                 }
 
                 this.httpBase.setConfig(this.requestConfig);
+
 
                 // user-agent
                 String userAgent = this.getUserAgent();
@@ -222,7 +229,7 @@ public abstract class Spider implements SpiderIface {
                 if (response.getStatusLine().getStatusCode() == 200 || Arrays.asList(settings.handle_httpstatus_list).contains(
                         "" + response.getStatusLine().getStatusCode())) {
                     try {
-                        responseCallback(new SpiderResponse(response,this.getUrl(), this.meta));
+                        responseCallback(new SpiderResponse(response, this.getUrl(), this.meta));
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
                     }
@@ -235,7 +242,6 @@ public abstract class Spider implements SpiderIface {
     }
 
     public abstract void responseCallback(SpiderResponse response);
-
 
 
     /**
