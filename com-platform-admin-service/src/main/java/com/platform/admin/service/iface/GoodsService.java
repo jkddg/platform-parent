@@ -1,10 +1,9 @@
 package com.platform.admin.service.iface;
 
 
-import com.platform.common.modal.ManualMessageParam;
-import com.platform.common.modal.MyCategory;
+import com.platform.common.modal.manual.ManualMessageParam;
+import com.platform.common.modal.goods.MyCategory;
 import com.platform.common.modal.ResultInfo;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.platform.front.service.biz;
 
 import com.platform.common.contanst.EsConstanst;
-import com.platform.common.modal.GoodsInfo;
+import com.platform.common.modal.goods.GoodsInfo;
 import com.platform.common.modal.PageData;
 import com.platform.common.util.es.EsResult;
 import com.platform.common.util.es.EsSearchUtil;

@@ -1,8 +1,7 @@
 package com.platform.admin.consumer.hystrix;
 
-import com.platform.common.modal.ManualMessage;
-import com.platform.common.modal.ManualMessageParam;
-import com.platform.common.modal.MyCategory;
+import com.platform.common.modal.manual.ManualMessageParam;
+import com.platform.common.modal.goods.MyCategory;
 import com.platform.common.modal.ResultInfo;
 
 import java.util.List;

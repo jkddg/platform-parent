@@ -4,7 +4,7 @@ import com.platform.front.consumer.client.param.TpwdParam;
 import com.platform.common.modal.PageData;
 import com.platform.front.consumer.client.param.FindGoodsListParam;
 
-import com.platform.common.modal.GoodsInfo;
+import com.platform.common.modal.goods.GoodsInfo;
 import com.platform.front.consumer.feignClient.GoodsService;
 
 /**

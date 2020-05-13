@@ -1,4 +1,4 @@
-package com.platform.common.modal;
+package com.platform.common.modal.goods;
 
 import lombok.Getter;
 import lombok.Setter;

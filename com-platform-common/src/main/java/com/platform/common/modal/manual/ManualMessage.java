@@ -1,17 +1,16 @@
-package com.platform.common.modal;
+package com.platform.common.modal.manual;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
-public class ManualMessageParam implements Serializable {
+public class ManualMessage implements Serializable {
     private String id;
-    private List<Long> myCategoryId;
+    private long myCategoryId;
     private String myCategoryName;
     private int platformId;
     private String platformName;

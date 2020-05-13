@@ -6,7 +6,7 @@ import com.platform.front.consumer.client.param.TpwdParam;
 import com.platform.front.service.api.TaobaoGoodsAPI;
 
 import com.platform.front.service.mapper.TaobaoGoodsMapper;
-import com.platform.common.modal.GoodsInfo;
+import com.platform.common.modal.goods.GoodsInfo;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.taobao.api.response.TbkTpwdCreateResponse;
 import lombok.extern.slf4j.Slf4j;

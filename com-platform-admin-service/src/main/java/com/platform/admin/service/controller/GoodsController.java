@@ -1,8 +1,8 @@
 package com.platform.admin.service.controller;
 
 import com.platform.admin.service.iface.GoodsService;
-import com.platform.common.modal.ManualMessageParam;
-import com.platform.common.modal.MyCategory;
+import com.platform.common.modal.manual.ManualMessageParam;
+import com.platform.common.modal.goods.MyCategory;
 import com.platform.common.modal.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

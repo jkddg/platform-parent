@@ -1,7 +1,7 @@
 package com.platform.front.web.controller.api;
 
 import com.platform.common.contanst.PlatformEnum;
-import com.platform.common.modal.GoodsInfo;
+import com.platform.common.modal.goods.GoodsInfo;
 import com.platform.common.modal.PageData;
 import com.platform.front.service.client.param.FindGoodsListParam;
 import com.platform.front.service.iface.GoodsService;

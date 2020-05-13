@@ -1,7 +1,7 @@
 package com.platform.admin.service.mapper;
 
 import com.platform.common.contanst.PlatformEnum;
-import com.platform.common.modal.GoodsInfo;
+import com.platform.common.modal.goods.GoodsInfo;
 import jd.union.open.goods.jingfen.query.response.Coupon;
 import jd.union.open.goods.jingfen.query.response.JFGoodsResp;
 

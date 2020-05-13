@@ -1,7 +1,7 @@
 package com.platform.admin.service.mapper;
 
 import com.platform.common.contanst.PlatformEnum;
-import com.platform.common.modal.GoodsInfo;
+import com.platform.common.modal.goods.GoodsInfo;
 import com.platform.common.util.DateUtil;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import org.springframework.beans.BeanUtils;
