@@ -9,19 +9,7 @@ PUT manual_msg
 		    "id": {
               	"type": "keyword"
              },
-			"myCategoryId": {
-				"type": "long"
-			},
-			"myCategoryName": {
-                "type": "keyword"
-            },
-			"platformId": {
-				"type": "integer"
-			},
-			"platformName": {
-				"type": "keyword"
-			},
-			"imgUrl": {
+			"imgUrls": {
             	"type": "keyword"
             },
 			"msg": {
@@ -47,9 +35,11 @@ PUT manual_msg
               }
               ,
               "createUser": {
+                 "type": "integer"
+              },
+              "createUserName": {
                   "type": "keyword"
                 }
-
 		}
 	},
 	"aliases": {
