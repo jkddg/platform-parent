@@ -22,5 +22,6 @@
         <module>com-platform-admin-service</module>
         <module>com-platform-admin-web</module>
         <module>com-platform-spider</module>
+        <module>com-platform-base-parent</module>
     </modules>
 </project>

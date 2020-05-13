@@ -7,7 +7,7 @@ import com.platform.common.modal.ResultInfo;
  * Created by Huangyonghao on 2019/8/29 14:59.
  */
 public class UserServiceHystrix {
-    public ResultInfo<UserInfo> getUserByAccout(String userName) {
+    public ResultInfo<UserInfo> getUserByAccout(String userName,Throwable throwable) {
         ResultInfo<UserInfo> resultInfo=new ResultInfo<>();
         resultInfo.setSuccess(false);
         resultInfo.setMsg("熔断");
