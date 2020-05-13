@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
-            <artifactId>com-platform-admin-service-contract</artifactId>
+            <artifactId>com-platform-admin-service-consumer</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
