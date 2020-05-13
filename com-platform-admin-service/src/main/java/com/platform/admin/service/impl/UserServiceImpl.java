@@ -1,9 +1,9 @@
 package com.platform.admin.service.impl;
 
 import com.platform.admin.service.iface.UserService;
-import com.platform.admin.service.modal.user.UserInfo;
 import com.platform.common.contanst.EsConstanst;
 import com.platform.common.modal.ResultInfo;
+import com.platform.common.modal.user.UserInfo;
 import com.platform.common.util.es.EsResult;
 import com.platform.common.util.es.EsSearchUtil;
 import lombok.extern.slf4j.Slf4j;

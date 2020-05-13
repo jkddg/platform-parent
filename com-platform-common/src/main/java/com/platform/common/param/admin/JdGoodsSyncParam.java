@@ -1,4 +1,4 @@
-package com.platform.admin.service.client.param;
+package com.platform.common.param.admin;
 
 import com.alibaba.fastjson.JSON;
 import lombok.Getter;

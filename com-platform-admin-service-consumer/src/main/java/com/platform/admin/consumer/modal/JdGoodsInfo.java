@@ -1,4 +1,4 @@
-package com.platform.admin.service.modal;
+package com.platform.admin.consumer.modal;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,10 +1,11 @@
-package com.platform.front.service.hystrix;
+package com.platform.front.consumer.hystrix;
 
-import com.platform.front.service.client.param.TpwdParam;
+import com.platform.front.consumer.client.param.TpwdParam;
 import com.platform.common.modal.PageData;
-import com.platform.front.service.client.param.FindGoodsListParam;
-import com.platform.front.service.iface.GoodsService;
+import com.platform.front.consumer.client.param.FindGoodsListParam;
+
 import com.platform.common.modal.GoodsInfo;
+import com.platform.front.consumer.feignClient.GoodsService;
 
 /**
  * Created by Huangyonghao on 2019/6/21 17:26.

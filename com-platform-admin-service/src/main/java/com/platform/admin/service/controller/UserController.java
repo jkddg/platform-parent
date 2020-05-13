@@ -1,8 +1,8 @@
 package com.platform.admin.service.controller;
 
 import com.platform.admin.service.iface.UserService;
-import com.platform.admin.service.modal.user.UserInfo;
 import com.platform.common.modal.ResultInfo;
+import com.platform.common.modal.user.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

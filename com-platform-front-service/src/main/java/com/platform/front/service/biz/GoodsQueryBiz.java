@@ -8,7 +8,7 @@ import com.platform.common.util.es.EsResult;
 import com.platform.common.util.es.EsSearchUtil;
 import com.platform.common.util.es.RangeQueryEntity;
 import com.platform.common.util.es.SortEntity;
-import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.consumer.client.param.FindGoodsListParam;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Service;
 

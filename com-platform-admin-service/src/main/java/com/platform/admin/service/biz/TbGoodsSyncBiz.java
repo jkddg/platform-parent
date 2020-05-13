@@ -2,13 +2,13 @@ package com.platform.admin.service.biz;
 
 import com.alibaba.fastjson.JSON;
 import com.platform.admin.service.api.TaobaoGoodsAPI;
-import com.platform.admin.service.client.param.TbGoodsSyncParam;
 import com.platform.admin.service.mapper.TbGoodsMapper;
 import com.platform.common.contanst.EsConstanst;
 import com.platform.common.contanst.PlatformEnum;
 import com.platform.common.modal.GoodsCategory;
 import com.platform.common.modal.GoodsInfo;
 import com.platform.common.modal.ResultInfo;
+import com.platform.common.param.admin.TbGoodsSyncParam;
 import com.platform.common.util.StringUtil;
 import com.platform.common.util.es.EsResult;
 import com.platform.common.util.es.EsSearchUtil;

@@ -1,11 +1,10 @@
 package com.platform.admin.web.controller;
 
 
-import com.platform.admin.service.iface.GoodsService;
-import com.platform.admin.service.iface.UserService;
-import com.platform.admin.service.modal.user.UserInfo;
+import com.platform.admin.consumer.feignClient.GoodsService;
+import com.platform.admin.consumer.feignClient.UserService;
+import com.platform.common.modal.user.UserInfo;
 import com.platform.common.contanst.PlatformEnum;
-import com.platform.common.modal.ManualMessage;
 import com.platform.common.modal.ManualMessageParam;
 import com.platform.common.modal.MyCategory;
 import com.platform.common.modal.ResultInfo;
@@ -24,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

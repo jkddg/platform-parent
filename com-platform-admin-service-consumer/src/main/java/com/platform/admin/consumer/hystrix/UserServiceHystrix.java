@@ -1,6 +1,6 @@
-package com.platform.admin.service.hystrix;
+package com.platform.admin.consumer.hystrix;
 
-import com.platform.admin.service.modal.user.UserInfo;
+import com.platform.common.modal.user.UserInfo;
 import com.platform.common.modal.ResultInfo;
 
 /**

@@ -1,4 +1,4 @@
-package com.platform.admin.service.modal.user;
+package com.platform.common.modal.user;
 
 import lombok.Getter;
 import lombok.Setter;

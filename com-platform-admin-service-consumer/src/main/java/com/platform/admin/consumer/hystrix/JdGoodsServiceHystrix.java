@@ -1,6 +1,6 @@
-package com.platform.admin.service.hystrix;
+package com.platform.admin.consumer.hystrix;
 
-import com.platform.admin.service.client.param.JdGoodsSyncParam;
+import com.platform.common.param.admin.JdGoodsSyncParam;
 import com.platform.common.modal.ResultInfo;
 
 public class JdGoodsServiceHystrix {

@@ -1,4 +1,4 @@
-package com.platform.admin.service.hystrix;
+package com.platform.admin.consumer.hystrix;
 
 import com.platform.common.modal.ManualMessage;
 import com.platform.common.modal.ManualMessageParam;

@@ -1,9 +1,10 @@
 package com.platform.front.service.biz;
 
 import com.platform.common.modal.PageData;
+import com.platform.front.consumer.client.param.FindGoodsListParam;
+import com.platform.front.consumer.client.param.TpwdParam;
 import com.platform.front.service.api.TaobaoGoodsAPI;
-import com.platform.front.service.client.param.FindGoodsListParam;
-import com.platform.front.service.client.param.TpwdParam;
+
 import com.platform.front.service.mapper.TaobaoGoodsMapper;
 import com.platform.common.modal.GoodsInfo;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;

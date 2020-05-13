@@ -6,7 +6,7 @@ import com.platform.common.modal.PageData;
 import com.platform.common.util.es.EsResult;
 import com.platform.common.util.es.EsSearchUtil;
 import com.platform.common.util.es.SortEntity;
-import com.platform.front.service.client.param.FindGoodsListParam;
+import com.platform.front.consumer.client.param.FindGoodsListParam;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

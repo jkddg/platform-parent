@@ -1,8 +1,8 @@
 package com.platform.admin.service;
 
-import com.platform.admin.service.client.param.JdGoodsSyncParam;
 import com.platform.admin.service.iface.JdGoodsService;
 import com.platform.common.modal.ResultInfo;
+import com.platform.common.param.admin.JdGoodsSyncParam;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package com.platform.admin.service.impl;
 import com.platform.admin.service.biz.JdGoodsSyncBiz;
 import com.platform.admin.service.iface.JdGoodsService;
 import com.platform.common.modal.ResultInfo;
-import com.platform.admin.service.client.param.JdGoodsSyncParam;
+import com.platform.common.param.admin.JdGoodsSyncParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
