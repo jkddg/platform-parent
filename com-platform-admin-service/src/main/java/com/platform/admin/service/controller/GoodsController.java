@@ -1,4 +1,4 @@
-package com.platform.admin.service.service;
+package com.platform.admin.service.controller;
 
 import com.platform.admin.service.iface.GoodsService;
 import com.platform.common.modal.ManualMessageParam;

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.5.RELEASE</version>
+        <version>2.2.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.platform</groupId>
@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -48,7 +48,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -65,7 +64,7 @@
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
-            <artifactId>com-platform-admin-service-contract</artifactId>
+            <artifactId>com-platform-admin-service-consumer</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

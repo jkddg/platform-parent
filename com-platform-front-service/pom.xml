@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <es.version>7.1.0</es.version>
     </properties>
     <dependencies>
@@ -42,11 +42,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>com-platform-front-service-contract</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>

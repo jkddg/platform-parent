@@ -1,4 +1,4 @@
-package com.platform.admin.service.service;
+package com.platform.admin.service.controller;
 
 
 
