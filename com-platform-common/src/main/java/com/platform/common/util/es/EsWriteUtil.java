@@ -2,6 +2,7 @@ package com.platform.common.util.es;
 
 import com.alibaba.fastjson.JSON;
 import com.platform.common.contanst.EsConstanst;
+import com.platform.common.modal.goods.GoodsInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -21,6 +22,7 @@ import org.elasticsearch.script.Script;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,10 +46,8 @@ public class EsWriteUtil {
             throw new RuntimeException("主键值" + idColumn + "不可为空");
         }
         IndexRequest request = new IndexRequest(index);
-        //IndexRequest(index, type, id.toString());
         request.id(id.toString());
         request.source(doc).setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
-
         RestHighLevelClient client = RestClientUtil.highClient();
         try {
 
@@ -57,13 +57,14 @@ public class EsWriteUtil {
             throw new RuntimeException(e);
         }
     }
+
     public static void set(Object object, String index) {
-        if(object==null){
+        if (object == null) {
             return;
         }
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map;
         map = JSON.parseObject(JSON.toJSONString(object));
-        set(map,index, EsConstanst.ES_GOODS_ID_COLUMN_NAME);
+        set(map, index, EsConstanst.ES_BASE_ID_COLUMN_NAME);
     }
 
 
@@ -100,6 +101,24 @@ public class EsWriteUtil {
         }
     }
 
+    public static void addList(List<Object> objects, String index) {
+        if (objects == null || objects.size() == 0) {
+            return;
+        }
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (int i = 0; i < objects.size(); i++) {
+            Object object = objects.get(i);
+            if (object != null) {
+                Map<String, Object> map;
+                map = JSON.parseObject(JSON.toJSONString(object));
+                list.add(map);
+            }
+        }
+        if (list.size() > 0) {
+            addList(list, index, EsConstanst.ES_BASE_ID_COLUMN_NAME);
+        }
+    }
+
     /**
      * 更新
      *
@@ -125,6 +144,16 @@ public class EsWriteUtil {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void update(Object object, String index) {
+
+        if (object == null) {
+            return;
+        }
+        Map<String, Object> map;
+        map = JSON.parseObject(JSON.toJSONString(object));
+        update(map, index, EsConstanst.ES_BASE_ID_COLUMN_NAME);
     }
 
     /**

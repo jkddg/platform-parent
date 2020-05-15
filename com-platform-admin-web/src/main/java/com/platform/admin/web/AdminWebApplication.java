@@ -6,9 +6,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableHystrix
+
 @EnableEurekaClient
-@EnableFeignClients(basePackages = "com.platform")
 @SpringBootApplication(scanBasePackages = "com.platform")
 public class AdminWebApplication {
 
