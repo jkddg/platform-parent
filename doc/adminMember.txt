@@ -18,6 +18,12 @@ PUT admin_user
                			"realName": {
                				"type": "keyword"
                			},
+               			"mobile": {
+                             "type": "keyword"
+                         },
+                         "qq": {
+                             "type": "keyword"
+                         },
                			"remark": {
                				"type": "keyword"
                			},
