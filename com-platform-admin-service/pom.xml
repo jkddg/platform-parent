@@ -60,6 +60,10 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.platform</groupId>
             <artifactId>com-platform-common</artifactId>
             <version>1.0.0</version>

@@ -1,9 +1,10 @@
 package com.platform.task.biz;
 
+
 import com.alibaba.fastjson.JSON;
-import com.platform.admin.service.client.param.TbGoodsSyncParam;
-import com.platform.admin.service.iface.TbGoodsService;
+import com.platform.admin.consumer.feignClient.TbGoodsService;
 import com.platform.common.modal.ResultInfo;
+import com.platform.common.param.admin.TbGoodsSyncParam;
 import com.platform.common.util.ThreadPoolUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

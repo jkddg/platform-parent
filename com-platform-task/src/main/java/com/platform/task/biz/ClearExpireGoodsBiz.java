@@ -1,6 +1,7 @@
 package com.platform.task.biz;
 
-import com.platform.admin.service.iface.GoodsService;
+
+import com.platform.admin.consumer.feignClient.GoodsService;
 import com.platform.common.modal.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

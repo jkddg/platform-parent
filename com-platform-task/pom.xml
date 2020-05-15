@@ -6,6 +6,7 @@
         <groupId>com.platform</groupId>
         <artifactId>com-platform-base-parent</artifactId>
         <version>1.0.0</version>
+        <relativePath></relativePath>
     </parent>
     <groupId>com.platform</groupId>
     <artifactId>com-platform-task</artifactId>
@@ -39,6 +40,20 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>com-platform-common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
     </dependencies>
 

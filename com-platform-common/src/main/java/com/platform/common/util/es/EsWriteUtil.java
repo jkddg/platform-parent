@@ -1,5 +1,7 @@
 package com.platform.common.util.es;
 
+import com.alibaba.fastjson.JSON;
+import com.platform.common.contanst.EsConstanst;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -54,6 +56,14 @@ public class EsWriteUtil {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+    public static void set(Object object, String index) {
+        if(object==null){
+            return;
+        }
+        Map<String, Object> map = new HashMap<>();
+        map = JSON.parseObject(JSON.toJSONString(object));
+        set(map,index, EsConstanst.ES_GOODS_ID_COLUMN_NAME);
     }
 
 
