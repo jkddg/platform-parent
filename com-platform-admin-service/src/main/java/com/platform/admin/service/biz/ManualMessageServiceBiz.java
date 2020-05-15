@@ -20,9 +20,10 @@ public class ManualMessageServiceBiz {
         try {
             EsWriteUtil.set(messageParam, EsConstanst.ES_MANUAL_MESSAGE_INDEX_NAME);
             resultInfo.setSuccess(true);
+            resultInfo.setMsg("新增成功");
         } catch (Exception ex) {
             resultInfo.setSuccess(false);
-            resultInfo.setMsg(ex.getMessage());
+            resultInfo.setMsg("新增失败" + ex.getMessage());
             log.error(ex.getMessage() + ex.getStackTrace());
         }
         return resultInfo;

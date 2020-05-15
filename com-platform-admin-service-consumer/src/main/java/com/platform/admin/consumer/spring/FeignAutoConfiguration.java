@@ -4,6 +4,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+/**
+ * @author jkddg
+ */
 @EnableFeignClients(basePackages = "com.platform")
 @EnableHystrix
 @EnableAutoConfiguration
