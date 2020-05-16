@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 public class MessageParam implements Serializable {
 
+    private String id;
     private List<String> imgUrls;
     private String msg;
     private LocalDateTime createTime;

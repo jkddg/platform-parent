@@ -14,4 +14,10 @@ public class ResultInfo<T>  implements Serializable {
     private boolean success = false;
     private String msg;
     private T data;
+    public static ResultInfo failInfo(String errmsg){
+        ResultInfo resultInfo=new ResultInfo();
+        resultInfo.setSuccess(false);
+        resultInfo.setMsg(errmsg);
+        return resultInfo;
+    }
 }

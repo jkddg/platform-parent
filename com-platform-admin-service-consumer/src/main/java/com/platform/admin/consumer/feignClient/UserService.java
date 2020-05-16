@@ -1,7 +1,7 @@
 package com.platform.admin.consumer.feignClient;
 
 
-import com.platform.admin.consumer.hystrix.UserServiceHystrix;
+
 import com.platform.common.modal.user.UserInfo;
 import com.platform.common.modal.ResultInfo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,4 +17,12 @@ public interface UserService {
     ResultInfo<UserInfo> getUserByAccout(String userName);
 
 
+}
+class UserServiceHystrix {
+    public ResultInfo<UserInfo> getUserByAccout(String userName,Throwable throwable) {
+        ResultInfo<UserInfo> resultInfo=new ResultInfo<>();
+        resultInfo.setSuccess(false);
+        resultInfo.setMsg("熔断");
+        return resultInfo;
+    }
 }

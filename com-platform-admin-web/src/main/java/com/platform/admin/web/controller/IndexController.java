@@ -2,7 +2,9 @@ package com.platform.admin.web.controller;
 
 
 import com.platform.admin.consumer.feignClient.GoodsService;
+import com.platform.admin.consumer.feignClient.ManualMessageService;
 import com.platform.admin.consumer.feignClient.UserService;
+import com.platform.common.modal.manual.MessageParam;
 import com.platform.common.modal.user.UserInfo;
 import com.platform.common.contanst.PlatformEnum;
 import com.platform.common.modal.manual.ManualMessageParam;
@@ -34,6 +36,9 @@ public class IndexController {
 
     @Autowired
     GoodsService goodsService;
+
+    @Autowired
+    ManualMessageService manualMessageService;
 
     String solt = "abc";
 
@@ -91,6 +96,9 @@ public class IndexController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                cookie = new Cookie("userId", String.valueOf(userInfo.getUserId()));
+                cookie.setHttpOnly(true);
+                cookie.setMaxAge(60 * 60 * 24);
                 cookie = new Cookie("uPwd", md5);
                 cookie.setHttpOnly(true);
                 cookie.setMaxAge(60 * 60 * 24);
@@ -117,6 +125,17 @@ public class IndexController {
         return userName;
     }
 
+    private Long getCurrentUserId(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        Cookie cookie = getCookie(cookies, "userId");
+        String userId = cookie != null ? cookie.getValue() : null;
+        try {
+            return Long.valueOf(userId);
+        } catch (NumberFormatException e) {
+            return 0L;
+        }
+    }
+
     private Cookie getCookie(Cookie[] cookies, String name) {
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
@@ -130,32 +149,23 @@ public class IndexController {
 
     @RequestMapping("/pushMsg")
     @ResponseBody
-    public ResultInfo pushMsg(String msg, int platform, String category, String endTime, int maxSendCount, HttpServletRequest request) {
+    public ResultInfo pushMsg(String msg, HttpServletRequest request) {
         ResultInfo resultInfo = new ResultInfo();
-        try {
-            ManualMessageParam message = new ManualMessageParam();
-            message.setBeenSendCount(0);
-            message.setCreateTime(LocalDateTime.now());
-            message.setCreateUser(getCurrentUserName(request));
-            LocalDateTime myEndTime = DateUtil.dateStr2EndLocalDateTime(endTime);
-            message.setEndTime(myEndTime);
-            message.setId(UUID.randomUUID().toString());
-            message.setMaxSendCount(maxSendCount);
-            message.setMsg(msg);
-            String[] c = category.split(",");
-            List<Long> categorys = new ArrayList<>();
-            for (String s : c) {
-                categorys.add(Long.parseLong(s));
-            }
-            message.setMyCategoryId(categorys);
-            message.setPlatformId(platform);
-            message.setPlatformName(PlatformEnum.valueOf(platform).displayName());
-            message.setLastSendTime(LocalDateTime.now());
-            resultInfo = goodsService.appendManualMessage(message);
-        } catch (Exception ex) {
-            resultInfo.setSuccess(false);
-            resultInfo.setMsg(ex.getMessage());
+        if (StringUtils.isEmpty(msg)) {
+            resultInfo = ResultInfo.failInfo("消息内容为空");
+            return resultInfo;
         }
+        MessageParam messageParam = new MessageParam();
+        messageParam.setCreateTime(LocalDateTime.now());
+        messageParam.setCreateUser(getCurrentUserId(request));
+        messageParam.setCreateUserName(getCurrentUserName(request));
+        LocalDateTime myEndTime = LocalDateTime.now().plusDays(1);
+        messageParam.setEndTime(myEndTime);
+        messageParam.setId(UUID.randomUUID().toString());
+        messageParam.setMaxSendCount(1);
+        messageParam.setMsg(msg);
+        resultInfo = manualMessageService.add(messageParam);
+
 
         return resultInfo;
     }

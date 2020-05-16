@@ -1,6 +1,5 @@
 package com.platform.admin.consumer.feignClient;
 
-import com.platform.admin.consumer.hystrix.GoodsServiceHystrix;
 import com.platform.common.modal.manual.ManualMessageParam;
 import com.platform.common.modal.goods.MyCategory;
 import com.platform.common.modal.ResultInfo;
@@ -25,4 +24,26 @@ public interface GoodsService {
 
     @PostMapping("/goods/getMyCategorys")
     ResultInfo<List<MyCategory>> getMyCategorys();
+}
+class GoodsServiceHystrix {
+
+    ResultInfo clearExpireGoods() {
+        ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setSuccess(false);
+        resultInfo.setMsg("超时熔断");
+        return resultInfo;
+    }
+    ResultInfo appendManualMessage(ManualMessageParam msg){
+        ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setSuccess(false);
+        resultInfo.setMsg("超时熔断");
+        return resultInfo;
+    }
+
+    ResultInfo<List<MyCategory>> getMyCategorys(){
+        ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setSuccess(false);
+        resultInfo.setMsg("超时熔断");
+        return resultInfo;
+    }
 }
