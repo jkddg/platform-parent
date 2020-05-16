@@ -23,5 +23,7 @@
         <module>com-platform-admin-web</module>
         <module>com-platform-spider</module>
         <module>com-platform-base-parent</module>
+        <module>com-platform-admin-zuul</module>
+        <module>com-platform-front-zuul</module>
     </modules>
 </project>
