@@ -28,6 +28,9 @@ PUT manual_msg
              },
              "maxSendCount": {
                   "type": "integer"
+             },
+             "sendFlag": {
+                 "type": "integer"
              }
              ,
              "beenSendCount": {

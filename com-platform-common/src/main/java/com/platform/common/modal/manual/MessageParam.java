@@ -20,6 +20,7 @@ public class MessageParam implements Serializable {
     private LocalDateTime createTime;
     private LocalDateTime endTime;
     private int maxSendCount;
+    private int sendFlag;
     private long createUser;
     private String createUserName;
 
