@@ -1,0 +1,9 @@
+server:
+  port: 19011
+spring:
+  application:
+    name: com-platform-turbine
+eureka:
+  client:
+    service-url:
+      defaultZone: ${eureka.url}

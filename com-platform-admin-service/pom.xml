@@ -6,6 +6,7 @@
         <groupId>com.platform</groupId>
         <artifactId>com-platform-base-parent</artifactId>
         <version>1.0.0</version>
+        <relativePath></relativePath>
     </parent>
     <groupId>com.platform</groupId>
     <artifactId>com-platform-admin-service</artifactId>

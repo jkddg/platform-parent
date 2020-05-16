@@ -13,9 +13,11 @@
     <artifactId>com-platform-base-parent</artifactId>
     <version>1.0.0</version>
     <properties>
+        <resource.delimiter>${}</resource.delimiter>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <elasticsearch.version>7.7.0</elasticsearch.version>
+        <eureka.url>http://eureka-server:19000/eureka/</eureka.url>
     </properties>
 
     <dependencyManagement>
@@ -74,5 +76,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 
 </project>

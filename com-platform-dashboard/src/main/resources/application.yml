@@ -1,0 +1,6 @@
+server:
+  port: 19010
+eureka:
+  client:
+    service-url:
+      defaultZone: ${eureka.url}

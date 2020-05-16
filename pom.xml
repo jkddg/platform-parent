@@ -25,5 +25,7 @@
         <module>com-platform-base-parent</module>
         <module>com-platform-admin-zuul</module>
         <module>com-platform-front-zuul</module>
+        <module>com-platform-dashboard</module>
+        <module>com-platform-turbine</module>
     </modules>
 </project>
