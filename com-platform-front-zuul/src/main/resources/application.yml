@@ -4,3 +4,10 @@ eureka:
   client:
     service-url:
       defaultZone: ${eureka.url}
+zuul:
+  ignored-services: '*'
+  routes:
+    com-platform-front-web: /web/**
+logging:
+  level:
+    com.netflix: debug

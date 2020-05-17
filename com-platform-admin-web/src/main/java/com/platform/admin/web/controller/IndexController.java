@@ -165,8 +165,6 @@ public class IndexController {
         messageParam.setMaxSendCount(1);
         messageParam.setMsg(msg);
         resultInfo = manualMessageService.add(messageParam);
-
-
         return resultInfo;
     }
 
