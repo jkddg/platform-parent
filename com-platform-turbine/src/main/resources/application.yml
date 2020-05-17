@@ -7,3 +7,9 @@ eureka:
   client:
     service-url:
       defaultZone: ${eureka.url}
+  instance:
+    prefer-ip-address: true
+turbine:
+  app-config: com-platform-admin-web,com-platform-front-web
+  cluster-name-expression: "'default'"
+  combine-host-port: true
