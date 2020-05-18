@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
  * @author jkddg
  */
 @EnableHystrix
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.platform.admin.consumer")
 public class FeignAutoConfiguration {
 }

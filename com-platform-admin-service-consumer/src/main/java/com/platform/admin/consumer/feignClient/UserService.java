@@ -8,7 +8,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * Created by Huangyonghao on 2019/8/29 14:58.
+ *
+ * @author Huangyonghao
+ * @date 2019/8/29 14:58
  */
 @FeignClient(value = "com-platform-admin-service", fallback = UserServiceHystrix.class)
 public interface UserService {
@@ -18,11 +20,13 @@ public interface UserService {
 
 
 }
-class UserServiceHystrix {
-    public ResultInfo<UserInfo> getUserByAccout(String userName,Throwable throwable) {
+class UserServiceHystrix implements UserService{
+    @Override
+    public ResultInfo<UserInfo> getUserByAccout(String userName) {
         ResultInfo<UserInfo> resultInfo=new ResultInfo<>();
         resultInfo.setSuccess(false);
         resultInfo.setMsg("熔断");
         return resultInfo;
     }
+
 }

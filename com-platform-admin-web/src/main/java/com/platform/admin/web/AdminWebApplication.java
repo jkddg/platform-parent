@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 @EnableEurekaClient
-@SpringBootApplication(scanBasePackages = "com.platform")
+@SpringBootApplication
 public class AdminWebApplication {
 
     public static void main(String[] args) {
