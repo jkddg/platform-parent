@@ -10,7 +10,7 @@
     <groupId>com.platform</groupId>
     <artifactId>com-platform-front-service-consumer</artifactId>
     <version>1.0.0</version>
-    <name>com-platform-front-service-contract</name>
+    <name>com-platform-front-service-consumer</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

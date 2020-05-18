@@ -150,7 +150,7 @@ public class IndexController {
     @RequestMapping("/pushMsg")
     @ResponseBody
     public ResultInfo pushMsg(String msg, HttpServletRequest request) {
-        ResultInfo resultInfo = new ResultInfo();
+        ResultInfo resultInfo;
         if (StringUtils.isEmpty(msg)) {
             resultInfo = ResultInfo.failInfo("消息内容为空");
             return resultInfo;

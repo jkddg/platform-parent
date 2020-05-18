@@ -8,12 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author jkddg
  */
 @FeignClient(value = "com-platform-admin-service", fallbackFactory = ManualMessageFallbackFactory.class)
 public interface ManualMessageService {
+    @PostMapping("/manual/message/add")
     ResultInfo add(MessageParam messageParam);
 }
 
