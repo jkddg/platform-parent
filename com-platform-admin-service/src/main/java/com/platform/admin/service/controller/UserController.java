@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by Huangyonghao on 2019/8/29 15:03.
+ *
+ * @author Huangyonghao
+ * @date 2019/8/29 15:03
  */
 
 @RestController
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping("/getUserByAccout")
     public ResultInfo<UserInfo> getUserByAccout(@RequestBody String userName) {
