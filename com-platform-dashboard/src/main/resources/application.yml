@@ -4,3 +4,9 @@ eureka:
   client:
     service-url:
       defaultZone: ${eureka.url}
+logging:
+  file:
+    name: ../log/platform-dashboard.log
+spring:
+  application:
+    name: platform-dashboard

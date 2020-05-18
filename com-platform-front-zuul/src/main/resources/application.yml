@@ -11,3 +11,8 @@ zuul:
 logging:
   level:
     com.netflix: debug
+  file:
+    name: ../log/platform-zuul.log
+spring:
+  application:
+    name: com-platform-zuul
