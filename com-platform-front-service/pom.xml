@@ -15,17 +15,16 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>com-platform-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,17 +42,14 @@
         <dependency>
             <groupId>com.taobao</groupId>
             <artifactId>api</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.jd.cps</groupId>
             <artifactId>jd-cps-client</artifactId>
-            <version>2.2</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
@@ -61,13 +57,6 @@
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>com-platform-front-service-consumer</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
