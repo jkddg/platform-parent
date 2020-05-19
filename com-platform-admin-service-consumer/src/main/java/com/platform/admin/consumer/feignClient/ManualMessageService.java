@@ -31,6 +31,7 @@ class ManualMessageFallbackFactory implements FallbackFactory<ManualMessageServi
             @Override
             public ResultInfo add(MessageParam messageParam) {
                 logger.error("调用ManualMessageService.add失败：" + cause.getMessage() + cause.getStackTrace());
+                System.out.println("调用ManualMessageService.add失败：" + cause.getMessage() + cause.getStackTrace());
                 ResultInfo resultInfo = ResultInfo.failInfo("请求失败");
                 return resultInfo;
             }
