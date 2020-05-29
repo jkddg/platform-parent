@@ -22,7 +22,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.platform.admin.zuul.PlatformAdminZuulApplication</mainClass>
+                    <mainClass>com.platform.dashboard.PlatformDashboardApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>
